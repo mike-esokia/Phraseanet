@@ -97,8 +97,6 @@ class Install extends Command
         }
 
         $output->writeln("<info>Install successful !</info>");
-
-        return;
     }
 
     private function getABConn(InputInterface $input, OutputInterface $output, DialogHelper $dialog)
