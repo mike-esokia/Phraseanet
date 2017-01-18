@@ -38,4 +38,12 @@ class Version
     {
         return $this->name;
     }
+
+    /**
+     * @return string
+     */
+    public function getNameAndNumber()
+    {
+        return $this->getName() . ' ' . $this->getNumber();
+    }
 }

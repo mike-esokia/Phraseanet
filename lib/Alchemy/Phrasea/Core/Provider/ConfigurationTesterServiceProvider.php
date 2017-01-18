@@ -26,10 +26,6 @@ class ConfigurationTesterServiceProvider implements ServiceProviderInterface
 
     public function register(SilexApplication $app)
     {
-        $app['phraseanet.configuration-tester'] = $app->share(function (BaseApplication $app) {
-            return new ConfigurationTester($app);
-        });
-
         $app['phraseanet.pre-schema-upgrader.upgrades'] = $app->share(function () {
             return [new Upgrade39Feeds(), new Upgrade39Users(), new Upgrade39Tokens(), new Upgrade39Sessions()];
         });
@@ -37,9 +33,19 @@ class ConfigurationTesterServiceProvider implements ServiceProviderInterface
         $app['phraseanet.pre-schema-upgrader'] = $app->share(function (BaseApplication $app) {
             return new PreSchemaUpgradeCollection($app['phraseanet.pre-schema-upgrader.upgrades']);
         });
+
+        $app['phraseanet.configuration-tester'] = $app->share(function (BaseApplication $app) {
+            return new ConfigurationTester(
+                $app['version.appbox-repository'],
+                $app['conf'],
+                $app['databox.repository'],
+                $app['version-probe.factory']
+            );
+        });
     }
 
     public function boot(SilexApplication $app)
     {
+
     }
 }

@@ -12,6 +12,9 @@
 namespace Alchemy\Phrasea\Core\Provider;
 
 use Alchemy\Phrasea\BaseApplication;
+use Alchemy\Phrasea\Core\Connection\ConnectionSettings;
+use Alchemy\Phrasea\Core\Database\DatabaseConnection;
+use Alchemy\Phrasea\Core\Database\DatabaseMaintenanceServiceFactory;
 use Alchemy\Phrasea\Http\StaticFile\Symlink\SymLinker;
 use Alchemy\Phrasea\Http\StaticFile\Symlink\SymLinkerEncoder;
 use Alchemy\Phrasea\Metadata\PhraseanetMetadataReader;
@@ -27,7 +30,21 @@ class PhraseanetServiceProvider implements ServiceProviderInterface
     public function register(SilexApplication $app)
     {
         $app['phraseanet.appbox'] = $app->share(function (SilexApplication $app) {
-            return new \appbox($app);
+            $cacheService = $app['cache.service'];
+
+            $connection = $app['db.provider']($app['conf']->get(['main', 'database']));
+            $databaseConnection = new DatabaseConnection(ConnectionSettings::fromConnection($connection), $connection);
+
+            $databaseMaintenanceServiceFactory = new DatabaseMaintenanceServiceFactory($app);
+
+            $versionRepository = $app['version.appbox-repository'];
+
+            return new \appbox(
+                $cacheService,
+                $databaseConnection,
+                $databaseMaintenanceServiceFactory,
+                $versionRepository
+            );
         });
 
         $app['firewall'] = $app->share(function (SilexApplication $app) {

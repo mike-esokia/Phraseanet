@@ -154,7 +154,7 @@ class ConfigurationTesterTest extends AbstractSetupTester
         $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['phraseanet.SE'] = $this->createSearchEngineMock();
 
-        foreach ($this->getTester($app)->getRequirements() as $requirements) {
+        foreach ($this->getTester($app)->getRequirements($app) as $requirements) {
             $this->assertInstanceOf('Alchemy\Phrasea\Setup\RequirementCollectionInterface', $requirements);
         }
     }

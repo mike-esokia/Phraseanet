@@ -10,8 +10,11 @@
  */
 
 use Alchemy\Phrasea\BaseApplication;
+use Alchemy\Phrasea\Cache\CacheService;
 use Alchemy\Phrasea\Core\Connection\ConnectionSettings;
+use Alchemy\Phrasea\Core\Database\DatabaseConnection;
 use Alchemy\Phrasea\Core\Database\DatabaseMaintenanceService;
+use Alchemy\Phrasea\Core\Database\DatabaseMaintenanceServiceFactory;
 use Alchemy\Phrasea\Core\Version as PhraseaVersion;
 use Doctrine\DBAL\Connection;
 
@@ -48,29 +51,36 @@ abstract class base implements cache_cacheableInterface
     protected $connection;
 
     /**
-     * @var BaseApplication
-     */
-    protected $app;
-
-    /**
      * @var PhraseaVersion\VersionRepository
      */
     protected $versionRepository;
 
     /**
-     * @param BaseApplication $application
-     * @param Connection $connection
-     * @param ConnectionSettings $connectionSettings
+     * @var CacheService
+     */
+    protected $cacheService;
+
+    /**
+     * @var DatabaseMaintenanceServiceFactory
+     */
+    private $databaseMaintenanceServiceFactory;
+
+    /**
+     * @param CacheService $cacheService
+     * @param DatabaseConnection $databaseConnection
+     * @param DatabaseMaintenanceServiceFactory $databaseMaintenanceServiceFactory
      * @param PhraseaVersion\VersionRepository $versionRepository
      */
-    public function __construct(BaseApplication $application,
-        Connection $connection,
-        ConnectionSettings $connectionSettings,
-        PhraseaVersion\VersionRepository $versionRepository)
-    {
-        $this->app = $application;
-        $this->connection = $connection;
-        $this->connectionSettings = $connectionSettings;
+    public function __construct(
+        CacheService $cacheService,
+        DatabaseConnection $databaseConnection,
+        DatabaseMaintenanceServiceFactory $databaseMaintenanceServiceFactory,
+        PhraseaVersion\VersionRepository $versionRepository
+    ) {
+        $this->cacheService = $cacheService;
+        $this->databaseMaintenanceServiceFactory = $databaseMaintenanceServiceFactory;
+        $this->connection = $databaseConnection->getConnection();
+        $this->connectionSettings = $databaseConnection->getSettings();
         $this->versionRepository = $versionRepository;
     }
 
@@ -78,6 +88,14 @@ abstract class base implements cache_cacheableInterface
      * @return string
      */
     abstract public function get_base_type();
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return SimpleXMLElement
@@ -147,54 +165,49 @@ abstract class base implements cache_cacheableInterface
      */
     public function get_cache()
     {
-        return $this->app['cache'];
+        return $this->cacheService->getCache();
     }
 
+    /**
+     * @param string|null $option
+     * @return mixed
+     */
     public function get_data_from_cache($option = null)
     {
-        if ($this->get_base_type() == self::DATA_BOX) {
-            \cache_databox::refresh($this->app, $this->id);
-        }
-
-        $data = $this->get_cache()->get($this->get_cache_key($option));
-
-        if (is_object($data) && method_exists($data, 'hydrate')) {
-            $data->hydrate($this->app);
-        }
-
-        return $data;
+        return $this->cacheService->getDataFromCache($this, $option);
     }
 
+    /**
+     * @param $value
+     * @param string|null $option
+     * @param int $duration
+     * @return bool
+     */
     public function set_data_to_cache($value, $option = null, $duration = 0)
     {
-        return $this->get_cache()->save($this->get_cache_key($option), $value, $duration);
+        return $this->cacheService->writeDataToCache($this, $value, $option, $duration);
     }
 
+    /**
+     * @param string|null $option
+     * @return \Alchemy\Phrasea\Cache\Cache|bool
+     */
     public function delete_data_from_cache($option = null)
     {
-        $appbox = $this->get_base_type() == self::APPLICATION_BOX ? $this : $this->get_appbox();
-
-        if ($option === appbox::CACHE_LIST_BASES) {
-            $keys = [$this->get_cache_key(appbox::CACHE_LIST_BASES)];
-
-            phrasea::reset_sbasDatas($appbox);
-            phrasea::reset_baseDatas($appbox);
-            phrasea::clear_sbas_params($this->app);
-
-            return $this->get_cache()->deleteMulti($keys);
-        }
-
-        if (is_array($option)) {
-            foreach ($option as $key => $value) {
-                $option[$key] = $this->get_cache_key($value);
-            }
-
-            return $this->get_cache()->deleteMulti($option);
-        } else {
-            return $this->get_cache()->delete($this->get_cache_key($option));
-        }
+        return $this->cacheService->deleteDataFromCache($this, $option);
     }
 
+    /**
+     * @return PhraseaVersion\VersionRepository
+     */
+    public function getVersionRepository()
+    {
+        return $this->versionRepository;
+    }
+
+    /**
+     * @return string
+     */
     public function get_version()
     {
         if (! $this->version) {
@@ -204,6 +217,11 @@ abstract class base implements cache_cacheableInterface
         return $this->version;
     }
 
+    /**
+     * @param PhraseaVersion $version
+     * @return bool
+     * @throws Exception
+     */
     protected function setVersion(PhraseaVersion $version)
     {
         try {   
@@ -213,9 +231,13 @@ abstract class base implements cache_cacheableInterface
         }
     }
 
+    /**
+     * @param $applyPatches
+     * @return array
+     */
     protected function upgradeDb($applyPatches)
     {
-        $service = new DatabaseMaintenanceService($this->app, $this->connection);
+        $service = $this->databaseMaintenanceServiceFactory->createService($this->connection);
 
         return $service->upgradeDatabase($this, $applyPatches);
     }
@@ -234,16 +256,20 @@ abstract class base implements cache_cacheableInterface
             throw new Exception('Unable to load schema');
         }
 
-        if ($this->get_base_type() === self::APPLICATION_BOX) {
-            $this->schema = $structure->appbox;
-        } elseif ($this->get_base_type() === self::DATA_BOX) {
-            $this->schema = $structure->databox;
-        } else {
+        $this->schema = $this->getSchemaNode($structure);
+
+        if (! $this->schema) {
             throw new Exception('Unknown schema type');
         }
 
         return $this;
     }
+
+    /**
+     * @param SimpleXMLElement $structure
+     * @return SimpleXMLElement
+     */
+    abstract protected function getSchemaNode(SimpleXMLElement $structure);
 
     /**
      * @return base
@@ -252,20 +278,20 @@ abstract class base implements cache_cacheableInterface
     {
         $this->load_schema();
 
-        $service = new DatabaseMaintenanceService($this->app, $this->connection);
+        $service = $this->databaseMaintenanceServiceFactory->createService($this->connection);
 
         foreach ($this->get_schema()->tables->table as $table) {
             $service->createTable($table);
         }
 
-        $this->setVersion($this->app['phraseanet.version']);
+        $this->setVersion(new PhraseaVersion());
 
         return $this;
     }
 
     public function apply_patches($from, $to, $post_process)
     {
-        $service = new DatabaseMaintenanceService($this->app, $this->connection);
+        $service = $this->databaseMaintenanceServiceFactory->createService($this->connection);
 
         return $service->applyPatches($this, $from, $to, $post_process);
     }

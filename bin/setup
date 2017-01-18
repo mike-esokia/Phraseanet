@@ -30,54 +30,6 @@ use Alchemy\Phrasea\SetupApplication;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$version = new Version();
-$app = new SetupApplication("
-  _____  _    _ _____            _____ ______          _   _ ______ _______
- |  __ \| |  | |  __ \    /\    / ____|  ____|   /\   | \ | |  ____|__   __|
- | |__) | |__| | |__) |  /  \  | (___ | |__     /  \  |  \| | |__     | |
- |  ___/|  __  |  _  /  / /\ \  \___ \|  __|   / /\ \ | . ` |  __|    | |
- | |    | |  | | | \ \ / ____ \ ____) | |____ / ____ \| |\  | |____   | |
- |_|    |_|  |_|_|  \_|_/    \_\_____/|______/_/    \_\_| \_|______|  |_|
-                          __
-               ________  / /___  ______
-              / ___/ _ \/ __/ / / / __ \
-             (__  )  __/ /_/ /_/ / /_/ /
-            /____/\___/\__/\__,_/ .___/
-                              /_/
+$app = new SetupApplication("Phraseanet Setup Application");
 
- Phraseanet Copyright (C) 2004 Alchemy
- This program comes with ABSOLUTELY NO WARRANTY.
- This is free software, and you are welcome to redistribute it
- under certain conditions; type `about:license' for details.\n\n"
-            . ' SETUP', $version->getName() . ' ' . $version->getNumber());
-
-$app->register(new DoctrineMigrationServiceProvider());
-
-$app->command(new \module_console_aboutAuthors('about:authors'));
-$app->command(new \module_console_aboutLicense('about:license'));
-
-/** @var ConfigurationTester $configurationTester */
-$configurationTester = $app['phraseanet.configuration-tester'];
-
-if($configurationTester->isMigrable() || $configurationTester->isUpgradable() || $configurationTester->isInstalled()) {
-    $app->command(new \module_console_systemUpgrade('system:upgrade'));
-}
-
-if ($configurationTester->isInstalled()) {
-    $app->command(new UpgradeDBDatas('system:upgrade-datas'));
-    $app->command(new ConfigurationEditor('system:config'));
-}
-
-$app->command(new AddPlugin());
-$app->command(new ListPlugin());
-$app->command(new RemovePlugin());
-$app->command(new PluginsReset());
-$app->command(new EnablePlugin());
-$app->command(new DisablePlugin());
-$app->command(new CheckEnvironment('check:system'));
-$app->command(new Install('system:install'));
-$app->command(new CrossDomainGenerator());
-
-$app['phraseanet.setup_mode'] = true;
-
-exit(is_int($app->run()) ? : 1);
+$app->run();

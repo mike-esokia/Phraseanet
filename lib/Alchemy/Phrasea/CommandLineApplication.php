@@ -15,14 +15,15 @@ use Alchemy\Phrasea\Command\CommandInterface;
 use Alchemy\Phrasea\Core\CLIProvider\TranslationExtractorServiceProvider;
 use Alchemy\Phrasea\Core\Event\Subscriber\BridgeSubscriber;
 use Alchemy\Phrasea\Core\PhraseaCLIExceptionHandler;
+use Alchemy\Phrasea\Core\Version;
 use Alchemy\Phrasea\Exception\RuntimeException;
 use Symfony\Component\Console;
 use Alchemy\Phrasea\Core\CLIProvider\CLIDriversServiceProvider;
 use Alchemy\Phrasea\Core\CLIProvider\ComposerSetupServiceProvider;
 use Alchemy\Phrasea\Core\CLIProvider\DoctrineMigrationServiceProvider;
-use Alchemy\Phrasea\Core\CLIProvider\PluginServiceProvider;
 use Alchemy\Phrasea\Core\CLIProvider\SignalHandlerServiceProvider;
 use Alchemy\Phrasea\Core\CLIProvider\TaskManagerServiceProvider;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -38,11 +39,13 @@ class CommandLineApplication extends BaseApplication
      * Registers the autoloader and necessary components.
      *
      * @param string      $name        Name for this application.
-     * @param string|null $version     Version number for this application.
      * @param string|null $environment The environment.
      */
-    public function __construct($name, $version = null, $environment = self::ENV_PROD)
+    public function __construct($name, $environment = self::ENV_PROD)
     {
+        $version = new Version();
+        $version = $version->getNameAndNumber();
+
         parent::__construct($environment);
 
         $this['session.test'] = true;
@@ -106,6 +109,10 @@ class CommandLineApplication extends BaseApplication
             throw new RuntimeException('Phraseanet Konsole can not run Http Requests.');
         }
 
+        foreach ($this->getCommands() as $command) {
+            $this->command($command);
+        }
+
         $this->boot();
         $this['console']->run();
     }
@@ -115,12 +122,25 @@ class CommandLineApplication extends BaseApplication
      *
      * If a command with the same name already exists, it will be overridden.
      *
-     * @param CommandInterface $command A Command object
+     * @param Command $command A Command object
      */
-    public function command(CommandInterface $command)
+    public function command(Command $command)
     {
-        $command->setContainer($this);
+        if ($command instanceof CommandInterface) {
+            $command->setContainer($this);
+        }
+
         $this['console']->add($command);
+    }
+
+    protected function getCommands()
+    {
+        $commands = [];
+
+        $commands[] = new \module_console_aboutAuthors('about:authors');
+        $commands[] = new \module_console_aboutLicense('about:license');
+
+        return $commands;
     }
 
     /**

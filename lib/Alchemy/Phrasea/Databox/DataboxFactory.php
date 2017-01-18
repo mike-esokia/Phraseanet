@@ -10,6 +10,11 @@
 namespace Alchemy\Phrasea\Databox;
 
 use Alchemy\Phrasea\BaseApplication;
+use Alchemy\Phrasea\Cache\CacheService;
+use Alchemy\Phrasea\Core\Connection\ConnectionSettings;
+use Alchemy\Phrasea\Core\Database\DatabaseConnection;
+use Alchemy\Phrasea\Core\Database\DatabaseMaintenanceServiceFactory;
+use Alchemy\Phrasea\Core\Version\DataboxVersionRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DataboxFactory
@@ -20,16 +25,44 @@ class DataboxFactory
     private $app;
 
     /**
+     * @var CacheService
+     */
+    private $cacheService;
+
+    /**
      * @var DataboxRepository
      */
     private $databoxRepository;
 
     /**
-     * @param BaseApplication $app
+     * @var DatabaseMaintenanceServiceFactory
      */
-    public function __construct(BaseApplication $app)
-    {
+    private $databaseMaintenanceServiceFactory;
+
+    /**
+     * @var DataboxVersionRepository
+     */
+    private $databoxVersionRepository;
+
+    /**
+     * @param BaseApplication $app
+     * @param CacheService $cacheService
+     * @param DatabaseMaintenanceServiceFactory $databaseMaintenanceServiceFactory
+     * @param DataboxRepository $databoxRepository
+     * @param DataboxVersionRepository $databoxVersionRepository
+     */
+    public function __construct(
+        BaseApplication $app,
+        CacheService $cacheService,
+        DatabaseMaintenanceServiceFactory $databaseMaintenanceServiceFactory,
+        DataboxRepository $databoxRepository,
+        DataboxVersionRepository $databoxVersionRepository
+    ) {
         $this->app = $app;
+        $this->cacheService = $cacheService;
+        $this->databaseMaintenanceServiceFactory = $databaseMaintenanceServiceFactory;
+        $this->databoxRepository = $databoxRepository;
+        $this->databoxVersionRepository = $databoxVersionRepository;
     }
 
     /**
@@ -47,7 +80,34 @@ class DataboxFactory
      */
     public function create($id, array $raw)
     {
-        return new \databox($this->app, $id, $this->databoxRepository, $raw);
+        $connectionConfigs = \phrasea::sbas_params($this->app);
+
+        if (! isset($connectionConfigs[$id])) {
+            throw new NotFoundHttpException(sprintf('databox %d not found', $id));
+        }
+
+        $connectionConfig = $connectionConfigs[$id];
+        $connection = $app['db.provider']($connectionConfig);
+        $connectionSettings = new ConnectionSettings(
+            $connectionConfig['host'],
+            $connectionConfig['port'],
+            $connectionConfig['dbname'],
+            $connectionConfig['user'],
+            $connectionConfig['password']
+        );
+
+        $databaseConnection = new DatabaseConnection($connectionSettings, $connection);
+
+        return new \databox(
+            $this->app,
+            $id,
+            $this->cacheService,
+            $databaseConnection,
+            $this->databaseMaintenanceServiceFactory,
+            $this->databoxRepository,
+            $this->databoxVersionRepository,
+            $raw
+        );
     }
 
     /**
@@ -60,7 +120,7 @@ class DataboxFactory
         $databoxes = [];
 
         foreach ($rows as $id => $raw) {
-            $databoxes[$id] = new \databox($this->app, $id, $this->databoxRepository, $raw);
+            $databoxes[$id] = $this->create($id, $raw);
         }
 
         return $databoxes;

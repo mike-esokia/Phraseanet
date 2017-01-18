@@ -2,8 +2,24 @@
 
 namespace Alchemy\Phrasea\Core\Connection;
 
+use Doctrine\DBAL\Connection;
+
 class ConnectionSettings
 {
+    /**
+     * @param Connection $connection
+     * @return ConnectionSettings
+     */
+    public static function fromConnection(Connection $connection)
+    {
+        return new self(
+            $connection->getHost(),
+            $connection->getPort(),
+            $connection->getDatabase(),
+            $connection->getUsername(),
+            $connection->getPassword()
+        );
+    }
 
     /**
      * @var string

@@ -101,10 +101,8 @@ use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\SwiftmailerServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use Silex\Provider\WebProfilerServiceProvider;
-use Sorien\Provider\PimpleDumpProvider;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Exception\ExceptionInterface;
-use Symfony\Component\Form\Exception\FormException;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
@@ -119,7 +117,6 @@ class WebApplication extends BaseApplication
     use ApplicationBoxAware;
     use AuthenticatorAware;
     use UrlGeneratorTrait;
-    use TranslationTrait;
 
     private static $flashTypes = ['warning', 'info', 'success', 'error'];
 

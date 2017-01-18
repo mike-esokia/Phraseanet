@@ -35,14 +35,23 @@ class module_console_systemUpgrade extends Command
 
     protected function doExecute(InputInterface $input, OutputInterface $output)
     {
+        /** @var \Alchemy\Phrasea\Setup\ConfigurationTester $configurationTester */
+        $configurationTester = $this->container['phraseanet.configuration-tester'];
+
+        if (! $configurationTester->isInstalled()) {
+            throw new \RuntimeException('Application is not installed, upgrade failed');
+        }
+
+        if (! $configurationTester->isMigrable() && ! $configurationTester->isUpgradable()) {
+            $output->writeln('There are no updates to apply', '');
+
+            //return 0;
+        }
+
         $pluginAutoloader = rtrim($this->container['root.path'], '\\/') . '/plugins/autoload.php';
 
         if (file_exists($pluginAutoloader)) {
             require_once $pluginAutoloader;
-
-            $serviceProvider = new \Alchemy\Phrasea\Core\Provider\PluginServiceProvider();
-            $serviceProvider->register($this->getContainer());
-            $serviceProvider->boot($this->getContainer());
         }
 
         $this->getContainer()->loadPlugins();

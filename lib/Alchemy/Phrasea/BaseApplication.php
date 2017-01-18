@@ -4,21 +4,30 @@ namespace Alchemy\Phrasea;
 
 use Alchemy\Phrasea\Application\Environment;
 use Alchemy\Phrasea\Application\Helper\ApplicationBoxAware;
+use Alchemy\Phrasea\Core\MetaProvider\DatabaseMetaProvider;
+use Alchemy\Phrasea\Core\Provider\CacheServiceProvider;
 use Alchemy\Phrasea\Core\Provider\ConfigurationServiceProvider;
 use Alchemy\Phrasea\Core\Provider\ConfigurationTesterServiceProvider;
+use Alchemy\Phrasea\Core\Provider\DataboxServiceProvider;
+use Alchemy\Phrasea\Core\Provider\ORMServiceProvider;
+use Alchemy\Phrasea\Core\Provider\PhraseanetServiceProvider;
 use Alchemy\Phrasea\Core\Provider\PhraseaVersionServiceProvider;
-use Alchemy\Phrasea\Core\Provider\PluginServiceProvider;
+use Alchemy\Phrasea\Core\Provider\TranslationServiceProvider;
+use Alchemy\Phrasea\Core\Provider\VersionProbeServiceProvider;
+use Alchemy\Phrasea\Core\Provider\VersionRepositoryServiceProvider;
 use Alchemy\Phrasea\Filesystem\ApplicationPathServiceGenerator;
 use Alchemy\Phrasea\Filesystem\FilesystemServiceProvider;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 use Silex\Application;
 use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\TranslationServiceProvider as SilexTranslationServiceProvider;
 use Sorien\Provider\PimpleDumpProvider;
 
 class BaseApplication extends Application
 {
     use ApplicationBoxAware;
+    use Application\TranslationTrait;
 
     const ENV_DEV = 'dev';
     const ENV_PROD = 'prod';
@@ -96,11 +105,27 @@ class BaseApplication extends Application
             $this->register(new PimpleDumpProvider());
         }
 
+
         $this->register(new ConfigurationServiceProvider());
         $this->register(new ConfigurationTesterServiceProvider());
+        $this->register(new VersionRepositoryServiceProvider());
+        $this->register(new VersionProbeServiceProvider());
+
         $this->register(new FilesystemServiceProvider());
         $this->register(new MonologServiceProvider());
+
         $this->register(new PhraseaVersionServiceProvider());
+
+        $this->register(new SilexTranslationServiceProvider());
+        $this->register(new TranslationServiceProvider());
+
+        $this->register(new DatabaseMetaProvider());
+        $this->register(new DataboxServiceProvider());
+
+        $this->register(new CacheServiceProvider());
+
+        $this->register(new PhraseanetServiceProvider());
+
         $this->setupMonolog();
     }
 

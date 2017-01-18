@@ -12,9 +12,11 @@
 use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\CollectionService;
 use Alchemy\Phrasea\Core\Configuration\AccessRestriction;
+use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
 use Alchemy\Phrasea\Core\Connection\ConnectionSettings;
 use Alchemy\Phrasea\Core\LazyLocator;
 use Alchemy\Phrasea\Core\Version\AppboxVersionRepository;
+use Alchemy\Phrasea\Core\Version\VersionRepository;
 use Alchemy\Phrasea\Databox\DataboxConnectionProvider;
 use Alchemy\Phrasea\Databox\DataboxRepository;
 use Doctrine\ORM\Tools\SchemaTool;
@@ -40,32 +42,16 @@ class appbox extends base
      * @var int
      */
     protected $id;
+
     /**
      * @var \databox[]
      */
     protected $databoxes;
+
     /**
      * @var CollectionService
      */
     protected $collectionService;
-
-    public function __construct(BaseApplication $app)
-    {
-        $connectionConfig = $app['conf']->get(['main', 'database']);
-        $connection = $app['db.provider']($connectionConfig);
-
-        $connectionSettings = new ConnectionSettings(
-            $connectionConfig['host'],
-            $connectionConfig['port'],
-            $connectionConfig['dbname'],
-            $connectionConfig['user'],
-            $connectionConfig['password']
-        );
-
-        $versionRepository = new AppboxVersionRepository($connection);
-
-        parent::__construct($app, $connection, $connectionSettings, $versionRepository);
-    }
 
     public function write_collection_pic(Alchemyst $alchemyst, Filesystem $filesystem, collection $collection, SymfoFile $pathfile = null, $pic_type)
     {
@@ -250,6 +236,11 @@ class appbox extends base
         return $this;
     }
 
+    protected function getSchemaNode(SimpleXMLElement $element)
+    {
+        return $element->appbox;
+    }
+
     /**
      * @return databox[]
      */
@@ -269,6 +260,7 @@ class appbox extends base
      */
     public function get_databox($sbas_id)
     {
+        // TODO: Check whether access restrictions should be validated
         $databoxes = $this->getDataboxRepository()->findAll();
 
         if (!isset($databoxes[$sbas_id]) && !array_key_exists($sbas_id, $databoxes)) {

@@ -25,6 +25,7 @@ abstract class AbstractCheckCommand extends Command
      */
     protected function doExecute(InputInterface $input, OutputInterface $output)
     {
+
         $ret = static::CHECK_OK;
 
         foreach ($this->provideRequirements() as $collection) {

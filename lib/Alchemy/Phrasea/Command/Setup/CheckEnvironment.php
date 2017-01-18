@@ -18,6 +18,8 @@ use Alchemy\Phrasea\Setup\Requirements\FilesystemRequirements;
 use Alchemy\Phrasea\Setup\Requirements\LocalesRequirements;
 use Alchemy\Phrasea\Setup\Requirements\PhpRequirements;
 use Alchemy\Phrasea\Setup\Requirements\SystemRequirements;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class CheckEnvironment extends AbstractCheckCommand
 {
@@ -29,9 +31,25 @@ class CheckEnvironment extends AbstractCheckCommand
     {
         parent::__construct($name);
 
-        $this->setDescription("Performs a check against the environment");
+        $description = "Performs a check against the environment";
+
+        if ($name !== 'system:check') {
+            $description = '[OBSOLETE, use system:check instead] ' . $description;
+        }
+
+        $this->setDescription($description);
 
         return $this;
+    }
+
+    protected function doExecute(InputInterface $input, OutputInterface $output)
+    {
+        if ($this->getName()!== 'system:check') {
+            $output->writeln('This command has been replaced by "system:check" and will be removed in future versions.');
+            $output->writeln('');
+        }
+
+        parent::doExecute($input, $output);
     }
 
     /**

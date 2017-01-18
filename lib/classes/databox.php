@@ -10,8 +10,11 @@
  */
 
 use Alchemy\Phrasea\BaseApplication;
+use Alchemy\Phrasea\Cache\CacheService;
 use Alchemy\Phrasea\Collection\CollectionRepositoryRegistry;
 use Alchemy\Phrasea\Core\Connection\ConnectionSettings;
+use Alchemy\Phrasea\Core\Database\DatabaseConnection;
+use Alchemy\Phrasea\Core\Database\DatabaseMaintenanceServiceFactory;
 use Alchemy\Phrasea\Core\PhraseaTokens;
 use Alchemy\Phrasea\Core\Thumbnail\ThumbnailedElement;
 use Alchemy\Phrasea\Core\Version\DataboxVersionRepository;
@@ -271,37 +274,32 @@ class databox extends base implements ThumbnailedElement
     /**
      * @param BaseApplication $app
      * @param int $sbas_id
+     * @param CacheService $cacheService
+     * @param DatabaseConnection $databaseConnection
+     * @param DatabaseMaintenanceServiceFactory $databaseMaintenanceServiceFactory
      * @param DataboxRepository $databoxRepository
+     * @param DataboxVersionRepository $versionRepository
      * @param array $row
      */
-    public function __construct(BaseApplication $app, $sbas_id, DataboxRepository $databoxRepository, array $row)
-    {
+    public function __construct(
+        BaseApplication $app,
+        $sbas_id,
+        CacheService $cacheService,
+        DatabaseConnection $databaseConnection,
+        DatabaseMaintenanceServiceFactory $databaseMaintenanceServiceFactory,
+        DataboxRepository $databoxRepository,
+        DataboxVersionRepository $versionRepository,
+        array $row
+    ) {
         assert(is_int($sbas_id));
         assert($sbas_id > 0);
 
         $this->databoxRepository = $databoxRepository;
         $this->id = $sbas_id;
 
-        $connectionConfigs = phrasea::sbas_params($app);
 
-        if (! isset($connectionConfigs[$sbas_id])) {
-            throw new NotFoundHttpException(sprintf('databox %d not found', $sbas_id));
-        }
 
-        $connectionConfig = $connectionConfigs[$sbas_id];
-        $connection = $app['db.provider']($connectionConfig);
-
-        $connectionSettings = new ConnectionSettings(
-            $connectionConfig['host'],
-            $connectionConfig['port'],
-            $connectionConfig['dbname'],
-            $connectionConfig['user'],
-            $connectionConfig['password']
-        );
-
-        $versionRepository = new DataboxVersionRepository($connection);
-
-        parent::__construct($app, $connection, $connectionSettings, $versionRepository);
+        parent::__construct($cacheService, $databaseConnection, $databaseMaintenanceServiceFactory, $versionRepository);
 
         $this->loadFromRow($row);
     }
@@ -549,6 +547,11 @@ class databox extends base implements ThumbnailedElement
         $this->delete_data_from_cache('printLogo');
     }
 
+    protected function getSchemaNode(SimpleXMLElement $element)
+    {
+        return $element->databox;
+    }
+
     public function delete_data_from_cache($option = null)
     {
         switch ($option) {
@@ -568,6 +571,7 @@ class databox extends base implements ThumbnailedElement
             default:
                 break;
         }
+
         parent::delete_data_from_cache($option);
     }
 

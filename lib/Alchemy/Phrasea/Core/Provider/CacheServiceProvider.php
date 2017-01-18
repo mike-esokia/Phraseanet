@@ -11,6 +11,7 @@
 
 namespace Alchemy\Phrasea\Core\Provider;
 
+use Alchemy\Phrasea\Cache\CacheService;
 use Alchemy\Phrasea\Cache\Manager as CacheManager;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
@@ -52,6 +53,10 @@ class CacheServiceProvider implements ServiceProviderInterface
             /** @var CacheManager $service */
             $service = $app['phraseanet.cache-service'];
             return $service->factory('opcode-cache', 'ArrayCache', []);
+        });
+
+        $app['cache.service'] = $app->share(function (Application $app) {
+            return new CacheService($app, $app['cache']);
         });
     }
 

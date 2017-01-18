@@ -12,6 +12,11 @@
 namespace Alchemy\Phrasea\Setup;
 
 use Alchemy\Phrasea\BaseApplication;
+use Alchemy\Phrasea\Core\Configuration\ConfigurationInterface;
+use Alchemy\Phrasea\Core\Version as PhraseaVersion;
+use Alchemy\Phrasea\Core\Version\VersionRepository;
+use Alchemy\Phrasea\Databox\DataboxRepository;
+use Alchemy\Phrasea\Setup\Version\Migration\MigrationInterface;
 use Alchemy\Phrasea\Setup\Version\Probe\Probe31;
 use Alchemy\Phrasea\Setup\Version\Probe\Probe35;
 use Alchemy\Phrasea\Setup\Version\Probe\Probe38;
@@ -25,49 +30,111 @@ use Alchemy\Phrasea\Setup\Probe\PhpProbe;
 use Alchemy\Phrasea\Setup\Probe\SearchEngineProbe;
 use Alchemy\Phrasea\Setup\Probe\SubdefsPathsProbe;
 use Alchemy\Phrasea\Setup\Probe\SystemProbe;
+use Alchemy\Phrasea\Setup\Version\Probe\VersionProbesFactory;
 use vierbergenlars\SemVer\version;
 
 class ConfigurationTester
 {
-    private $app;
-    private $requirements;
+
+    /**
+     * @var VersionRepository
+     */
+    private $appboxVersionRepository;
+
+    /**
+     * @var ConfigurationInterface
+     */
+    private $config;
+
+    /**
+     * @var DataboxRepository
+     */
+    private $databoxRepository;
+
+    /**
+     * @var PhraseaVersion
+     */
+    private $sourceVersion;
+
+    /**
+     * @var VersionProbeInterface[]
+     */
     private $versionProbes;
 
-    public function __construct(BaseApplication $app)
-    {
-        $this->app = $app;
+    /**
+     * @var VersionProbesFactory
+     */
+    private $versionProbesFactory;
 
-        $this->versionProbes = [
-            new Probe31($this->app),
-            new Probe35($this->app),
-            new Probe38($this->app),
+    /**
+     * @param VersionRepository $appboxVersionRepository
+     * @param ConfigurationInterface $config
+     * @param DataboxRepository $databoxRepository
+     * @param VersionProbesFactory $versionProbesFactory
+     */
+    public function __construct(
+        VersionRepository $appboxVersionRepository,
+        ConfigurationInterface $config,
+        DataboxRepository $databoxRepository,
+        VersionProbesFactory $versionProbesFactory
+    ) {
+        $this->appboxVersionRepository = $appboxVersionRepository;
+        $this->config = $config;
+        $this->databoxRepository = $databoxRepository;
+        $this->versionProbesFactory = $versionProbesFactory;
+        $this->sourceVersion = new PhraseaVersion();
+    }
+
+    /**
+     * @param BaseApplication $app
+     * @return Requirements\RequirementInterface[]
+     */
+    public function getRequirements(BaseApplication $app)
+    {
+        return [
+            BinariesProbe::create($app),
+            CacheServerProbe::create($app),
+            DataboxStructureProbe::create($app),
+            FilesystemProbe::create($app),
+            LocalesProbe::create($app),
+            PhpProbe::create($app),
+            SearchEngineProbe::create($app),
+            SubdefsPathsProbe::create($app),
+            SystemProbe::create($app),
         ];
     }
 
-    public function getRequirements()
+    /**
+     * @return Version\Migration\MigrationInterface[]
+     */
+    public function getMigrations()
     {
-        if ($this->requirements) {
-            return $this->requirements;
+        $migrations = [];
+
+        if ($this->isUpToDate()) {
+            return $migrations;
         }
 
-        $this->requirements = [
-            BinariesProbe::create($this->app),
-            CacheServerProbe::create($this->app),
-            DataboxStructureProbe::create($this->app),
-            FilesystemProbe::create($this->app),
-            LocalesProbe::create($this->app),
-            PhpProbe::create($this->app),
-            SearchEngineProbe::create($this->app),
-            SubdefsPathsProbe::create($this->app),
-            SystemProbe::create($this->app),
-        ];
+        foreach ($this->getVersionProbes() as $probe) {
+            if ($probe->isMigrable()) {
+                $migrations[] = $probe->getMigration();
+            }
+        }
 
-        return $this->requirements;
+        return $migrations;
     }
 
+    public function getVersionProbes()
+    {
+        return $this->versionProbes ?: $this->versionProbes = $this->versionProbesFactory->createProbes();
+    }
+
+    /**
+     * @param VersionProbeInterface $probe
+     */
     public function registerVersionProbe(VersionProbeInterface $probe)
     {
-        $this->versionProbes[] = $probe;
+        $this->versionProbesFactory->registerVersionProbe($probe);
     }
 
     /**
@@ -77,11 +144,11 @@ class ConfigurationTester
      */
     public function isInstalled()
     {
-        return $this->app['configuration.store']->isSetup();
+        return $this->config->isSetup();
     }
 
     /**
-     *
+     * @return bool
      */
     public function isUpToDate()
     {
@@ -89,7 +156,7 @@ class ConfigurationTester
     }
 
     /**
-     *
+     * @return bool
      */
     public function isBlank()
     {
@@ -98,7 +165,7 @@ class ConfigurationTester
 
     /**
      *
-     * @return boolean
+     * @return bool
      */
     public function isUpgradable()
     {
@@ -106,21 +173,16 @@ class ConfigurationTester
             return false;
         }
 
-        try {
-            $upgradable = version::lt($this->app->getApplicationBox()->get_version(),
-                $this->app['phraseanet.version']->getNumber());
+        $appboxVersion = $this->appboxVersionRepository->getVersion();
+        $upgradable = version::lt($appboxVersion, $this->sourceVersion);
 
-            if (!$upgradable) {
-                foreach ($this->app->getDataboxes() as $databox) {
-                    if (version::lt($databox->get_version(), $this->app['phraseanet.version']->getNumber())) {
-                        $upgradable = true;
-                        break;
-                    }
+        if (! $upgradable) {
+            foreach ($this->databoxRepository->findAll() as $databox) {
+                if (version::lt($databox->get_version(), $this->sourceVersion->getNumber())) {
+                    $upgradable = true;
+                    break;
                 }
             }
-        }
-        catch (\LogicException $exception) {
-            $upgradable = false;
         }
 
         return $upgradable;
@@ -134,22 +196,5 @@ class ConfigurationTester
     public function isMigrable()
     {
         return (Boolean) $this->getMigrations();
-    }
-
-    public function getMigrations()
-    {
-        $migrations = [];
-
-        if ($this->isUpToDate()) {
-            return $migrations;
-        }
-
-        foreach ($this->versionProbes as $probe) {
-            if ($probe->isMigrable()) {
-                $migrations[] = $probe->getMigration();
-            }
-        }
-
-        return $migrations;
     }
 }
