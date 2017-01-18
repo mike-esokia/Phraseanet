@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Utilities\NullableDateTime;
 
 class Bridge_Element
@@ -90,7 +90,7 @@ class Bridge_Element
     const STATUS_PENDING = 'pending';
     const STATUS_ERROR = 'error';
 
-    public function __construct(Application $app, Bridge_Account $account, $id)
+    public function __construct(BaseApplication $app, Bridge_Account $account, $id)
     {
         $this->app = $app;
         $this->account = $account;
@@ -419,7 +419,7 @@ class Bridge_Element
         return;
     }
 
-    public static function get_elements_by_account(Application $app, Bridge_Account $account, $offset_start = 0, $quantity = 50)
+    public static function get_elements_by_account(BaseApplication $app, Bridge_Account $account, $offset_start = 0, $quantity = 50)
     {
         $sql = 'SELECT id FROM bridge_elements WHERE account_id = :account_id
             ORDER BY id DESC
@@ -439,7 +439,7 @@ class Bridge_Element
         return $results;
     }
 
-    public static function create(Application $app, Bridge_Account $account, record_adapter $record, $title, $status, $type, Array $datas = [])
+    public static function create(BaseApplication $app, Bridge_Account $account, record_adapter $record, $title, $status, $type, Array $datas = [])
     {
         $sql = 'INSERT INTO bridge_elements
             (id, account_id, sbas_id, record_id, dist_id, title, `type`

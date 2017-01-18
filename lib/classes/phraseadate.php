@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 /*
  * Phraseanet Date class, mostly inspired by :
@@ -29,7 +29,7 @@ class phraseadate
 
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

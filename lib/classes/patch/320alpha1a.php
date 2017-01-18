@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_320alpha1a extends patchAbstract
 {
@@ -46,7 +46,7 @@ class patch_320alpha1a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $databox, Application $app)
+    public function apply(base $databox, BaseApplication $app)
     {
         $sql = 'UPDATE record SET parent_record_id = "1"
                 WHERE parent_record_id != "0"';

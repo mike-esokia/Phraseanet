@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\Collection as CollectionVO;
 use Alchemy\Phrasea\Collection\CollectionRepository;
 use Alchemy\Phrasea\Collection\CollectionRepositoryRegistry;
@@ -47,11 +47,11 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
     private static $_presentations = [];
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param $databoxId
      * @return CollectionRepository
      */
-    private static function getRepository(Application $app, $databoxId)
+    private static function getRepository(BaseApplication $app, $databoxId)
     {
         /** @var CollectionRepositoryRegistry $registry */
         $registry = $app['repo.collections-registry'];
@@ -59,7 +59,7 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
         return $registry->getRepositoryByDatabox($databoxId);
     }
 
-    public static function create(Application $app, databox $databox, appbox $appbox, $name, User $user = null)
+    public static function create(BaseApplication $app, databox $databox, appbox $appbox, $name, User $user = null)
     {
         $databoxId = $databox->get_sbas_id();
 
@@ -91,7 +91,7 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
         return $collection;
     }
 
-    public static function mount_collection(Application $app, databox $databox, $coll_id, User $user)
+    public static function mount_collection(BaseApplication $app, databox $databox, $coll_id, User $user)
     {
         $reference = new CollectionReference(0, $databox->get_sbas_id(), $coll_id, 0, true, '');
 
@@ -111,7 +111,7 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
         return $reference->getBaseId();
     }
 
-    public static function getLogo($base_id, Application $app, $printname = false)
+    public static function getLogo($base_id, BaseApplication $app, $printname = false)
     {
         $base_id_key = $base_id . '_' . ($printname ? '1' : '0');
 
@@ -171,11 +171,11 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
     }
 
     /**
-     * @param  Application $app
+     * @param  BaseApplication $app
      * @param  int $base_id
      * @return collection
      */
-    public static function getByBaseId(Application $app, $base_id)
+    public static function getByBaseId(BaseApplication $app, $base_id)
     {
         /** @var CollectionReferenceRepository $referenceRepository */
         $referenceRepository = $app['repo.collection-references'];
@@ -192,12 +192,12 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param databox|int $databox
      * @param int $collectionId
      * @return collection
      */
-    public static function getByCollectionId(Application $app, $databox, $collectionId)
+    public static function getByCollectionId(BaseApplication $app, $databox, $collectionId)
     {
         assert(is_int($collectionId));
         $databoxId = $databox instanceof databox ? $databox->get_sbas_id() : (int)$databox;
@@ -206,15 +206,15 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return \Alchemy\Phrasea\Core\Configuration\AccessRestriction
      */
-    private static function getAccessRestriction(Application $app)
+    private static function getAccessRestriction(BaseApplication $app)
     {
         return $app['conf.restrictions'];
     }
 
-    private static function assertCollectionIsAvailable(Application $app, collection $collection)
+    private static function assertCollectionIsAvailable(BaseApplication $app, collection $collection)
     {
         if (!self::getAccessRestriction($app)->isCollectionAvailable($collection)) {
             throw new Exception_Databox_CollectionNotFound(sprintf(
@@ -225,12 +225,12 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param int $databoxId
      * @param int $collectionId
      * @return collection
      */
-    private static function getByDataboxIdAndCollectionId(Application $app, $databoxId, $collectionId)
+    private static function getByDataboxIdAndCollectionId(BaseApplication $app, $databoxId, $collectionId)
     {
         $repository = self::getRepository($app, $databoxId);
         $collection = $repository->find($collectionId);
@@ -247,12 +247,12 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param int $databoxId
      * @param int $collectionId
      * @return collection
      */
-    private static function getAvailableCollection(Application $app, $databoxId, $collectionId)
+    private static function getAvailableCollection(BaseApplication $app, $databoxId, $collectionId)
     {
         $collection = self::getByDataboxIdAndCollectionId($app, $databoxId, $collectionId);
         self::assertCollectionIsAvailable($app, $collection);
@@ -261,7 +261,7 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
     }
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
@@ -292,13 +292,13 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
 
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param CollectionVO $collection
      * @param CollectionReference $reference
      * @internal param $baseId
      * @internal param array $row
      */
-    public function __construct(Application $app, CollectionVO $collection, CollectionReference $reference)
+    public function __construct(BaseApplication $app, CollectionVO $collection, CollectionReference $reference)
     {
         $this->collectionVO = $collection;
         $this->reference = $reference;
@@ -331,7 +331,7 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
         return $this->app['repo.collection-references'];
     }
 
-    public function hydrate(Application $app)
+    public function hydrate(BaseApplication $app)
     {
         $this->fetchInternalServices($app);
     }
@@ -829,9 +829,9 @@ class collection implements ThumbnailedElement, cache_cacheableInterface
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      */
-    private function fetchInternalServices(Application $app)
+    private function fetchInternalServices(BaseApplication $app)
     {
         $this->app = $app;
         $this->databox = $app->getApplicationBox()->get_databox($this->reference->getDataboxId());

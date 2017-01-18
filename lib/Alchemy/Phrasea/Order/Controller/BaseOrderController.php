@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Order\Controller;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\DispatcherAware;
 use Alchemy\Phrasea\Application\Helper\EntityManagerAware;
 use Alchemy\Phrasea\Controller\Controller;
@@ -55,13 +55,13 @@ class BaseOrderController extends Controller
     private $orderBasketProvider;
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param OrderRepository $orderRepository
      * @param OrderElementRepository $orderElementRepository
      * @param OrderBasketProvider $orderBasketProvider
      */
     public function __construct(
-        Application $app,
+        BaseApplication $app,
         OrderRepository $orderRepository,
         OrderElementRepository $orderElementRepository,
         OrderBasketProvider $orderBasketProvider

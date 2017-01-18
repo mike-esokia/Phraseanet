@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Probe;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
 use Alchemy\Phrasea\Setup\Requirements\FilesystemRequirements;
 
@@ -53,7 +53,7 @@ class FilesystemProbe extends FilesystemRequirements implements ProbeInterface
      *
      * @return FilesystemProbe
      */
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         return new static($app['conf']);
     }

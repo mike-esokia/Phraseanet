@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Controller\Prod;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\Checker\Sha256;
 use Alchemy\Phrasea\Border\Manager;
 use DataURI;

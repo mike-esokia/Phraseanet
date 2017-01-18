@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Controller\Api;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\Context;
 use Alchemy\Phrasea\Border\File;
 use Alchemy\Phrasea\Controller\Api\V1Controller;
@@ -786,7 +786,7 @@ class ApiJsonTest extends ApiTestCase
         foreach ($content['response']['termsOfUse'] as $terms) {
             $this->assertTrue(is_array($terms), 'Une bloc cgu est un objet');
             $this->assertArrayHasKey('locale', $terms);
-            $this->assertTrue(in_array($terms['locale'], array_keys(Application::getAvailableLanguages())));
+            $this->assertTrue(in_array($terms['locale'], array_keys(BaseApplication::getAvailableLanguages())));
             $this->assertArrayHasKey('terms', $terms);
             break;
         }

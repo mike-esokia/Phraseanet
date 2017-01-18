@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Serializer\CaptionSerializer;
 use Imagine\Image\ImagineInterface;
 use Imagine\Image\Palette\RGB;
@@ -22,12 +22,12 @@ use MediaVorus\Media\Image;
 class recordutils_image
 {
     /**
-     * @param Application   $app
+     * @param BaseApplication   $app
      * @param \media_subdef $subdef
      *
      * @return string The path to the stamped file
      */
-    public static function stamp(Application $app, \media_subdef $subdef)
+    public static function stamp(BaseApplication $app, \media_subdef $subdef)
     {
         static $palette;
 
@@ -368,12 +368,12 @@ class recordutils_image
 
     /**
      *
-     * @param Application   $app
+     * @param BaseApplication   $app
      * @param \media_subdef $subdef
      *
      * @return boolean|string
      */
-    public static function watermark(Application $app, \media_subdef $subdef)
+    public static function watermark(BaseApplication $app, \media_subdef $subdef)
     {
         static $palette;
 

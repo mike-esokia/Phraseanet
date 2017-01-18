@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Controller\Root;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Registration;
 use Alchemy\Phrasea\Model\Entities\User;
 use RandomLib\Factory;

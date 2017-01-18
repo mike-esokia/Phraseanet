@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\Checker\CheckerInterface;
 use Alchemy\Phrasea\Border\Attribute\AttributeInterface;
 use Alchemy\Phrasea\Exception\RuntimeException;
@@ -61,9 +61,9 @@ class Manager
     /**
      * Constructor
      *
-     * @param Application $app The application context
+     * @param BaseApplication $app The application context
      */
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

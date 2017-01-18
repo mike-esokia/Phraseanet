@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border\Attribute;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use PHPExiftool\Driver\Metadata\Metadata as ExiftoolMeta;
 
 /**
@@ -73,7 +73,7 @@ class Metadata implements AttributeInterface
      *
      * @return Metadata
      */
-    public static function loadFromString(Application $app, $string)
+    public static function loadFromString(BaseApplication $app, $string)
     {
         if (!$metadata = @unserialize($string)) {
             throw new \InvalidArgumentException('Unable to load metadata from string');

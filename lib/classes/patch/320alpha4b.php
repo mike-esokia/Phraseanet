@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Feed;
 use Alchemy\Phrasea\Model\Entities\FeedEntry;
 use Alchemy\Phrasea\Model\Entities\FeedItem;
@@ -61,7 +61,7 @@ class patch_320alpha4b extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         try {
             $sql = 'ALTER TABLE `ssel` ADD `migrated` INT NOT NULL DEFAULT "0"';
@@ -176,7 +176,7 @@ class patch_320alpha4b extends patchAbstract
     }
     protected static $feeds = [];
 
-    protected function get_feed(Application $app, appbox $appbox, User $user, $pub_restrict, $homelink)
+    protected function get_feed(BaseApplication $app, appbox $appbox, User $user, $pub_restrict, $homelink)
     {
         $user_key = 'user_' . $user->getId();
         if ($homelink == '1') {

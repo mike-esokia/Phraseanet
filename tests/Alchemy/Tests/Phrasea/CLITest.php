@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea;
 
-use Alchemy\Phrasea\CLI;
+use Alchemy\Phrasea\CommandLineApplication;
 
 /**
  * @group functional
@@ -12,7 +12,7 @@ class CLITest extends \PhraseanetTestCase
 {
     public function testsEmailWithoutQueue()
     {
-        $app = new CLI('Phrasea');
+        $app = new CommandLineApplication('Phrasea');
 
         $spool = $this->getMock('Swift_Spool');
         $spool->expects($this->once())

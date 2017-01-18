@@ -22,10 +22,18 @@ use Symfony\Component\Process\PhpExecutableFinder;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
-class PluginServiceProvider implements ServiceProviderInterface
+class PluginServiceProvider extends \Alchemy\Phrasea\Core\Provider\PluginServiceProvider
 {
+
+    public function __construct()
+    {
+        parent::__construct(false);
+    }
+
     public function register(Application $app)
     {
+        parent::register($app);
+
         $app['plugins.import-strategy'] = $app->share(function (Application $app) {
             return new ImportStrategy();
         });
@@ -61,9 +69,5 @@ class PluginServiceProvider implements ServiceProviderInterface
         $app['plugins.importer.folder-importer'] = $app->share(function (Application $app) {
            return new FolderImporter($app['filesystem']);
         });
-    }
-
-    public function boot(Application $app)
-    {
     }
 }

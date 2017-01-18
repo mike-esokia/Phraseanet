@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -21,7 +21,7 @@ class BridgeExceptionSubscriber implements EventSubscriberInterface
 {
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

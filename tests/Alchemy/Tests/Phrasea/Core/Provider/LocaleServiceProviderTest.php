@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Core\Provider;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Provider\ConfigurationServiceProvider;
 use Alchemy\Phrasea\Core\Provider\LocaleServiceProvider;
 
@@ -18,7 +18,7 @@ class LocaleServiceProviderTest extends \PhraseanetTestCase
         $app = $this->loadApp();
         $app->register(new LocaleServiceProvider());
 
-        $this->assertEquals(Application::getAvailableLanguages(), $app['locales.available']);
+        $this->assertEquals(BaseApplication::getAvailableLanguages(), $app['locales.available']);
     }
 
     public function testLocalesAvailableCustomized()
@@ -29,7 +29,7 @@ class LocaleServiceProviderTest extends \PhraseanetTestCase
         $app->register(new ConfigurationServiceProvider());
         $app['conf']->set(['languages', 'available'], ['fr', 'zh', 'de']);
 
-        $original = Application::getAvailableLanguages();
+        $original = BaseApplication::getAvailableLanguages();
         unset($original['en']);
         unset($original['nl']);
 
@@ -49,7 +49,7 @@ class LocaleServiceProviderTest extends \PhraseanetTestCase
         $app['monolog']->expects($this->once())
             ->method('error');
 
-        $original = Application::getAvailableLanguages();
+        $original = BaseApplication::getAvailableLanguages();
 
         $this->assertEquals($original, $app['locales.available']);
     }

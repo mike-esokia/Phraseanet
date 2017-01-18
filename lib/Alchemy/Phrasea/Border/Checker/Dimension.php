@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border\Checker;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\File;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -21,7 +21,7 @@ class Dimension extends AbstractChecker
     protected $width;
     protected $height;
 
-    public function __construct(Application $app, array $options)
+    public function __construct(BaseApplication $app, array $options)
     {
         if ( ! isset($options['width'])) {
             throw new \InvalidArgumentException('Missing "width" option');

@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Media;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\Record\MediaSubstitutedEvent;
 use Alchemy\Phrasea\Core\Event\Record\RecordEvents;
 use Alchemy\Phrasea\Filesystem\FilesystemService;
@@ -26,7 +26,7 @@ class SubdefSubstituer
     private $fs;
     private $mediavorus;
 
-    public function __construct(Application $app, FilesystemService $fs, Alchemyst $alchemyst, MediaVorus $mediavorus, EventDispatcherInterface $dispatcher)
+    public function __construct(BaseApplication $app, FilesystemService $fs, Alchemyst $alchemyst, MediaVorus $mediavorus, EventDispatcherInterface $dispatcher)
     {
         $this->alchemyst = $alchemyst;
         $this->app = $app;

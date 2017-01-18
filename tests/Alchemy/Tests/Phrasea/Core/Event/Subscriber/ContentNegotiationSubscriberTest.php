@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\Subscriber\ContentNegotiationSubscriber;
 use Symfony\Component\HttpKernel\Client;
 
@@ -30,7 +30,7 @@ class ContentNegotiationSubscriberTest extends \PHPUnit_Framework_TestCase
 
     private function request($accept)
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new ContentNegotiationSubscriber($app['negotiator'], $app['phraseanet.content-negotiation.priorities']));
         $app->get('/content/negociation', function () {
             return '';

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_381alpha2a extends patchAbstract
 {
@@ -46,7 +46,7 @@ class patch_381alpha2a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $sql = 'SELECT `value` FROM `registry` WHERE `key` = "GV_i18n_service"';
         $stmt = $appbox->get_connection()->prepare($sql);

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Entities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -109,7 +109,7 @@ class StoryWZ
         return $this->record_id;
     }
 
-    public function getRecord(Application $app)
+    public function getRecord(BaseApplication $app)
     {
         return new \record_adapter($app, $this->getSbasId(), $this->getRecordId());
     }

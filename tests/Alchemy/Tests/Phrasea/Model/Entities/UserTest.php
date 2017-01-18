@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Model\Entities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\User;
 
 /**
@@ -50,7 +50,7 @@ class UserTest extends \PhraseanetTestCase
 
     public function testSetLocale()
     {
-        foreach (array_keys(Application::getAvailableLanguages()) as $locale) {
+        foreach (array_keys(BaseApplication::getAvailableLanguages()) as $locale) {
             $this->user->setLocale($locale);
             $this->assertEquals($this->user->getLocale(), $locale);
         }

@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\HttpKernel\Client;
 use Alchemy\Phrasea\Core\Event\Subscriber\BridgeExceptionSubscriber;
 
@@ -14,7 +14,7 @@ class BridgeExceptionSubscriberTest extends \PhraseanetTestCase
 {
     public function testErrorOnBridgeExceptions()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['bridge.account'] = $this->getMockBuilder('Bridge_Account')
             ->disableOriginalConstructor()
             ->getMock();
@@ -32,7 +32,7 @@ class BridgeExceptionSubscriberTest extends \PhraseanetTestCase
 
     public function testErrorOnOtherExceptions()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['bridge.account'] = $this->getMockBuilder('Bridge_Account')
             ->disableOriginalConstructor()
             ->getMock();

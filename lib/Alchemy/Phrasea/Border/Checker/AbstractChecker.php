@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border\Checker;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\File;
 
 /**
@@ -20,7 +20,7 @@ use Alchemy\Phrasea\Border\File;
 abstract class AbstractChecker implements CheckerInterface
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
@@ -34,7 +34,7 @@ abstract class AbstractChecker implements CheckerInterface
      */
     protected $collections = [];
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

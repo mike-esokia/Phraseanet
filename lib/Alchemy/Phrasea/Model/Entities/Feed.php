@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Entities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Feed\FeedInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -295,11 +295,11 @@ class Feed implements FeedInterface
     /**
      * Returns the collection to which the feed belongs.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return \collection
      */
-    public function getCollection(Application $app)
+    public function getCollection(BaseApplication $app)
     {
         if ($this->getBaseId() !== null) {
           return \collection::getByBaseId($app, $this->getBaseId());
@@ -452,11 +452,11 @@ class Feed implements FeedInterface
      * Returns a boolean indicating whether the given user has access to the feed.
      *
      * @param User        $user
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return boolean
      */
-    public function hasAccess(User $user, Application $app)
+    public function hasAccess(User $user, BaseApplication $app)
     {
         if ($this->getCollection($app) instanceof collection) {
             return $app->getAclForUser($user)->has_access_to_base($this->collection->get_base_id());
@@ -547,11 +547,11 @@ class Feed implements FeedInterface
      * Returns a boolean indicating whether a given user has access to the feed
      *
      * @param User                         $user
-     * @param \Alchemy\Phrasea\Application $app
+     * @param \Alchemy\Phrasea\BaseApplication $app
      *
      * @return boolean
      */
-    public function isAccessible(User $user, Application $app)
+    public function isAccessible(User $user, BaseApplication $app)
     {
         $coll = $this->getCollection($app);
         if ($this->isPublic()

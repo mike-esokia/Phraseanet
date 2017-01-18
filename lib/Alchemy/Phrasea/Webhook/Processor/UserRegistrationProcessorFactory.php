@@ -2,19 +2,19 @@
 
 namespace Alchemy\Phrasea\Webhook\Processor;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class UserRegistrationProcessorFactory implements ProcessorFactory
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      */
-    public function __construct(Application $application)
+    public function __construct(BaseApplication $application)
     {
         $this->app = $application;
     }

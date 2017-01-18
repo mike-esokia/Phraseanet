@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class module_report_filter
 {
@@ -18,7 +18,7 @@ class module_report_filter
     private $cor_query = [];
     private $active_column = [];
 
-    public function __construct(Application $app, $current_filter, $correspondance)
+    public function __construct(BaseApplication $app, $current_filter, $correspondance)
     {
         $this->app = $app;
         $this->tab_filter = $current_filter;

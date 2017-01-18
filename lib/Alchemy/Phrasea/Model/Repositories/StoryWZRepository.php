@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Repositories;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\StoryWZ;
 use Alchemy\Phrasea\Model\Entities\User;
 use Doctrine\ORM\EntityRepository;
@@ -27,7 +27,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class StoryWZRepository extends EntityRepository
 {
 
-    public function findByUser(Application $app, User $user, $sort)
+    public function findByUser(BaseApplication $app, User $user, $sort)
     {
         $dql = 'SELECT s FROM Phraseanet:StoryWZ s WHERE s.user = :user ';
 
@@ -73,7 +73,7 @@ class StoryWZRepository extends EntityRepository
         return $stories;
     }
 
-    public function findByUserAndId(Application $app, User $user, $id)
+    public function findByUserAndId(BaseApplication $app, User $user, $id)
     {
         $story = $this->find($id);
 
@@ -95,7 +95,7 @@ class StoryWZRepository extends EntityRepository
         return $story;
     }
 
-    public function findUserStory(Application $app, User $user, \record_adapter $Story)
+    public function findUserStory(BaseApplication $app, User $user, \record_adapter $Story)
     {
         $story = $this->findOneBy([
             'user'    => $user->getId(),
@@ -117,11 +117,11 @@ class StoryWZRepository extends EntityRepository
     }
 
     /**
-     * @param Application     $app
+     * @param BaseApplication     $app
      * @param \record_adapter $Story
      * @return StoryWZ[]
      */
-    public function findByRecord(Application $app, \record_adapter $Story)
+    public function findByRecord(BaseApplication $app, \record_adapter $Story)
     {
         $dql = 'SELECT s FROM Phraseanet:StoryWZ s
                 WHERE s.sbas_id = :sbas_id
@@ -149,7 +149,7 @@ class StoryWZRepository extends EntityRepository
         return $stories;
     }
 
-    public function findByDatabox(Application $app, \databox $databox)
+    public function findByDatabox(BaseApplication $app, \databox $databox)
     {
         $dql = 'SELECT s FROM Phraseanet:StoryWZ s WHERE s.sbas_id = :sbas_id';
 

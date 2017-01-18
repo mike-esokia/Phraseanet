@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider\Prod;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\Prod\DownloadController;
 use Alchemy\Phrasea\ControllerProvider\ControllerProviderTrait;
 use Alchemy\Phrasea\Core\Event\Listener\OAuthListener;

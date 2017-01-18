@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Core\Provider;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Silex\Application;
 
 /**

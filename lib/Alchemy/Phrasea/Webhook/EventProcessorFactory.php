@@ -4,7 +4,7 @@ namespace Alchemy\Phrasea\Webhook;
 
 use Alchemy\Phrasea\Exception\InvalidArgumentException;
 use Alchemy\Phrasea\Model\Entities\WebhookEvent;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Webhook\Processor\CallableProcessorFactory;
 use Alchemy\Phrasea\Webhook\Processor\FeedEntryProcessorFactory;
 use Alchemy\Phrasea\Webhook\Processor\OrderNotificationProcessorFactory;
@@ -21,9 +21,9 @@ class EventProcessorFactory
     private $processorFactories = [];
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      */
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->registerFactory(WebhookEvent::FEED_ENTRY_TYPE, new FeedEntryProcessorFactory($app));
         $this->registerFactory(WebhookEvent::USER_REGISTRATION_TYPE, new UserRegistrationProcessorFactory($app));

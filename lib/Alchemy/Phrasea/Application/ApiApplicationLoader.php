@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Application;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Controller\Api\Result;
 use Alchemy\Phrasea\ControllerProvider\Api\OAuth2;
 use Alchemy\Phrasea\ControllerProvider\Api\V1;
@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiApplicationLoader extends BaseApplicationLoader
 {
-    protected function doPrePluginServiceRegistration(Application $app)
+    protected function doPrePluginServiceRegistration(BaseApplication $app)
     {
         $app->register(new OAuth2());
         $app->register(new V1());
@@ -37,12 +37,12 @@ class ApiApplicationLoader extends BaseApplicationLoader
         $app->register(new JsonSchemaServiceProvider());
     }
 
-    protected function createExceptionHandler(Application $app)
+    protected function createExceptionHandler(BaseApplication $app)
     {
         return new ApiExceptionHandlerSubscriber($app['monolog']);
     }
 
-    protected function bindRoutes(Application $app)
+    protected function bindRoutes(BaseApplication $app)
     {
         $app['phraseanet.content-negotiation.priorities'] = array_merge(
             ['application/json', 'application/yaml', 'text/yaml', 'text/javascript', 'application/javascript'],
@@ -76,7 +76,7 @@ class ApiApplicationLoader extends BaseApplicationLoader
                 ),
                 false
             ));
-        }, Application::EARLY_EVENT);
+        }, BaseApplication::EARLY_EVENT);
 
         $app->after(function(Request $request, Response $response) {
             if ($request->getRequestFormat(Result::FORMAT_JSON) === Result::FORMAT_JSONP && !$response->isOk() && !$response->isServerError()) {
@@ -89,7 +89,7 @@ class ApiApplicationLoader extends BaseApplicationLoader
             }
         });
 
-        $app->get('/api/', function (Request $request, Application $app) {
+        $app->get('/api/', function (Request $request, BaseApplication $app) {
             return Result::create($request, [
                 'name'          => $app['conf']->get(['registry', 'general', 'title']),
                 'type'          => 'phraseanet',
@@ -142,7 +142,7 @@ class ApiApplicationLoader extends BaseApplicationLoader
         });
     }
 
-    protected function getDispatcherSubscribersFor(Application $app)
+    protected function getDispatcherSubscribersFor(BaseApplication $app)
     {
         $subscribers = parent::getDispatcherSubscribersFor($app);
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\DBAL\DBALException;
 
 class module_report
@@ -226,7 +226,7 @@ class module_report
 
     /**
      *
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
@@ -240,13 +240,13 @@ class module_report
     /**
      * Constructor
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param string      $d1      the minimal date of the report
      * @param string      $d2      the maximal date of the report
      * @param integer     $sbas_id the id of the base where we want to connect
      * @param string      $collist
      */
-    public function __construct(Application $app, $d1, $d2, $sbas_id, $collist)
+    public function __construct(BaseApplication $app, $d1, $d2, $sbas_id, $collist)
     {
         $this->app = $app;
         $this->dmin = $d1;
@@ -883,7 +883,7 @@ class module_report
         }
     }
 
-    public static function getPreff(Application $app, $sbasid)
+    public static function getPreff(BaseApplication $app, $sbasid)
     {
         $tab = [];
 

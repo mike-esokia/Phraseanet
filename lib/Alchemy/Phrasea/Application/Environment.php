@@ -2,7 +2,7 @@
 
 namespace Alchemy\Phrasea\Application;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class Environment
 {
@@ -19,7 +19,7 @@ class Environment
     public function __construct($name, $debug)
     {
         $this->name = (string) $name;
-        $this->debug = ((bool) $debug) || $name === Application::ENV_DEV;
+        $this->debug = ((bool) $debug) || $name === BaseApplication::ENV_DEV;
     }
 
     /**

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Status;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\Common\Collections\ArrayCollection;
 

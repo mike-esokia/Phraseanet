@@ -22,15 +22,16 @@ use Alchemy\Phrasea\Command\Plugin\AddPlugin;
 use Alchemy\Phrasea\Command\Plugin\RemovePlugin;
 use Alchemy\Phrasea\Command\Plugin\EnablePlugin;
 use Alchemy\Phrasea\Command\Plugin\DisablePlugin;
-use Alchemy\Phrasea\CLI;
+use Alchemy\Phrasea\CommandLineApplication;
 use Alchemy\Phrasea\Command\Setup\CheckEnvironment;
 use Alchemy\Phrasea\Core\CLIProvider\DoctrineMigrationServiceProvider;
 use Alchemy\Phrasea\Setup\ConfigurationTester;
+use Alchemy\Phrasea\SetupApplication;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $version = new Version();
-$app = new CLI("
+$app = new SetupApplication("
   _____  _    _ _____            _____ ______          _   _ ______ _______
  |  __ \| |  | |  __ \    /\    / ____|  ____|   /\   | \ | |  ____|__   __|
  | |__) | |__| | |__) |  /  \  | (___ | |__     /  \  |  \| | |__     | |

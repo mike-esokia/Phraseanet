@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\Subscriber\ApiOauth2ErrorsSubscriber;
 use Symfony\Component\HttpKernel\Client;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -21,7 +21,7 @@ class ApiOauth2ErrorsSubscriberTest extends \PhraseanetTestCase
      */
     public function testError($exception, $code, $contentType)
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new ApiOauth2ErrorsSubscriber(PhraseaExceptionHandler::register(), $this->createTranslatorMock()));
         $app->get('/api/oauthv2', function () use ($exception) {
             throw $exception;
@@ -39,7 +39,7 @@ class ApiOauth2ErrorsSubscriberTest extends \PhraseanetTestCase
      */
     public function testErrorOnOtherRoutes($exception, $code, $contentType)
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         unset($app['exception_handler']);
         $app['dispatcher']->addSubscriber(new ApiOauth2ErrorsSubscriber(PhraseaExceptionHandler::register(), $this->createTranslatorMock()));
         $app->get('/', function () use ($exception) {

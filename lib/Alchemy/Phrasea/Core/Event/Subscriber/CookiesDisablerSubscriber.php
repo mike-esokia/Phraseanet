@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -24,7 +24,7 @@ class CookiesDisablerSubscriber implements EventSubscriberInterface
     private $app;
     private $sessionCookieEnabled = true;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

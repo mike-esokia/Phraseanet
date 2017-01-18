@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Task;
 
 class patch_390alpha8a extends patchAbstract
@@ -55,7 +55,7 @@ class patch_390alpha8a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $sql = 'DELETE FROM Tasks';
         $stmt = $app->getApplicationBox()->get_connection()->prepare($sql);
@@ -96,7 +96,7 @@ class patch_390alpha8a extends patchAbstract
         $app['orm.em']->flush();
     }
 
-    private function createJob(Application $app, $class)
+    private function createJob(BaseApplication $app, $class)
     {
         switch (strtolower($class)) {
             case 'task_period_recordmover':

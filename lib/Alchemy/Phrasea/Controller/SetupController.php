@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Controller;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\RequirementCollectionInterface;
 use Alchemy\Phrasea\Setup\Requirements\BinariesRequirements;
 use Alchemy\Phrasea\Setup\Requirements\FilesystemRequirements;
@@ -29,7 +29,7 @@ class SetupController extends Controller
 
         return $this->render('/setup/index.html.twig', [
             'locale'                 => $this->app['locale'],
-            'available_locales'      => Application::getAvailableLanguages(),
+            'available_locales'      => BaseApplication::getAvailableLanguages(),
             'current_servername'     => $request->getScheme() . '://' . $request->getHttpHost() . '/',
             'requirementsCollection' => $requirementsCollection,
         ]);
@@ -53,7 +53,7 @@ class SetupController extends Controller
     {
         return $this->render('/setup/upgrade-instructions.html.twig', [
             'locale'              => $this->app['locale'],
-            'available_locales'   => Application::getAvailableLanguages(),
+            'available_locales'   => BaseApplication::getAvailableLanguages(),
         ]);
     }
 
@@ -76,7 +76,7 @@ class SetupController extends Controller
 
         return $this->render('/setup/step2.html.twig', [
             'locale'              => $this->app['locale'],
-            'available_locales'   => Application::getAvailableLanguages(),
+            'available_locales'   => BaseApplication::getAvailableLanguages(),
             'available_templates' => ['en', 'fr'],
             'warnings'            => $warnings,
             'error'               => $request->query->get('error'),

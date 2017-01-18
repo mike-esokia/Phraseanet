@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Controller\Admin;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\UserQueryAware;
 use Alchemy\Phrasea\Collection\CollectionService;
 use Alchemy\Phrasea\Controller\Controller;
@@ -26,7 +26,7 @@ class CollectionController extends Controller
      */
     private $collectionService;
 
-    public function __construct(Application $application, CollectionService $collectionService)
+    public function __construct(BaseApplication $application, CollectionService $collectionService)
     {
         parent::__construct($application);
 

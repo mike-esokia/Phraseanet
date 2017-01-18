@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\TaskManager\Job;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\PhraseaTokens;
 use Alchemy\Phrasea\Media\SubdefGenerator;
 use Alchemy\Phrasea\TaskManager\Editor\SubdefsEditor;
@@ -132,15 +132,15 @@ class SubdefsJob extends AbstractJob
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return SubdefGenerator
      */
-    private function getSubdefGenerator(Application $app)
+    private function getSubdefGenerator(BaseApplication $app)
     {
         return $app['subdef.generator'];
     }
 
-    private function flushIndexerQueue(Application $app)
+    private function flushIndexerQueue(BaseApplication $app)
     {
         $app['elasticsearch.indexer']->flushQueue();
     }

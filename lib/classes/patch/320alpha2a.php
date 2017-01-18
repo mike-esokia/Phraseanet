@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\ORM\Query;
 
 class patch_320alpha2a extends patchAbstract
@@ -47,7 +47,7 @@ class patch_320alpha2a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $dql = 'SELECT u FROM Phraseanet:User u WHERE u.nonce IS NULL';
         $q = $app['orm.em']->createQuery($dql);

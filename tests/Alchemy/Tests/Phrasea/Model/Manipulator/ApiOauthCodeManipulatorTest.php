@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Model\Manipulator;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\ControllerProvider\Api\V2;
 use Alchemy\Phrasea\Exception\InvalidArgumentException;
 use Alchemy\Phrasea\Model\Entities\ApiAccount;
@@ -75,28 +75,28 @@ class ApiOauthCodeManipulatorTest extends \PhraseanetTestCase
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return ApiOauthCodeRepository
      */
-    private function getOAuthCodesRepository(Application $app)
+    private function getOAuthCodesRepository(BaseApplication $app)
     {
         return $app['repo.api-oauth-codes'];
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return ApiAccountManipulator
      */
-    private function getApiAccountManipulator(Application $app)
+    private function getApiAccountManipulator(BaseApplication $app)
     {
         return $app['manipulator.api-account'];
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return ApiAccount
      */
-    private function getApiAccount(Application $app)
+    private function getApiAccount(BaseApplication $app)
     {
         return $this->getApiAccountManipulator($app)
             ->create(self::$DI['oauth2-app-user'], self::$DI['user'], V2::VERSION);

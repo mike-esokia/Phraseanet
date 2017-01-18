@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Controller;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\ACLProvider;
 use Alchemy\Phrasea\Authentication\Authenticator;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +26,7 @@ class DatafileController extends AbstractDelivery
     /** @var Authenticator */
     private $authentication;
 
-    public function __construct(Application $app, \appbox $appbox, ACLProvider $acl, Authenticator $authenticator)
+    public function __construct(BaseApplication $app, \appbox $appbox, ACLProvider $acl, Authenticator $authenticator)
     {
         parent::__construct($app);
 

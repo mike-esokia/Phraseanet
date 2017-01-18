@@ -11,13 +11,13 @@
 
 namespace Alchemy\Phrasea\Setup\Version\Migration;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class Migration31 implements MigrationInterface
 {
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

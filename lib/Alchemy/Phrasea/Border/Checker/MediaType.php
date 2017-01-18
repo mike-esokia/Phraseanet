@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border\Checker;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\File;
 use Doctrine\ORM\EntityManager;
 use MediaVorus\Media\MediaInterface;
@@ -27,7 +27,7 @@ class MediaType extends AbstractChecker
     const TYPE_IMAGE = MediaInterface::TYPE_IMAGE;
     const TYPE_VIDEO = MediaInterface::TYPE_VIDEO;
 
-    public function __construct(Application $app, array $options)
+    public function __construct(BaseApplication $app, array $options)
     {
         if (!isset($options['mediatypes'])) {
             throw new \InvalidArgumentException('Missing "mediatypes" options');

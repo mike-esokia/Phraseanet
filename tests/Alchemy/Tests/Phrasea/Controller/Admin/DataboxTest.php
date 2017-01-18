@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Controller\Admin;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\File;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

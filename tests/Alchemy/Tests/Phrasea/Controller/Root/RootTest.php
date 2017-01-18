@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Controller\Root;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\HttpKernel\Client;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\BrowserKit\Cookie as BrowserCookie;
@@ -93,7 +93,7 @@ class RootTest extends \PhraseanetAuthenticatedWebTestCase
 
         $boolean = false;
 
-        $app->get('/unit-test-route', function (Application $app) use (&$boolean) {
+        $app->get('/unit-test-route', function (BaseApplication $app) use (&$boolean) {
             $boolean = $app['authentication']->isAuthenticated();
 
             return new Response();
@@ -142,7 +142,7 @@ class RootTest extends \PhraseanetAuthenticatedWebTestCase
 
         $boolean = false;
 
-        $app->get('/unit-test-route', function (Application $app) use (&$boolean) {
+        $app->get('/unit-test-route', function (BaseApplication $app) use (&$boolean) {
             $boolean = $app['authentication']->isAuthenticated();
 
             return new Response();

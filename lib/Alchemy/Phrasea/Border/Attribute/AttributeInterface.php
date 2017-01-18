@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border\Attribute;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 /**
  * File attribute interface
@@ -45,10 +45,10 @@ interface AttributeInterface
     /**
      * Build the current object with is string value
      *
-     * @param Application $app    the application context
+     * @param BaseApplication $app    the application context
      * @param string      $string the serialized string
      *
      * @throws \InvalidArgumentException
      */
-    public static function loadFromString(Application $app, $string);
+    public static function loadFromString(BaseApplication $app, $string);
 }

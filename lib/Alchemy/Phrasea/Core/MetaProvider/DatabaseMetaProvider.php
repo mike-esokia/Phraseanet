@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Core\MetaProvider;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Cache\Manager;
 use Alchemy\Phrasea\Core\Provider\ORMServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\AuthFailure;
 
 class patch_380alpha4a extends patchAbstract
@@ -55,7 +55,7 @@ class patch_380alpha4a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $conn = $app->getApplicationBox()->get_connection();
         $sql = 'SELECT date, login, ip, locked

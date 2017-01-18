@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class module_report_sql
 {
@@ -37,7 +37,7 @@ class module_report_sql
     public $groupby = false;
     public $on = false;
 
-    public function __construct(Application $app, module_report $report)
+    public function __construct(BaseApplication $app, module_report $report)
     {
         $this->conn = $app->getApplicationBox()->get_connection();
         $this->connbas = $app->findDataboxById($report->getSbasId())->get_connection();

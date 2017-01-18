@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Setup\Version\Migration;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Configuration\Configuration;
 use Alchemy\Phrasea\Core\Configuration\Compiler;
 use Alchemy\Phrasea\Setup\Version\Migration\Migration35;
@@ -48,7 +48,7 @@ class Migration35Test extends AbstractSetupTester
         $this->assertFalse($this->specifications->isSetup());
 
         $this->goBackTo35();
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $migration = $this->getMigration($app);
         $migration->migrate();
 
@@ -61,9 +61,9 @@ class Migration35Test extends AbstractSetupTester
         @unlink($compiled);
     }
 
-    private function getMigration(Application $app = null)
+    private function getMigration(BaseApplication $app = null)
     {
-        $app = $app ? : new Application(Application::ENV_TEST);
+        $app = $app ? : new BaseApplication(BaseApplication::ENV_TEST);
 
         if ($this->specifications) {
             $app['configuration.store'] = $this->specifications;

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\LazaretFile;
 use Alchemy\Phrasea\Model\Entities\LazaretSession;
 use Doctrine\DBAL\DBALException;
@@ -59,7 +59,7 @@ class patch_370alpha7a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $conn = $appbox->get_connection();
 

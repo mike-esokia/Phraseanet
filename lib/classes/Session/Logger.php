@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Exception\SessionNotFound;
 use Alchemy\Phrasea\Model\Entities\SessionModule;
 
@@ -41,7 +41,7 @@ class Session_Logger
 
     /**
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param databox     $databox
      * @param integer     $log_id
      *
@@ -88,13 +88,13 @@ class Session_Logger
 
     /**
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param databox     $databox
      * @param Browser     $browser
      *
      * @return Session_Logger
      */
-    public static function create(Application $app, databox $databox, Browser $browser)
+    public static function create(BaseApplication $app, databox $databox, Browser $browser)
     {
         $colls = [];
 
@@ -155,7 +155,7 @@ class Session_Logger
         return new Session_Logger($databox, $log_id);
     }
 
-    public static function load(Application $app, databox $databox)
+    public static function load(BaseApplication $app, databox $databox)
     {
         if ( ! $app->getAuthenticator()->isAuthenticated()) {
             throw new Exception_Session_LoggerNotFound('Not authenticated');
@@ -180,7 +180,7 @@ class Session_Logger
         return new self($databox, $row['id']);
     }
 
-    public static function updateClientInfos(Application $app, $appId)
+    public static function updateClientInfos(BaseApplication $app, $appId)
     {
         if (!$app->getAuthenticator()->isAuthenticated()) {
             return;

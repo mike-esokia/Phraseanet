@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Controller;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\DataboxLoggerAware;
 use Alchemy\Phrasea\Application\Helper\DelivererAware;
 use Alchemy\Phrasea\Http\DeliverDataInterface;
@@ -22,10 +22,10 @@ abstract class AbstractDelivery
     use DataboxLoggerAware;
     use DelivererAware;
 
-    /** @var Application */
+    /** @var BaseApplication */
     protected $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

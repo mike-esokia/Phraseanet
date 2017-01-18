@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\FeedEntry;
 use Alchemy\Phrasea\SearchEngine\SearchEngineInterface;
 use Alchemy\Phrasea\SearchEngine\SearchEngineOptions;
@@ -74,7 +74,7 @@ class record_preview extends record_adapter
     protected $query;
     protected $options;
 
-    public function __construct(Application $app, $env, $pos, $contId, SearchEngineInterface $search_engine = null, $query = '', SearchEngineOptions $options = null)
+    public function __construct(BaseApplication $app, $env, $pos, $contId, SearchEngineInterface $search_engine = null, $query = '', SearchEngineOptions $options = null)
     {
         $number = null;
         $this->env = $env;

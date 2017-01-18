@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Controller\Prod;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\EntityManagerAware;
 use Alchemy\Phrasea\Application\Helper\SearchEngineAware;
 use Alchemy\Phrasea\Controller\Controller;

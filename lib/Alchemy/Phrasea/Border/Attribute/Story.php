@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border\Attribute;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -77,7 +77,7 @@ class Story implements AttributeInterface
      *
      * @return Story
      */
-    public static function loadFromString(Application $app, $string)
+    public static function loadFromString(BaseApplication $app, $string)
     {
         $ids = explode('_', $string);
 

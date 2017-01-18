@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Out\Module;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Out\Tool\PhraseaPDF;
 
 class PDF
@@ -26,7 +26,7 @@ class PDF
     const LAYOUT_THUMBNAILLIST = 'thumbnailList';
     const LAYOUT_THUMBNAILGRID = 'thumbnailGrid';
 
-    public function __construct(Application $app, array $records, $layout)
+    public function __construct(BaseApplication $app, array $records, $layout)
     {
         $this->app = $app;
 

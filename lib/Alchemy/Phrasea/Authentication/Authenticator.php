@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Authentication;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Exception\RuntimeException;
 use Alchemy\Phrasea\Model\Entities\User;
 use Browser;
@@ -27,7 +27,7 @@ class Authenticator
     private $em;
     private $user;
 
-    public function __construct(Application $app, Browser $browser, SessionInterface $session, EntityManager $em)
+    public function __construct(BaseApplication $app, Browser $browser, SessionInterface $session, EntityManager $em)
     {
         // design error, circular reference
         $this->app = $app;

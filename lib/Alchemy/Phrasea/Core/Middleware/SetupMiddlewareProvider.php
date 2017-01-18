@@ -18,7 +18,7 @@ class SetupMiddlewareProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        Assertion::isInstanceOf($app, \Alchemy\Phrasea\Application::class);
+        Assertion::isInstanceOf($app, \Alchemy\Phrasea\BaseApplication::class);
 
         $app['setup.validate-config'] = $app->protect(function (Request $request) use ($app) {
             if (0 === strpos($request->getPathInfo(), '/setup')) {

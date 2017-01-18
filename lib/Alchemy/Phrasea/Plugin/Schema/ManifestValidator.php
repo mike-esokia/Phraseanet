@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Plugin\Schema;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use JsonSchema\Validator as JsonValidator;
 use Alchemy\Phrasea\Exception\InvalidArgumentException;
 use Alchemy\Phrasea\Plugin\Exception\JsonValidationException;
@@ -77,7 +77,7 @@ class ManifestValidator
         }
     }
 
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         $data = @json_decode(@file_get_contents($app['plugins.schema']));
 

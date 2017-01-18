@@ -11,12 +11,12 @@
 
 namespace Alchemy\Phrasea\Helper;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\HttpFoundation\Request;
 
 class Helper
 {
-    /** @var Application */
+    /** @var BaseApplication */
     protected $app;
 
     /** @var Request */
@@ -24,12 +24,12 @@ class Helper
 
     /**
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param Request     $Request
      *
      * @return Helper
      */
-    public function __construct(Application $app, Request $Request)
+    public function __construct(BaseApplication $app, Request $Request)
     {
         $this->app = $app;
         $this->request = $Request;

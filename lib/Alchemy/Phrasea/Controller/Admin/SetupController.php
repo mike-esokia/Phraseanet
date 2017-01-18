@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Controller\Admin;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Controller\Controller;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
 use Alchemy\Phrasea\Core\Configuration\RegistryFormManipulator;
@@ -28,7 +28,7 @@ class SetupController extends Controller
      */
     private $configuration;
 
-    public function __construct(Application $app, RegistryFormManipulator $registryFormManipulator, PropertyAccess $configuration)
+    public function __construct(BaseApplication $app, RegistryFormManipulator $registryFormManipulator, PropertyAccess $configuration)
     {
         parent::__construct($app);
 

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 use Alchemy\Phrasea\Authentication\Exception\AccountLockedException;
 use Alchemy\Phrasea\Authentication\Exception\RequireCaptchaException;
@@ -30,7 +30,7 @@ class API_OAuth2_Adapter extends OAuth2
     protected $client;
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
@@ -67,10 +67,10 @@ class API_OAuth2_Adapter extends OAuth2
     protected $token;
 
     /**
-     * @param  Application $app
+     * @param  BaseApplication $app
      * @param array $conf
      */
-    public function __construct(Application $app, array $conf = [])
+    public function __construct(BaseApplication $app, array $conf = [])
     {
         parent::__construct($conf);
         $this->app = $app;

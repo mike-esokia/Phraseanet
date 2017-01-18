@@ -2,14 +2,14 @@
 
 namespace Alchemy\Phrasea\Account;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Configuration\RegistrationManager;
 use Alchemy\Phrasea\Model\Entities\User;
 
 class CollectionRequestMapper
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
@@ -18,7 +18,7 @@ class CollectionRequestMapper
      */
     private $registrationManager;
 
-    public function __construct(Application $app, RegistrationManager $registrationManager)
+    public function __construct(BaseApplication $app, RegistrationManager $registrationManager)
     {
         $this->app = $app;
         $this->registrationManager = $registrationManager;

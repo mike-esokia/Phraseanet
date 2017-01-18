@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
@@ -23,7 +23,7 @@ class Bridge_Api
 
     /**
      *
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
@@ -53,11 +53,11 @@ class Bridge_Api
 
     /**
      *
-     * @param  Application $app
+     * @param  BaseApplication $app
      * @param  int         $id
      * @return Bridge_Api
      */
-    public function __construct(Application $app, $id)
+    public function __construct(BaseApplication $app, $id)
     {
         $this->app = $app;
         $this->id = (int) $id;
@@ -471,11 +471,11 @@ class Bridge_Api
 
     /**
      *
-     * @param  Application          $app
+     * @param  BaseApplication          $app
      * @param  string               $name
      * @return Bridge_Api_Interface
      */
-    public static function get_connector_by_name(Application $app, $name)
+    public static function get_connector_by_name(BaseApplication $app, $name)
     {
         $name = ucfirst(strtolower($name));
         $classname = 'Bridge_Api_' . $name;
@@ -490,7 +490,7 @@ class Bridge_Api
         return new $classname($app['url_generator'], $app['conf'], $auth, $app['translator']);
     }
 
-    public static function get_by_api_name(Application $app, $name)
+    public static function get_by_api_name(BaseApplication $app, $name)
     {
         $name = strtolower($name);
 
@@ -508,10 +508,10 @@ class Bridge_Api
 
     /**
      *
-     * @param  Application $app
+     * @param  BaseApplication $app
      * @return Bridge_Api
      */
-    public static function get_availables(Application $app)
+    public static function get_availables(BaseApplication $app)
     {
         $sql = 'SELECT id FROM bridge_apis';
         $stmt = $app->getApplicationBox()->get_connection()->prepare($sql);
@@ -532,7 +532,7 @@ class Bridge_Api
         return $results;
     }
 
-    public static function create(Application $app, $name)
+    public static function create(BaseApplication $app, $name)
     {
         $connection = $app->getApplicationBox()->get_connection();
 

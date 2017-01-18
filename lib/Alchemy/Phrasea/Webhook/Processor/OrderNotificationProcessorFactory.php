@@ -2,16 +2,16 @@
 
 namespace Alchemy\Phrasea\Webhook\Processor;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class OrderNotificationProcessorFactory implements ProcessorFactory
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $application;
 
-    public function __construct(Application $application)
+    public function __construct(BaseApplication $application)
     {
         $this->application = $application;
     }

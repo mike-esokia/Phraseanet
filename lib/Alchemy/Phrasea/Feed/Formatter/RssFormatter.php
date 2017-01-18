@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Feed\Formatter;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Feed\FeedInterface;
 use Alchemy\Phrasea\Feed\Link\FeedLink;
 use Alchemy\Phrasea\Feed\Link\LinkGeneratorCollection;
@@ -39,7 +39,7 @@ class RssFormatter extends FeedFormatterAbstract implements FeedFormatterInterfa
     /**
      * {@inheritdoc}
      */
-    public function createResponse(Application $app, FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet')
+    public function createResponse(BaseApplication $app, FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet')
     {
         $content = $this->format($feed, $page, $user, $generator, $app);
         $response = new Response($content, 200, ['Content-Type' => 'application/rss+xml']);
@@ -50,7 +50,7 @@ class RssFormatter extends FeedFormatterAbstract implements FeedFormatterInterfa
     /**
      * {@inheritdoc}
      */
-    public function format(FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet', Application $app = null)
+    public function format(FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet', BaseApplication $app = null)
     {
         $next = $prev = null;
 
@@ -172,7 +172,7 @@ class RssFormatter extends FeedFormatterAbstract implements FeedFormatterInterfa
         return $doc->saveXML();
     }
 
-    protected function addItem(Application $app, \DOMDocument $document, \DOMNode $node, FeedEntry $entry)
+    protected function addItem(BaseApplication $app, \DOMDocument $document, \DOMNode $node, FeedEntry $entry)
     {
         $item = $this->addTag($document, $node, 'item');
         $feed = $entry->getFeed();

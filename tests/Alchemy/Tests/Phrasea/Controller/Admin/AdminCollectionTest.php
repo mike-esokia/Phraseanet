@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Controller\Admin;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\ACLProvider;
 use Alchemy\Phrasea\Border\File;
 use Ramsey\Uuid\Uuid;

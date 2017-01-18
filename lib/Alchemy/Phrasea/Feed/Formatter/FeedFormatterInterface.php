@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Feed\Formatter;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Feed\FeedInterface;
 use Alchemy\Phrasea\Model\Entities\User;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,11 +25,11 @@ interface FeedFormatterInterface
      * @param int           $page
      * @param User          $user
      * @param string        $generator
-     * @param Application   $app
+     * @param BaseApplication   $app
      *
      * @return string
      */
-    public function format(FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet', Application $app);
+    public function format(FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet', BaseApplication $app);
 
     /**
      * Returns an HTTP Response containing a string representation of the feed.
@@ -38,9 +38,9 @@ interface FeedFormatterInterface
      * @param int           $page
      * @param User          $user
      * @param string        $generator
-     * @param Application   $app
+     * @param BaseApplication   $app
      *
      * @return Response
      */
-    public function createResponse(Application $app, FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet');
+    public function createResponse(BaseApplication $app, FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet');
 }

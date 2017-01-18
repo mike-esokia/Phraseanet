@@ -2,7 +2,7 @@
 
 namespace Alchemy\Phrasea\Authentication;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\Exception\RegistrationException;
 use Alchemy\Phrasea\Authentication\Provider\ProviderInterface;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
@@ -44,7 +44,7 @@ class RegistrationService
     );
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
@@ -114,7 +114,7 @@ class RegistrationService
     private $registrationManipulator;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      * @param \appbox $appbox
      * @param ACLProvider $aclProvider
      * @param PropertyAccess $configuration
@@ -130,7 +130,7 @@ class RegistrationService
      * @param RegistrationManager $registrationManager
      */
     public function __construct(
-        Application $application,
+        BaseApplication $application,
         \appbox $appbox,
         ACLProvider $aclProvider,
         PropertyAccess $configuration,

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\Version\Probe\Probe31;
 use Alchemy\Phrasea\Setup\Version\Probe\Probe35;
 use Alchemy\Phrasea\Setup\Version\Probe\Probe38;
@@ -33,7 +33,7 @@ class ConfigurationTester
     private $requirements;
     private $versionProbes;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
 
@@ -106,15 +106,21 @@ class ConfigurationTester
             return false;
         }
 
-        $upgradable = version::lt($this->app->getApplicationBox()->get_version(), $this->app['phraseanet.version']->getNumber());
+        try {
+            $upgradable = version::lt($this->app->getApplicationBox()->get_version(),
+                $this->app['phraseanet.version']->getNumber());
 
-        if (!$upgradable) {
-            foreach ($this->app->getDataboxes() as $databox) {
-                if (version::lt($databox->get_version(), $this->app['phraseanet.version']->getNumber())) {
-                    $upgradable = true;
-                    break;
+            if (!$upgradable) {
+                foreach ($this->app->getDataboxes() as $databox) {
+                    if (version::lt($databox->get_version(), $this->app['phraseanet.version']->getNumber())) {
+                        $upgradable = true;
+                        break;
+                    }
                 }
             }
+        }
+        catch (\LogicException $exception) {
+            $upgradable = false;
         }
 
         return $upgradable;

@@ -3,7 +3,7 @@
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
 use Alchemy\Phrasea\Core\Event\Subscriber\FirewallSubscriber;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Client;
 
@@ -15,7 +15,7 @@ class FirewallSubscriberTest extends \PhraseanetTestCase
 {
     public function testRedirection()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         unset($app['exception_handler']);
         $app['dispatcher']->addSubscriber(new FirewallSubscriber());
         $app->get('/', function () {
@@ -31,7 +31,7 @@ class FirewallSubscriberTest extends \PhraseanetTestCase
 
     public function testNoHeaderNoRedirection()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         unset($app['exception_handler']);
         $app['dispatcher']->addSubscriber(new FirewallSubscriber());
         $app->get('/', function () {

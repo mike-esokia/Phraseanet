@@ -2,14 +2,14 @@
 
 namespace Alchemy\Phrasea\Webhook\Processor;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\WebhookEvent;
 use Alchemy\Phrasea\Model\Repositories\FeedEntryRepository;
 
 class FeedEntryProcessor implements ProcessorInterface
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $application;
 
@@ -23,7 +23,7 @@ class FeedEntryProcessor implements ProcessorInterface
      */
     private $userQuery;
 
-    public function __construct(Application $application, FeedEntryRepository $entryRepository, \User_Query $userQuery)
+    public function __construct(BaseApplication $application, FeedEntryRepository $entryRepository, \User_Query $userQuery)
     {
         $this->application = $application;
         $this->entryRepository = $entryRepository;

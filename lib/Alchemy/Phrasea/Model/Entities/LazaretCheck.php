@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Model\Entities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -109,10 +109,10 @@ class LazaretCheck
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return \record_adapter[]  the records conflicting with this check
      */
-    public function listConflicts(Application $app)
+    public function listConflicts(BaseApplication $app)
     {
         $className = $this->getCheckClassname();
         if (method_exists($className, "listConflicts")) {

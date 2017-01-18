@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Command\Developer;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Command\Command;
 use Alchemy\Phrasea\Exception\RuntimeException;
 use Alchemy\Phrasea\Model\Entities\User;
@@ -81,7 +81,7 @@ class JsFixtures extends Command
         return preg_replace('#<head>(.*?)</head>#is', '', $html);
     }
 
-    private function createUser(Application $app)
+    private function createUser(BaseApplication $app)
     {
         $user = $app['manipulator.user']->createUser(uniqid('fixturejs'), uniqid('fixturejs'), uniqid('fixturejs') . '@js.js', true);
 
@@ -91,19 +91,19 @@ class JsFixtures extends Command
         return $user;
     }
 
-    private function loginUser(Application $app, User $user)
+    private function loginUser(BaseApplication $app, User $user)
     {
         $app->getAuthenticator()->openAccount($user);
     }
 
-    private function logoutUser(Application $app)
+    private function logoutUser(BaseApplication $app)
     {
         $app->getAuthenticator()->closeAccount();
     }
 
     private function writeResponse(OutputInterface $output, $method, $path, $to, $authenticateUser = false)
     {
-        $environment = Application::ENV_TEST;
+        $environment = BaseApplication::ENV_TEST;
         $app = require __DIR__ . '/../../Application/Root.php';
         $app['orm.em'] = $app->extend('orm.em', function($em, $app) {
             return $app['orm.ems'][$app['db.fixture.hash.key']];

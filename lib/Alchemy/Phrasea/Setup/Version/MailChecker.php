@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Version;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\DBAL\Driver\Statement;
 
 /**

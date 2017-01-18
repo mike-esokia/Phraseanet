@@ -1,6 +1,6 @@
 <?php
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\ElasticsearchRecord;
 use Alchemy\Phrasea\SearchEngine\SearchEngineInterface;
 use Alchemy\Phrasea\SearchEngine\SearchEngineOptions;
@@ -185,7 +185,7 @@ abstract class PhraseanetAuthenticatedWebTestCase extends \PhraseanetAuthenticat
         }
     }
 
-    protected function assertFlashMessagePopulated(Application $app, $flashType, $quantity)
+    protected function assertFlashMessagePopulated(BaseApplication $app, $flashType, $quantity)
     {
         if (!preg_match('/[a-zA-Z]+/', $flashType)) {
             $this->fail(sprintf('FlashType must be in the form of [a-zA-Z]+, %s given', $flashType));
@@ -196,7 +196,7 @@ abstract class PhraseanetAuthenticatedWebTestCase extends \PhraseanetAuthenticat
 
     /**
      * @param \record_adapter $record
-     * @return \Alchemy\Phrasea\Application
+     * @return \Alchemy\Phrasea\BaseApplication
      */
     protected function mockElasticsearchResult(\record_adapter $record)
     {

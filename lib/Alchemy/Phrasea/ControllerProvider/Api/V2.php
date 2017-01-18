@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\ControllerProvider\Api;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\Api\BasketController;
 use Alchemy\Phrasea\Controller\Api\LazaretController;
 use Alchemy\Phrasea\Controller\Api\SearchController;

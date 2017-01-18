@@ -9,18 +9,18 @@
  */
 namespace Alchemy\Phrasea\Databox\Field;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use databox;
 use databox_field;
 
 class DataboxFieldFactory
 {
-    /** @var Application */
+    /** @var BaseApplication */
     private $app;
     /** @var databox */
     private $databox;
 
-    public function __construct(Application $app, databox $databox)
+    public function __construct(BaseApplication $app, databox $databox)
     {
         $this->app = $app;
         $this->databox = $databox;

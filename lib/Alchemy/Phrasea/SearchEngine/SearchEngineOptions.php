@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\SearchEngine;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\ACLProvider;
 use Alchemy\Phrasea\Authentication\Authenticator;
 use Alchemy\Phrasea\Collection\CollectionRepository;
@@ -58,10 +58,10 @@ class SearchEngineOptions
     ];
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return callable[]
      */
-    private static function getHydrateMethods(Application $app)
+    private static function getHydrateMethods(BaseApplication $app)
     {
         $fieldNormalizer = function ($value) use ($app) {
             return array_map(function ($serialized) use ($app) {
@@ -548,7 +548,7 @@ class SearchEngineOptions
 
     /**
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param string      $serialized
      *
      * @return $this
@@ -556,7 +556,7 @@ class SearchEngineOptions
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public static function hydrate(Application $app, $serialized)
+    public static function hydrate(BaseApplication $app, $serialized)
     {
         $serialized = json_decode($serialized, true);
 
@@ -607,12 +607,12 @@ class SearchEngineOptions
     /**
      * Creates options based on a Symfony Request object
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param Request     $request
      *
      * @return static
      */
-    public static function fromRequest(Application $app, Request $request)
+    public static function fromRequest(BaseApplication $app, Request $request)
     {
         $options = new static();
 

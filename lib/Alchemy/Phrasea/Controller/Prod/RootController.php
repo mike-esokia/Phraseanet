@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Controller\Prod;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Controller\Controller;
 use Alchemy\Phrasea\Core\Configuration\DisplaySettingService;
 use Alchemy\Phrasea\Exception\SessionNotFound;

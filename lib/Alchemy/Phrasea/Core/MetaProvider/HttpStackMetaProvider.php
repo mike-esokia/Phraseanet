@@ -4,7 +4,7 @@ namespace Alchemy\Phrasea\Core\MetaProvider;
 
 use Alchemy\Cors\Options\DefaultProvider;
 use Alchemy\CorsProvider\CorsServiceProvider;
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\ControllerProvider\ControllerProviderServiceProvider;
 use Alchemy\Phrasea\Core\Provider\ContentNegotiationServiceProvider;
 use Alchemy\Phrasea\Core\Provider\SessionHandlerServiceProvider;

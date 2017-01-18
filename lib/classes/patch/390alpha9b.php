@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Task;
 
 class patch_390alpha9b extends patchAbstract
@@ -47,13 +47,13 @@ class patch_390alpha9b extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $this->upgradeConf($app);
         $this->upgradeRegistry($app);
     }
 
-    private function upgradeRegistry(Application $app)
+    private function upgradeRegistry(BaseApplication $app)
     {
         $sql = 'SELECT `key`, `value`, `type` FROM registry';
         $stmt = $app->getApplicationBox()->get_connection()->prepare($sql);
@@ -178,7 +178,7 @@ class patch_390alpha9b extends patchAbstract
         }
     }
 
-    private function upgradeConf(Application $app)
+    private function upgradeConf(BaseApplication $app)
     {
         $config = $app['configuration.store']->getConfig();
 

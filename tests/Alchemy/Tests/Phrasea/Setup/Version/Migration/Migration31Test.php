@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Setup\Version\Migration;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\Version\Migration\Migration31;
 use Alchemy\Tests\Phrasea\Setup\AbstractSetupTester;
 
@@ -40,6 +40,6 @@ class Migration31Test extends AbstractSetupTester
 
     private function getMigration()
     {
-        return new Migration31(new Application(Application::ENV_TEST));
+        return new Migration31(new BaseApplication(BaseApplication::ENV_TEST));
     }
 }

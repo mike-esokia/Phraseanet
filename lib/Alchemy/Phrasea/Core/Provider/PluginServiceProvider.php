@@ -25,6 +25,17 @@ use Twig_SimpleFunction;
 
 class PluginServiceProvider implements ServiceProviderInterface
 {
+
+    private $enableTwig = true;
+
+    /**
+     * @param bool $enableTwig
+     */
+    public function __construct($enableTwig = true)
+    {
+        $this->enableTwig = (bool) $enableTwig;
+    }
+
     public function register(Application $app)
     {
         $app['plugins.schema'] = realpath(__DIR__ . '/../../../../conf.d/plugin-schema.json');
@@ -88,14 +99,17 @@ class PluginServiceProvider implements ServiceProviderInterface
         // $app['plugin.controller_providers'][] = array('/prefix', 'controller_provider_service_key');
         $app['plugin.controller_providers.api'] = new ArrayObject();
 
-        $app['twig'] = $app->share(
-            $app->extend('twig', function (Twig_Environment $twig) {
-                $function = new Twig_SimpleFunction('plugin_asset', array('Alchemy\Phrasea\Plugin\Management\AssetsManager', 'twigPluginAsset'));
-                $twig->addFunction($function);
+        if ($this->enableTwig) {
+            $app['twig'] = $app->share(
+                $app->extend('twig', function (Twig_Environment $twig) {
+                    $function = new Twig_SimpleFunction('plugin_asset',
+                        array('Alchemy\Phrasea\Plugin\Management\AssetsManager', 'twigPluginAsset'));
+                    $twig->addFunction($function);
 
-                return $twig;
-            })
-        );
+                    return $twig;
+                })
+            );
+        }
     }
 
     public function boot(Application $app)

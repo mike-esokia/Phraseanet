@@ -2,7 +2,7 @@
 
 namespace Alchemy\Phrasea\Webhook\Processor;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\WebhookEvent;
 use Alchemy\Phrasea\Model\Repositories\UserRepository;
 

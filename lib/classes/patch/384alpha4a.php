@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_384alpha4a implements patchInterface
 {
@@ -54,7 +54,7 @@ class patch_384alpha4a implements patchInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $config = $app['phraseanet.configuration']->getConfig();
 

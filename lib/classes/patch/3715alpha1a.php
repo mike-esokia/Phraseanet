@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\ApiApplication;
 
 class patch_3715alpha1a extends patchAbstract
@@ -49,7 +49,7 @@ class patch_3715alpha1a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         if (null === $app['repo.api-applications']->findByClientId(\API_OAuth2_Application_OfficePlugin::CLIENT_ID)) {
             $application = $app['manipulator.api-application']->create(

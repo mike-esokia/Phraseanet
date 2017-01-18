@@ -10,7 +10,7 @@
 
 namespace Alchemy\Tests\Phrasea\Controller;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\ACLProvider;
 use Alchemy\Phrasea\Authentication\Authenticator;
 use Alchemy\Phrasea\Controller\Controller;
@@ -27,7 +27,7 @@ final class ControllerTest extends \PHPUnit_Framework_TestCase
     private $twig;
     /** @var \appbox|\PHPUnit_Framework_MockObject_MockObject */
     private $appbox;
-    /** @var Application|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var BaseApplication|\PHPUnit_Framework_MockObject_MockObject */
     private $app;
     /** @var Controller */
     private $sut;
@@ -50,7 +50,7 @@ final class ControllerTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->app = $this->getMockBuilder(Application::class)
+        $this->app = $this->getMockBuilder(BaseApplication::class)
             ->disableOriginalConstructor()
             ->getMock();
 

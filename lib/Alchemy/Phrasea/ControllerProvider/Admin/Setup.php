@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider\Admin;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\Admin\SetupController;
 use Alchemy\Phrasea\Security\Firewall;
 use Silex\Application;

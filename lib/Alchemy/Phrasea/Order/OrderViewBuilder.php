@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Order;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Databox\Subdef\MediaSubdefService;
 use Alchemy\Phrasea\Model\Entities\Order;
 use Alchemy\Phrasea\Model\Entities\OrderElement;
@@ -24,7 +24,7 @@ class OrderViewBuilder
 {
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $application;
 
@@ -39,11 +39,11 @@ class OrderViewBuilder
     private $mediaSubdefService;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      * @param \appbox $appbox
      * @param MediaSubdefService $subdefService
      */
-    public function __construct(Application $application, \appbox $appbox, MediaSubdefService $subdefService)
+    public function __construct(BaseApplication $application, \appbox $appbox, MediaSubdefService $subdefService)
     {
         $this->application = $application;
         $this->applicationBox = $appbox;

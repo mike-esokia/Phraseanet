@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\TaskManager\Editor;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,12 +40,12 @@ interface EditorInterface
     /**
      * Treats a facility request.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param Request     $request
      *
      * @return Response
      */
-    public function facility(Application $app, Request $request);
+    public function facility(BaseApplication $app, Request $request);
 
     /**
      * Returns the job default settings.

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\User;
 
 class Bridge_Account
@@ -22,7 +22,7 @@ class Bridge_Account
 
     /**
      *
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
@@ -70,12 +70,12 @@ class Bridge_Account
 
     /**
      *
-     * @param  Application    $app
+     * @param  BaseApplication    $app
      * @param  Bridge_Api     $api
      * @param  int            $id
      * @return Bridge_Account
      */
-    public function __construct(Application $app, Bridge_Api $api, $id)
+    public function __construct(BaseApplication $app, Bridge_Api $api, $id)
     {
         $this->id = (int) $id;
         $this->app = $app;
@@ -228,11 +228,11 @@ class Bridge_Account
 
     /**
      *
-     * @param  Application    $app
+     * @param  BaseApplication    $app
      * @param  integer        $account_id
      * @return Bridge_Account
      */
-    public static function load_account(Application $app, $account_id)
+    public static function load_account(BaseApplication $app, $account_id)
     {
         $sql = 'SELECT id, api_id FROM bridge_accounts WHERE id = :account_id';
 
@@ -252,13 +252,13 @@ class Bridge_Account
 
     /**
      *
-     * @param  Application    $app
+     * @param  BaseApplication    $app
      * @param  Bridge_Api     $api
      * @param  User           $user
      * @param  string         $distant_id
      * @return Bridge_Account
      */
-    public static function load_account_from_distant_id(Application $app, Bridge_Api $api, User $user, $distant_id)
+    public static function load_account_from_distant_id(BaseApplication $app, Bridge_Api $api, User $user, $distant_id)
     {
         $sql = 'SELECT id FROM bridge_accounts
             WHERE api_id = :api_id AND usr_id = :usr_id AND dist_id = :dist_id';
@@ -282,12 +282,12 @@ class Bridge_Account
 
     /**
      *
-     * @param  Application    $app
+     * @param  BaseApplication    $app
      * @param  Bridge_Api     $api
      * @param  int            $quantity
      * @return Bridge_Account
      */
-    public static function get_accounts_by_api(Application $app, Bridge_Api $api, $quantity = 50)
+    public static function get_accounts_by_api(BaseApplication $app, Bridge_Api $api, $quantity = 50)
     {
         $sql = 'SELECT id FROM bridge_accounts WHERE api_id = :api_id
             LIMIT 0,' . (int) $quantity;
@@ -308,11 +308,11 @@ class Bridge_Account
 
     /**
      *
-     * @param  Application    $app
+     * @param  BaseApplication    $app
      * @param  User           $user
      * @return Bridge_Account
      */
-    public static function get_accounts_by_user(Application $app, User $user)
+    public static function get_accounts_by_user(BaseApplication $app, User $user)
     {
         $sql = 'SELECT id, api_id FROM bridge_accounts WHERE usr_id = :usr_id';
 
@@ -341,7 +341,7 @@ class Bridge_Account
 
     /**
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param Bridge_Api  $api
      * @param User        $user
      * @param string      $dist_id
@@ -349,7 +349,7 @@ class Bridge_Account
      *
      * @return Bridge_Account
      */
-    public static function create(Application $app, Bridge_Api $api, User $user, $dist_id, $name)
+    public static function create(BaseApplication $app, Bridge_Api $api, User $user, $dist_id, $name)
     {
         $sql = 'INSERT INTO bridge_accounts
             (id, api_id, dist_id, usr_id, name, created_on, updated_on)

@@ -4,7 +4,7 @@ namespace Alchemy\Tests\Phrasea\Setup;
 
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
 use Alchemy\Phrasea\Setup\Installer;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Configuration\Configuration;
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Yaml\Yaml;
@@ -18,7 +18,7 @@ class InstallerTest extends \PhraseanetTestCase
 {
     public function tearDown()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         \phrasea::reset_sbasDatas($app['phraseanet.appbox']);
         \phrasea::reset_baseDatas($app['phraseanet.appbox']);
         parent::tearDown();
@@ -26,7 +26,7 @@ class InstallerTest extends \PhraseanetTestCase
 
     public function testInstall()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         \phrasea::reset_sbasDatas($app['phraseanet.appbox']);
         \phrasea::reset_baseDatas($app['phraseanet.appbox']);
 

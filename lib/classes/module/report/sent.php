@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class module_report_sent extends module_report
 {
@@ -34,13 +34,13 @@ class module_report_sent extends module_report
     /**
      * constructor
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param string      $arg1    start date of the  report
      * @param string      $arg2    end date of the report
      * @param integer     $sbas_id id of the databox
      * @param string      $collist
      */
-    public function __construct(Application $app, $arg1, $arg2, $sbas_id, $collist)
+    public function __construct(BaseApplication $app, $arg1, $arg2, $sbas_id, $collist)
     {
         parent::__construct($app, $arg1, $arg2, $sbas_id, $collist);
         $this->title = $this->app->trans('Sent documents (mail)');
@@ -93,7 +93,7 @@ class module_report_sent extends module_report
         return $ret;
     }
 
-    protected function buildResult(Application $app, $rs)
+    protected function buildResult(BaseApplication $app, $rs)
     {
         $i = 0;
 

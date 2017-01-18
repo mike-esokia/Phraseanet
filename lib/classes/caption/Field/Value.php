@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Utilities\StringHelper;
 use Alchemy\Phrasea\Vocabulary\ControlProvider\ControlProviderInterface;
 
@@ -49,7 +49,7 @@ class caption_Field_Value implements cache_cacheableInterface
     protected $record;
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
@@ -70,13 +70,13 @@ class caption_Field_Value implements cache_cacheableInterface
     protected static $localCache = [];
 
     /**
-     * @param  Application $app
+     * @param  BaseApplication $app
      * @param  databox_field $databox_field
      * @param  record_adapter $record
      * @param  mixed $id
      * @param  bool $retrieveValues
      */
-    public function __construct(Application $app, databox_field $databox_field, record_adapter $record, $id, $retrieveValues = self::RETRIEVE_VALUES)
+    public function __construct(BaseApplication $app, databox_field $databox_field, record_adapter $record, $id, $retrieveValues = self::RETRIEVE_VALUES)
     {
         $this->id = (int) $id;
         $this->databox_field = $databox_field;
@@ -288,7 +288,7 @@ class caption_Field_Value implements cache_cacheableInterface
         return $this;
     }
 
-    public static function create(Application $app, databox_field $databox_field, \record_adapter $record, $value, ControlProviderInterface $vocabulary = null, $vocabularyId = null)
+    public static function create(BaseApplication $app, databox_field $databox_field, \record_adapter $record, $value, ControlProviderInterface $vocabulary = null, $vocabularyId = null)
     {
         $connection = $databox_field->get_connection();
 

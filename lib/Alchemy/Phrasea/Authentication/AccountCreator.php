@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Authentication;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Exception\InvalidArgumentException;
 use Alchemy\Phrasea\Exception\RuntimeException;
 use Alchemy\Phrasea\Model\Entities\User;
@@ -53,7 +53,7 @@ class AccountCreator
     /**
      * Creates an account
      *
-     * @param Application $app       The application
+     * @param BaseApplication $app       The application
      * @param string      $id        The base for user login
      * @param string      $email     The email
      * @param array       $templates Some extra templates to apply with the ones of this creator
@@ -63,7 +63,7 @@ class AccountCreator
      * @throws RuntimeException         In case the AccountCreator is disabled
      * @throws InvalidArgumentException In case a user with the same email already exists
      */
-    public function create(Application $app, $id, $email = null, array $templates = [])
+    public function create(BaseApplication $app, $id, $email = null, array $templates = [])
     {
         if (!$this->enabled) {
             throw new RuntimeException('Account creator is disabled');

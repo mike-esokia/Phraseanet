@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Model\Manipulator;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border;
 use Alchemy\Phrasea\Border\Attribute\AttributeInterface;
 use Alchemy\Phrasea\Border\Attribute\MetaField;
@@ -23,7 +23,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class LazaretManipulator
 {
-    /** @var Application */
+    /** @var BaseApplication */
     private $app;
     /** @var EntityRepository */
     private $repository;
@@ -36,7 +36,7 @@ class LazaretManipulator
      */
     private $entityManager;
 
-    public function __construct(Application $app, EntityRepository $repository, Filesystem $fileSystem, EntityManager $entityManager)
+    public function __construct(BaseApplication $app, EntityRepository $repository, Filesystem $fileSystem, EntityManager $entityManager)
     {
         $this->app = $app;
         $this->repository = $repository;

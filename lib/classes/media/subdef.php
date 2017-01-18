@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Databox\Subdef\MediaSubdefRepository;
 use Alchemy\Phrasea\Http\StaticFile\Symlink\SymLinker;
 use Alchemy\Phrasea\Model\RecordReferenceInterface;
@@ -23,16 +23,16 @@ use MediaVorus\MediaVorus;
 class media_subdef extends media_abstract implements cache_cacheableInterface
 {
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param int $databoxId
      * @return MediaSubdefRepository
      */
-    private static function getMediaSubdefRepository(Application $app, $databoxId)
+    private static function getMediaSubdefRepository(BaseApplication $app, $databoxId)
     {
         return $app['provider.repo.media_subdef']->getRepositoryForDatabox($databoxId);
     }
 
-    /** @var Application */
+    /** @var BaseApplication */
     protected $app;
 
     /** @var string */
@@ -117,13 +117,13 @@ class media_subdef extends media_abstract implements cache_cacheableInterface
     const TC_DATA_LIGHTVALUE = 'LightValue';
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param RecordReferenceInterface $record
      * @param string $name
      * @param bool $substitute
      * @param array|null $data
      */
-    public function __construct(Application $app, RecordReferenceInterface $record, $name, $substitute = false, array $data = null)
+    public function __construct(BaseApplication $app, RecordReferenceInterface $record, $name, $substitute = false, array $data = null)
     {
         $this->app = $app;
         $this->name = $name;
@@ -631,7 +631,7 @@ class media_subdef extends media_abstract implements cache_cacheableInterface
         return $datas;
     }
 
-    public static function create(Application $app, RecordReferenceInterface $record, $name, MediaInterface $media)
+    public static function create(BaseApplication $app, RecordReferenceInterface $record, $name, MediaInterface $media)
     {
         $path = $media->getFile()->getPath();
         $newname = $media->getFile()->getFilename();

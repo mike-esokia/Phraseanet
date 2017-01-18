@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\Process\ExecutableFinder;
 
 class patch_380alpha18a extends patchAbstract
@@ -47,7 +47,7 @@ class patch_380alpha18a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $app['conf']->set(['binaries', 'recess_binary'], (new ExecutableFinder())->find('recess'));
 

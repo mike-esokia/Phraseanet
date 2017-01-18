@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\User;
 
 class eventsmanager_notify_orderdeliver extends eventsmanager_notifyAbstract
 {
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         parent::__construct($app);
         $this->group = $this->app->trans('Commande');

@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Media;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\DispatcherAware;
 use Alchemy\Phrasea\Core\Event\Record\SubDefinitionCreatedEvent;
 use Alchemy\Phrasea\Core\Event\Record\SubDefinitionsCreatedEvent;
@@ -37,7 +37,7 @@ class SubdefGenerator
     private $logger;
     private $mediavorus;
 
-    public function __construct(Application $app, Alchemyst $alchemyst, FilesystemService $filesystem, MediaVorus $mediavorus, LoggerInterface $logger)
+    public function __construct(BaseApplication $app, Alchemyst $alchemyst, FilesystemService $filesystem, MediaVorus $mediavorus, LoggerInterface $logger)
     {
         $this->app = $app;
         $this->alchemyst = $alchemyst;

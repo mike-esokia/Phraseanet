@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Feed\Formatter;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Feed\FeedInterface;
 use Alchemy\Phrasea\Feed\Link\FeedLink;
 use Alchemy\Phrasea\Feed\RSS\Image as FeedRSSImage;
@@ -40,7 +40,7 @@ class CoolirisFormatter extends FeedFormatterAbstract implements FeedFormatterIn
     /**
      * {@inheritdoc}
      */
-    public function createResponse(Application $app, FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet')
+    public function createResponse(BaseApplication $app, FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet')
     {
         $content = $this->format($feed, $page, $user, $generator, $app);
         $response = new Response($content, 200, ['Content-Type' => 'application/rss+xml']);
@@ -51,7 +51,7 @@ class CoolirisFormatter extends FeedFormatterAbstract implements FeedFormatterIn
     /**
      * {@inheritdoc}
      */
-    public function format(FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet', Application $app = null)
+    public function format(FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet', BaseApplication $app = null)
     {
         $doc = new \DOMDocument('1.0', 'UTF-8');
         $doc->formatOutput = true;
@@ -175,14 +175,14 @@ class CoolirisFormatter extends FeedFormatterAbstract implements FeedFormatterIn
         return $doc->saveXML();
     }
 
-    protected function addItem(Application $app, \DOMDocument $document, \DOMNode $feed, FeedEntry $entry)
+    protected function addItem(BaseApplication $app, \DOMDocument $document, \DOMNode $feed, FeedEntry $entry)
     {
         foreach ($entry->getItems() as $content) {
             $this->addContent($app, $document, $feed, $content);
         }
     }
 
-    protected function addContent(Application $app, \DOMDocument $document, \DOMNode $node, FeedItem $content)
+    protected function addContent(BaseApplication $app, \DOMDocument $document, \DOMNode $node, FeedItem $content)
     {
         $preview_sd = $content->getRecord($app)->get_subdef('preview');
         $preview_permalink = $preview_sd->get_permalink();

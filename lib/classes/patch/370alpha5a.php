@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_370alpha5a extends patchAbstract
 {
@@ -46,7 +46,7 @@ class patch_370alpha5a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $databox, Application $app)
+    public function apply(base $databox, BaseApplication $app)
     {
         $sql = 'SELECT id, src FROM metadatas_structure';
         $stmt = $databox->get_connection()->prepare($sql);

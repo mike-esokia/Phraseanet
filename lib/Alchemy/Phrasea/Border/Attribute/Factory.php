@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border\Attribute;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 /**
  * This factory is intended to create Attribute based on their name and
@@ -23,7 +23,7 @@ class Factory
     /**
      * Build a file package Attribute
      *
-     * @param  Application               $app        Application context
+     * @param  BaseApplication               $app        Application context
      * @param  string                    $name       The name of the attribute, one of the
      *                                               AttributeInterface::NAME_* constants
      * @param  string                    $serialized The serialized value of the attribute
@@ -31,7 +31,7 @@ class Factory
      * @return AttributeInterface        The attribute
      * @throws \InvalidArgumentException
      */
-    public static function getFileAttribute(Application $app, $name, $serialized)
+    public static function getFileAttribute(BaseApplication $app, $name, $serialized)
     {
         switch ($name)
         {

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_384alpha5a implements patchInterface
 {
@@ -54,7 +54,7 @@ class patch_384alpha5a implements patchInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(base $databox, Application $app)
+    public function apply(base $databox, BaseApplication $app)
     {
         $sql = "UPDATE log_docs SET `action`='mail' WHERE `action`='download' AND LOCATE('@', comment)";
         $stmt = $databox->get_connection()->prepare($sql);

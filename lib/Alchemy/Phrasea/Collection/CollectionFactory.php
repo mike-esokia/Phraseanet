@@ -10,21 +10,21 @@
 
 namespace Alchemy\Phrasea\Collection;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\Reference\CollectionReference;
 use Assert\Assertion;
 
 class CollectionFactory
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      */
-    public function __construct(Application $application)
+    public function __construct(BaseApplication $application)
     {
         $this->app = $application;
     }

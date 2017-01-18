@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_320alpha5a extends patchAbstract
 {
@@ -46,7 +46,7 @@ class patch_320alpha5a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $sql = 'SELECT base_id, usr_id FROM order_masters';
         $stmt = $appbox->get_connection()->prepare($sql);

@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Controller;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\ACLProvider;
 use Alchemy\Phrasea\Authentication\Authenticator;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Controller
 {
-    /** @var Application */
+    /** @var BaseApplication */
     protected $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

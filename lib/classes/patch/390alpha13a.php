@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Registration;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
@@ -58,7 +58,7 @@ class patch_390alpha13a implements patchInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $em = $app['orm.em'];
 

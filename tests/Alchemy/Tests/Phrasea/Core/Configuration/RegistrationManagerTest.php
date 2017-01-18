@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Core\Configuration;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Registration;
 use Alchemy\Phrasea\Model\Entities\User;
 use Alchemy\Phrasea\Core\Configuration\RegistrationManager;
@@ -84,7 +84,7 @@ class RegistrationManagerTest extends \PhraseanetTestCase
         $rejectedRegistration->setPending(true);
         $rejectedRegistration->setRejected(true);
 
-        $databox = current((new \appbox(new Application(Application::ENV_TEST)))->get_databoxes());
+        $databox = current((new \appbox(new BaseApplication(BaseApplication::ENV_TEST)))->get_databoxes());
         $collection = current($databox->get_collections());
 
         $noLimitedPendingRegistration = [

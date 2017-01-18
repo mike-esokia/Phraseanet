@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Entities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -182,10 +182,10 @@ class OrderElement
     /**
      * Returns a record from the element's base_id and record_id
      *
-     * @param  Application     $app
+     * @param  BaseApplication     $app
      * @return \record_adapter
      */
-    public function getRecord(Application $app)
+    public function getRecord(BaseApplication $app)
     {
         return new \record_adapter($app, $this->getSbasId($app), $this->getRecordId());
     }
@@ -193,10 +193,10 @@ class OrderElement
     /**
      * Returns the matching sbasId
      *
-     * @param  Application $app
+     * @param  BaseApplication $app
      * @return int
      */
-    public function getSbasId(Application $app)
+    public function getSbasId(BaseApplication $app)
     {
         return \phrasea::sbasFromBas($app, $this->getBaseId());
     }

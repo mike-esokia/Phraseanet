@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\NotifierAware;
 use Alchemy\Phrasea\Controller\LazyLocator;
 use Alchemy\Phrasea\Model\Entities\User;
@@ -23,7 +23,7 @@ abstract class AbstractNotificationSubscriber implements EventSubscriberInterfac
 
     protected $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
         $this->setDelivererLocator(new LazyLocator($app, 'notification.deliverer'));

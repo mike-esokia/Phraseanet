@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\SearchEngine;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\SearchEngine\SearchEngineOptions;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -17,7 +17,7 @@ class SearchEngineOptionsTest extends \PhraseanetTestCase
      */
     public function testSerialize()
     {
-        /** @var Application $app */
+        /** @var BaseApplication $app */
         $app = self::$DI['app'];
         /** @var \collection $collection */
         $collection = self::$DI['collection'];
@@ -53,7 +53,7 @@ class SearchEngineOptionsTest extends \PhraseanetTestCase
      */
     public function testFromRequest()
     {
-        /** @var Application $app */
+        /** @var BaseApplication $app */
         $app = self::$DI['app'];
         $this->authenticate($app);
 

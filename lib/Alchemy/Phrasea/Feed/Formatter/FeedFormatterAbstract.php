@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Feed\Formatter;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\FeedItem;
 
 abstract class FeedFormatterAbstract
@@ -39,13 +39,13 @@ abstract class FeedFormatterAbstract
     }
 
     /**
-     * @param Application  $app
+     * @param BaseApplication  $app
      * @param \DOMDocument $document
      * @param \DOMNode     $item
      * @param FeedItem     $content
      * @return $this
      */
-    protected function addContent(Application $app, \DOMDocument $document, \DOMNode $item, FeedItem $content)
+    protected function addContent(BaseApplication $app, \DOMDocument $document, \DOMNode $item, FeedItem $content)
     {
         $preview_sd = $content->getRecord($app)->get_subdef('preview');
         $preview_permalink = $preview_sd->get_permalink();

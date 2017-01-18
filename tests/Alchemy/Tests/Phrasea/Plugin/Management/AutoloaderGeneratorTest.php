@@ -2,8 +2,8 @@
 
 namespace Alchemy\Tests\Phrasea\Plugin\Management;
 
-use Alchemy\Phrasea\Application;
-use Alchemy\Phrasea\CLI;
+use Alchemy\Phrasea\BaseApplication;
+use Alchemy\Phrasea\CommandLineApplication;
 use Alchemy\Phrasea\Plugin\Management\AutoloaderGenerator;
 use Alchemy\Phrasea\Plugin\Schema\Manifest;
 use Symfony\Component\Process\ProcessBuilder;
@@ -56,7 +56,7 @@ class AutoloaderGeneratorTest extends \PhraseanetTestCase
         $this->assertTrue(class_exists('Vendor\PluginService'));
 
         // load services
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['conf']->set(['plugins', $manifest->getName(), 'enabled'], true);
         $retrievedApp = require $pluginsDir . '/services.php';
 
@@ -64,7 +64,7 @@ class AutoloaderGeneratorTest extends \PhraseanetTestCase
         $this->assertEquals('hello world', $app['plugin-test']);
 
         // load services
-        $cli = new CLI('test');
+        $cli = new CommandLineApplication('test');
         $retrievedCli = require $pluginsDir . '/commands.php';
 
         $this->assertSame($cli, $retrievedCli);

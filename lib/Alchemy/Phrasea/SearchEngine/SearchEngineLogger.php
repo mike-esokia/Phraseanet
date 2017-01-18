@@ -11,13 +11,13 @@
 
 namespace Alchemy\Phrasea\SearchEngine;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class SearchEngineLogger
 {
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Form\Constraint;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\Validator\Constraint;
 use Alchemy\Geonames\Connector;
 use Alchemy\Geonames\Exception\TransportException;
@@ -41,7 +41,7 @@ class Geoname extends Constraint
         return true;
     }
 
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         return new static($app['geonames.connector']);
     }

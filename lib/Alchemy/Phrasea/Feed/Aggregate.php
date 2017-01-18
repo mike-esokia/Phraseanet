@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Feed;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Exception\LogicException;
 use Alchemy\Phrasea\Model\Entities\AggregateToken;
 use Alchemy\Phrasea\Model\Entities\Feed;
@@ -71,13 +71,13 @@ class Aggregate implements FeedInterface
     /**
      * Creates an aggregate from all the feeds available to a given user.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param User        $user
      *
      * @param array       $restrictions
      * @return Aggregate
      */
-    public static function createFromUser(Application $app, User $user, array $restrictions = [])
+    public static function createFromUser(BaseApplication $app, User $user, array $restrictions = [])
     {
         /** @var FeedRepository $feedRepository */
         $feedRepository = $app['repo.feeds'];
@@ -90,11 +90,11 @@ class Aggregate implements FeedInterface
     /**
      * Creates an aggregate from given Feed id array.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param array       $feed_ids
      * @return Aggregate
      */
-    public static function create(Application $app, array $feed_ids)
+    public static function create(BaseApplication $app, array $feed_ids)
     {
         $feeds = $app['repo.feeds']->findByIds($feed_ids);
 
@@ -226,11 +226,11 @@ class Aggregate implements FeedInterface
     /**
      * Creates an Aggregate from all the public feeds.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return Aggregate
      */
-    public static function getPublic(Application $app)
+    public static function getPublic(BaseApplication $app)
     {
         return new static($app['orm.em'], $app['repo.feeds']->findBy(['public' => true], ['updatedOn' => 'DESC']));
     }

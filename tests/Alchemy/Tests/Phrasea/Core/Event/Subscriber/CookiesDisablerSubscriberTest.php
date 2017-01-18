@@ -3,7 +3,7 @@
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
 use Alchemy\Phrasea\Core\Event\Subscriber\CookiesDisablerSubscriber;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\BrowserKit\CookieJar;
 use Symfony\Component\BrowserKit\Cookie as BrowserCookie;
 use Symfony\Component\HttpKernel\Client;
@@ -22,7 +22,7 @@ class CookiesDisablerSubscriberTest extends \PhraseanetTestCase
      */
     public function testRoutes($disabled, $route)
     {
-        $app = new Application();
+        $app = new BaseApplication();
         $app['dispatcher']->addSubscriber(new CookiesDisablerSubscriber($app));
 
         $app->get($route, function () {
@@ -43,7 +43,7 @@ class CookiesDisablerSubscriberTest extends \PhraseanetTestCase
         }
     }
 
-    private function getClientWithCookie(Application $app)
+    private function getClientWithCookie(BaseApplication $app)
     {
         $cookieJar = new CookieJar();
         $cookieJar->set(new BrowserCookie('test-cookie', 'cookievalue'));

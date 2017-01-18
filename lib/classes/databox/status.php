@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use MediaAlchemyst\Exception\ExceptionInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Alchemy\Phrasea\Exception\InvalidArgumentException;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class databox_status
 {
-    public static function getSearchStatus(Application $app)
+    public static function getSearchStatus(BaseApplication $app)
     {
         $structures = [];
         foreach ($app->getAclForUser($app->getAuthenticatedUser())->get_granted_sbas() as $databox) {
@@ -47,7 +47,7 @@ class databox_status
         return $structures;
     }
 
-    public static function deleteIcon(Application $app, $databox_id, $bit, $switch)
+    public static function deleteIcon(BaseApplication $app, $databox_id, $bit, $switch)
     {
         $databox = $app->findDataboxById($databox_id);
 
@@ -77,7 +77,7 @@ class databox_status
         return true;
     }
 
-    public static function updateIcon(Application $app, $databox_id, $bit, $switch, UploadedFile $file)
+    public static function updateIcon(BaseApplication $app, $databox_id, $bit, $switch, UploadedFile $file)
     {
         $databox = $app->findDataboxById($databox_id);
 

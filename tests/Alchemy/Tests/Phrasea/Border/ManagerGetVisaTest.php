@@ -11,7 +11,7 @@
 namespace Alchemy\Tests\Phrasea\Border;
 
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\Checker\CheckerInterface;
 use Alchemy\Phrasea\Border\Checker\Response;
 use Alchemy\Phrasea\Border\File;
@@ -35,7 +35,7 @@ class ManagerGetVisaTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->app = $this->prophesize(Application::class);
+        $this->app = $this->prophesize(BaseApplication::class);
         $this->app->offsetGet('orm.em')->willReturn($this->prophesize(EntityManager::class));
 
         $this->sut = new Manager($this->app->reveal());

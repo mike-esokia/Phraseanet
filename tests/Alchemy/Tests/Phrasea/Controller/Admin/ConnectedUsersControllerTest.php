@@ -10,7 +10,7 @@
 
 namespace Alchemy\Tests\Phrasea\Controller\Admin;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Controller\Admin\ConnectedUsersController;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -41,7 +41,7 @@ class ConnectedUsersControllerTest extends \PHPUnit_Framework_TestCase
                 [null, [], null, null, null],
             ]);
 
-        $app = $this->getMockBuilder(Application::class)
+        $app = $this->getMockBuilder(BaseApplication::class)
             ->disableOriginalConstructor()
             ->getMock()
         ;

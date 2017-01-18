@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Version\Migration;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\Yaml\Yaml;
 use Alchemy\Phrasea\Exception\RuntimeException;
 
@@ -25,7 +25,7 @@ class Migration38 implements MigrationInterface
     private $servicesYaml;
     private $configYaml;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
 

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider\Prod;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\ControllerProvider\ControllerProviderTrait;
 use Alchemy\Phrasea\Core\LazyLocator;
 use Alchemy\Phrasea\Order\Controller\ProdOrderController;

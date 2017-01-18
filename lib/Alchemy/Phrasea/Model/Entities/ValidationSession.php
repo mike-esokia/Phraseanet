@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Entities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -251,7 +251,7 @@ class ValidationSession
         return $date_obj > $this->getExpires();
     }
 
-    public function getValidationString(Application $app, User $user)
+    public function getValidationString(BaseApplication $app, User $user)
     {
         if ($this->isInitiator($user)) {
             if ($this->isFinished()) {

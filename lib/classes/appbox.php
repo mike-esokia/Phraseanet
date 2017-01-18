@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\CollectionService;
 use Alchemy\Phrasea\Core\Configuration\AccessRestriction;
 use Alchemy\Phrasea\Core\Connection\ConnectionSettings;
@@ -49,7 +49,7 @@ class appbox extends base
      */
     protected $collectionService;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $connectionConfig = $app['conf']->get(['main', 'database']);
         $connection = $app['db.provider']($connectionConfig);
@@ -159,7 +159,7 @@ class appbox extends base
         return self::BASE_TYPE;
     }
 
-    public function forceUpgrade(Setup_Upgrade $upgrader, Application $app)
+    public function forceUpgrade(Setup_Upgrade $upgrader, BaseApplication $app)
     {
         $from_version = $this->get_version();
 
@@ -237,7 +237,7 @@ class appbox extends base
         return $advices;
     }
 
-    protected function post_upgrade(Application $app)
+    protected function post_upgrade(BaseApplication $app)
     {
         $this->apply_patches($this->get_version(), $app['phraseanet.version']->getNumber(), true);
         $this->setVersion($app['phraseanet.version']);

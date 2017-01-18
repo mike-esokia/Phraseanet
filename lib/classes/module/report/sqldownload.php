@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class module_report_sqldownload extends module_report_sql implements module_report_sqlReportInterface
 {
     protected $restrict = false;
 
-    public function __construct(Application $app, module_report $report)
+    public function __construct(BaseApplication $app, module_report $report)
     {
 // no_file_put_contents("/tmp/report.txt", sprintf("%s (%s)\n\n", __FILE__, __LINE__), FILE_APPEND);
         parent::__construct($app, $report);

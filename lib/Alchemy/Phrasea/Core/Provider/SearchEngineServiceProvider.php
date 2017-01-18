@@ -90,7 +90,7 @@ class SearchEngineServiceProvider implements ServiceProviderInterface
             );
         });
 
-        $app['search_engine.structure'] = $app->share(function (\Alchemy\Phrasea\Application $app) {
+        $app['search_engine.structure'] = $app->share(function (\Alchemy\Phrasea\BaseApplication $app) {
             $databoxes = $app->getDataboxes();
 
             return GlobalStructure::createFromDataboxes($databoxes);

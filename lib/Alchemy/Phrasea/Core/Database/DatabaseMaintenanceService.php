@@ -2,7 +2,7 @@
 
 namespace Alchemy\Phrasea\Core\Database;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\DoctrineMigrations\AbstractMigration;
 use Doctrine\DBAL\Connection;
 use vierbergenlars\SemVer\version;
@@ -58,7 +58,7 @@ class DatabaseMaintenanceService
 
     private $connection;
 
-    public function __construct(Application $application, Connection $connection)
+    public function __construct(BaseApplication $application, Connection $connection)
     {
         $this->app = $application;
         $this->connection = $connection;

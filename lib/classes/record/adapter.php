@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\File;
 use Alchemy\Phrasea\Cache\Exception;
 use Alchemy\Phrasea\Core\Event\Record\CollectionChangedEvent;
@@ -50,16 +50,16 @@ class record_adapter implements RecordInterface, cache_cacheableInterface
     const CACHE_GROUPING = 'grouping';
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return FilesystemService
      */
-    private static function getFilesystem(Application $app)
+    private static function getFilesystem(BaseApplication $app)
     {
         return $app['phraseanet.filesystem'];
     }
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
@@ -106,13 +106,13 @@ class record_adapter implements RecordInterface, cache_cacheableInterface
     private $size;
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param integer     $sbas_id
      * @param integer     $record_id
      * @param integer     $number
      * @param bool        $load
      */
-    public function __construct(Application $app, $sbas_id, $record_id, $number = null, $load = true)
+    public function __construct(BaseApplication $app, $sbas_id, $record_id, $number = null, $load = true)
     {
         $this->app = $app;
         $this->reference = RecordReference::createFromDataboxIdAndRecordId($sbas_id, $record_id);
@@ -1142,12 +1142,12 @@ class record_adapter implements RecordInterface, cache_cacheableInterface
 
     /**
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param \collection $collection
      *
      * @return \record_adapter
      */
-    public static function createStory(Application $app, \collection $collection)
+    public static function createStory(BaseApplication $app, \collection $collection)
     {
         $connection = $collection->get_databox()->get_connection();
 
@@ -1194,11 +1194,11 @@ class record_adapter implements RecordInterface, cache_cacheableInterface
 
     /**
      * @param File        $file
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return \record_adapter
      */
-    public static function createFromFile(File $file, Application $app)
+    public static function createFromFile(File $file, BaseApplication $app)
     {
         $databox = $file->getCollection()->get_databox();
 

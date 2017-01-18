@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\User;
 use Doctrine\DBAL\Connection;
 
@@ -20,11 +20,11 @@ class eventsmanager_broker
 
     /**
      *
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
 

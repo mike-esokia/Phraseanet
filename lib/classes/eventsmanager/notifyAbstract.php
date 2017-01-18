@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\User;
 
 abstract class eventsmanager_notifyAbstract
 {
     /** @var null|string */
     protected $group = null;
-    /** @var Application */
+    /** @var BaseApplication */
     protected $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

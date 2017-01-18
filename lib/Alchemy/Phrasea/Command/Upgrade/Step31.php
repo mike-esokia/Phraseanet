@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Command\Upgrade;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\File;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,9 +29,9 @@ class Step31 implements DatasUpgraderInterface
     /**
      * Constructor
      *
-     * @param Application $app The context application for execution
+     * @param BaseApplication $app The context application for execution
      */
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

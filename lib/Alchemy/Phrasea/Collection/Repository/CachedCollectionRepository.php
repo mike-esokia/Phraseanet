@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Collection\Repository;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\Collection;
 use Alchemy\Phrasea\Collection\CollectionRepository;
 use Doctrine\Common\Cache\Cache;
@@ -18,7 +18,7 @@ final class CachedCollectionRepository implements CollectionRepository
 {
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
@@ -38,12 +38,12 @@ final class CachedCollectionRepository implements CollectionRepository
     private $cacheKey;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      * @param CollectionRepository $repository
      * @param Cache $cache
      * @param $cacheKey
      */
-    public function __construct(Application $application, CollectionRepository $repository, Cache $cache, $cacheKey)
+    public function __construct(BaseApplication $application, CollectionRepository $repository, Cache $cache, $cacheKey)
     {
         $this->app = $application;
         $this->repository = $repository;

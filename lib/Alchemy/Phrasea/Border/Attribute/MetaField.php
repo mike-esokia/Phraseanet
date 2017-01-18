@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border\Attribute;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 /**
  * Phraseanet Border MetaField Attribute
@@ -88,7 +88,7 @@ class MetaField implements AttributeInterface
      *
      * @return MetaField
      */
-    public static function loadFromString(Application $app, $string)
+    public static function loadFromString(BaseApplication $app, $string)
     {
         $data = @unserialize($string);
 

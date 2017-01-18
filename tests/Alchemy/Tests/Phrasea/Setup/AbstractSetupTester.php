@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Setup;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 abstract class AbstractSetupTester extends \PhraseanetTestCase
 {
@@ -28,7 +28,7 @@ abstract class AbstractSetupTester extends \PhraseanetTestCase
 
     protected function goBackTo31()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $conn = $app->getApplicationBox()->get_connection();
 
         $this->uninstall();
@@ -53,7 +53,7 @@ abstract class AbstractSetupTester extends \PhraseanetTestCase
 
     protected function goBackTo35()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $conn = $app->getApplicationBox()->get_connection();
 
         $this->uninstall();

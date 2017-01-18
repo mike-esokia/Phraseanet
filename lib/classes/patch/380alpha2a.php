@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_380alpha2a extends patchAbstract
 {
@@ -46,7 +46,7 @@ class patch_380alpha2a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $databox, Application $app)
+    public function apply(base $databox, BaseApplication $app)
     {
         if ($app['conf']->has(['main', 'database-test'])) {
             $app['conf']->set(['main', 'database-test', 'path'], '/tmp/db.sqlite');

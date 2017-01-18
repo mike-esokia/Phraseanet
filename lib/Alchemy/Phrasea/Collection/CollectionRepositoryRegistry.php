@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Collection;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\Reference\CollectionReferenceRepository;
 
 class CollectionRepositoryRegistry
@@ -19,7 +19,7 @@ class CollectionRepositoryRegistry
     private $baseIdMap = null;
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $application;
 
@@ -39,12 +39,12 @@ class CollectionRepositoryRegistry
     private $repositoryFactory;
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param CollectionRepositoryFactory $collectionRepositoryFactory
      * @param CollectionReferenceRepository $referenceRepository
      */
     public function __construct(
-        Application $app,
+        BaseApplication $app,
         CollectionRepositoryFactory $collectionRepositoryFactory,
         CollectionReferenceRepository $referenceRepository
     ) {

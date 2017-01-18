@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Serializer\CaptionSerializer;
 use Alchemy\Phrasea\Model\Entities\Token;
 use Alchemy\Phrasea\Model\Entities\User;
@@ -32,7 +32,7 @@ class set_export extends set_abstract
     }
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
     protected $storage = [];
@@ -48,12 +48,12 @@ class set_export extends set_abstract
     protected $exportName;
 
     /**
-     * @param  Application $app
+     * @param  BaseApplication $app
      * @param  string $lst
      * @param  int $sstid
      * @param  int $storyWZid
      */
-    public function __construct(Application $app, $lst, $sstid, $storyWZid = null)
+    public function __construct(BaseApplication $app, $lst, $sstid, $storyWZid = null)
     {
         $this->app = $app;
 
@@ -685,14 +685,14 @@ class set_export extends set_abstract
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param Token $token
      * @param array $list
      * @param string $zipFile
      *
      * @return string
      */
-    public static function build_zip(Application $app, Token $token, array $list, $zipFile)
+    public static function build_zip(BaseApplication $app, Token $token, array $list, $zipFile)
     {
         if (isset($list['complete']) && $list['complete'] === true) {
             return $zipFile;
@@ -746,7 +746,7 @@ class set_export extends set_abstract
     /**
      * @todo a revoir le cas anonymous
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param array $list
      * @param String $type
      * @param boolean $anonymous
@@ -754,7 +754,7 @@ class set_export extends set_abstract
      *
      * @return void
      */
-    public static function log_download(Application $app, array $list, $type, $anonymous = false, $comment = '')
+    public static function log_download(BaseApplication $app, array $list, $type, $anonymous = false, $comment = '')
     {
         $tmplog = [];
         $files = $list['files'];

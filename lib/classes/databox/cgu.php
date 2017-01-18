@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class databox_cgu
 {
@@ -19,7 +19,7 @@ class databox_cgu
         return $this;
     }
 
-    public static function askAgreement(Application $app)
+    public static function askAgreement(BaseApplication $app)
     {
         $terms = self::getUnvalidated($app);
 
@@ -42,7 +42,7 @@ class databox_cgu
         return $out;
     }
 
-    private static function getUnvalidated(Application $app, $home = false)
+    private static function getUnvalidated(BaseApplication $app, $home = false)
     {
         $terms = [];
 

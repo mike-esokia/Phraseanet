@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider\Prod;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\LazyLocator;
 use Alchemy\Phrasea\Controller\Prod\UploadController;
 use Alchemy\Phrasea\ControllerProvider\ControllerProviderTrait;

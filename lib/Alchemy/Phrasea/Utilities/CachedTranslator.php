@@ -6,7 +6,7 @@
 
 namespace Alchemy\Phrasea\Utilities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Silex\Translator;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Translation\MessageSelector;
@@ -23,7 +23,7 @@ class CachedTranslator extends Translator
         'debug'     => false,
     ];
 
-    public function __construct(Application $app, MessageSelector $selector, array $options = [])
+    public function __construct(BaseApplication $app, MessageSelector $selector, array $options = [])
     {
         $this->app = $app;
 

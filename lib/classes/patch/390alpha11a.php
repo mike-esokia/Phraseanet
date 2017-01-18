@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Task;
 
 class patch_390alpha11a extends patchAbstract
@@ -47,7 +47,7 @@ class patch_390alpha11a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $app['conf']->set(['main', 'task-manager', 'status'], 'started');
 

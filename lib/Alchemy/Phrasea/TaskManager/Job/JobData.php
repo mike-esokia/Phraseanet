@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\TaskManager\Job;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\TaskManager\Job\JobDataInterface;
 use Alchemy\Phrasea\Model\Entities\Task;
 
@@ -20,14 +20,14 @@ class JobData implements JobDataInterface
     private $app;
     private $task;
 
-    public function __construct(Application $app, Task $task)
+    public function __construct(BaseApplication $app, Task $task)
     {
         $this->app = $app;
         $this->task = $task;
     }
 
     /**
-     * @return Application
+     * @return BaseApplication
      */
     public function getApplication()
     {

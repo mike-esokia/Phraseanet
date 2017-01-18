@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Preset;
 use Gedmo\Timestampable\TimestampableListener;
 
@@ -56,7 +56,7 @@ class patch_390alpha16a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $sql = ' SELECT edit_preset_id, creation_date, title, xml, usr_id, sbas_id
                  FROM edit_presets';

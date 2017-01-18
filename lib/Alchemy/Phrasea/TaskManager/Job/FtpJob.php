@@ -12,7 +12,7 @@
 namespace Alchemy\Phrasea\TaskManager\Job;
 
 use ftpclient;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\NotifierAware;
 use Alchemy\Phrasea\Model\Serializer\CaptionSerializer;
 use Alchemy\Phrasea\Notification\Mail\MailSuccessFTPReceiver;
@@ -75,7 +75,7 @@ class FtpJob extends AbstractJob
         }
     }
 
-    private function removeDeadExports(Application $app)
+    private function removeDeadExports(BaseApplication $app)
     {
         foreach ($app['repo.ftp-exports']
                 ->findCrashedExports(new \DateTime('-1 month')) as $export) {
@@ -84,13 +84,13 @@ class FtpJob extends AbstractJob
         $app['orm.em']->flush();
     }
 
-    private function retrieveExports(Application $app)
+    private function retrieveExports(BaseApplication $app)
     {
         return $app['repo.ftp-exports']
                 ->findDoableExports();
     }
 
-    protected function doExport(Application $app, Task $task, FtpExport $export)
+    protected function doExport(BaseApplication $app, Task $task, FtpExport $export)
     {
         $settings = simplexml_load_string($task->getSettings());
 
@@ -306,7 +306,7 @@ class FtpJob extends AbstractJob
         $this->finalize($app, $export);
     }
 
-    private function finalize(Application $app, FtpExport $export)
+    private function finalize(BaseApplication $app, FtpExport $export)
     {
         if ($export->getCrash() >= $export->getNbretry()) {
             $this->send_mails($app, $export);
@@ -342,7 +342,7 @@ class FtpJob extends AbstractJob
         }
     }
 
-    private function send_mails(Application $app, FtpExport $export)
+    private function send_mails(BaseApplication $app, FtpExport $export)
     {
         $transferts = [];
         $transfert_status = $this->translator->trans('task::ftp:Tous les documents ont ete transferes avec succes');
@@ -409,7 +409,7 @@ class FtpJob extends AbstractJob
         }
     }
 
-    private function logexport(Application $app, \record_adapter $record, $obj, $ftpLog)
+    private function logexport(BaseApplication $app, \record_adapter $record, $obj, $ftpLog)
     {
         foreach ($obj as $oneObj) {
             $app['phraseanet.logger']($record->getDatabox())

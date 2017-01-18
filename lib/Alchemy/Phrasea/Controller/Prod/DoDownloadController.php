@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Controller\Prod;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\DelivererAware;
 use Alchemy\Phrasea\Application\Helper\DispatcherAware;
 use Alchemy\Phrasea\Application\Helper\FilesystemAware;

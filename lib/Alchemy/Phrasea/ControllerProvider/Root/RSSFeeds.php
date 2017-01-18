@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider\Root;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\LazyLocator;
 use Alchemy\Phrasea\Controller\Root\RSSFeedController;
 use Alchemy\Phrasea\ControllerProvider\ControllerProviderTrait;

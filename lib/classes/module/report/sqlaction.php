@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class module_report_sqlaction extends module_report_sql implements module_report_sqlReportInterface
 {
     private $action = 'add';
 
-    public function __construct(Application $app, module_report $report)
+    public function __construct(BaseApplication $app, module_report $report)
     {
         parent::__construct($app, $report);
     }

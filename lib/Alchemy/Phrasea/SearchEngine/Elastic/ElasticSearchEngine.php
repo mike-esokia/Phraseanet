@@ -27,7 +27,7 @@ use Alchemy\Phrasea\Exception\RuntimeException;
 use Closure;
 use Doctrine\Common\Collections\ArrayCollection;
 use Alchemy\Phrasea\Model\Entities\FeedEntry;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Elasticsearch\Client;
 
 class ElasticSearchEngine implements SearchEngineInterface
@@ -55,7 +55,7 @@ class ElasticSearchEngine implements SearchEngineInterface
      */
     private $context_factory;
 
-    public function __construct(Application $app, Structure $structure, Client $client, $indexName, QueryContextFactory $context_factory, Closure $facetsResponseFactory, ElasticsearchOptions $options)
+    public function __construct(BaseApplication $app, Structure $structure, Client $client, $indexName, QueryContextFactory $context_factory, Closure $facetsResponseFactory, ElasticsearchOptions $options)
     {
         $this->app = $app;
         $this->structure = $structure;

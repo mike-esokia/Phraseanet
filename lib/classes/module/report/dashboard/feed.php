@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\DBAL\DBALException;
 
 class module_report_dashboard_feed implements module_report_dashboard_componentInterface
@@ -62,13 +62,13 @@ class module_report_dashboard_feed implements module_report_dashboard_componentI
      * Returns l'objet stockee dans le cache si i l existe sinon instancie
      * un nouveau objet dashboard_feed
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param integer     $sbasid
      * @param string      $sbas_coll
      * @param mixed       $dmin
      * @param mixed       $dmax
      */
-    public static function getInstance(Application $app, $sbasid, $sbas_coll, $dmin, $dmax)
+    public static function getInstance(BaseApplication $app, $sbasid, $sbas_coll, $dmin, $dmax)
     {
         $cache_id = 'feed_' . md5($sbasid . '_' . $sbas_coll . '_' . $dmin . '_' . $dmax);
 
@@ -90,13 +90,13 @@ class module_report_dashboard_feed implements module_report_dashboard_componentI
     /**
      * Remplis les resultats bruts pour valeures passees en param
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param integer     $sbasid
      * @param string      $sbas_collection les collection sous forme de string séparés par une virgule
      * @param string      $dmin            Y-m-d
      * @param string      $dmax            Y-m-d
      */
-    public function __construct(Application $app, $sbasid, $sbas_collection, $dmin, $dmax)
+    public function __construct(BaseApplication $app, $sbasid, $sbas_collection, $dmin, $dmax)
     {
         $this->app = $app;
         $this->dmin = $dmin;
@@ -236,7 +236,7 @@ class module_report_dashboard_feed implements module_report_dashboard_componentI
         }
     }
 
-    private function setApplication(Application $app)
+    private function setApplication(BaseApplication $app)
     {
         $this->app = $app;
     }

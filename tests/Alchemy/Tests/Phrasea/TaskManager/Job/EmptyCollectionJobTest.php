@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\TaskManager\Job;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\TaskManager\Job\AbstractJob;
 use Alchemy\Phrasea\TaskManager\Job\EmptyCollectionJob;
 use Prophecy\Prophecy\ObjectProphecy;

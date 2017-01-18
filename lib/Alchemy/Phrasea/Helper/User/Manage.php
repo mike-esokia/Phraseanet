@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Helper\User;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\NotifierAware;
 use Alchemy\Phrasea\Controller\LazyLocator;
 use Alchemy\Phrasea\Helper\Helper;
@@ -30,7 +30,7 @@ class Manage extends Helper
     /** @var int */
     protected $usr_id;
 
-    public function __construct(Application $app, Request $Request)
+    public function __construct(BaseApplication $app, Request $Request)
     {
         parent::__construct($app, $Request);
 

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\LightboxController;
 use Alchemy\Phrasea\Model\Entities\Token;
 use Alchemy\Phrasea\Model\Manipulator\TokenManipulator;

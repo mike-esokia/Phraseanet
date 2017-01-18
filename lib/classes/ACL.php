@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\Reference\CollectionReferenceCollection;
 use Alchemy\Phrasea\Core\Event\Acl\AccessPeriodChangedEvent;
 use Alchemy\Phrasea\Core\Event\Acl\AccessToBaseGrantedEvent;
@@ -153,7 +153,7 @@ class ACL implements cache_cacheableInterface
     ];
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
@@ -171,9 +171,9 @@ class ACL implements cache_cacheableInterface
      * Constructor
      *
      * @param User        $user
-     * @param Application $app
+     * @param BaseApplication $app
      */
-    public function __construct(User $user, Application $app)
+    public function __construct(User $user, BaseApplication $app)
     {
         $this->user = $user;
         $this->app = $app;

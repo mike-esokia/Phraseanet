@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\Version\MailChecker;
 use Symfony\Component\Yaml\Dumper;
 
@@ -17,7 +17,7 @@ class Setup_Upgrade
 {
     /**
      *
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
@@ -27,7 +27,7 @@ class Setup_Upgrade
      */
     private $recommendations = [];
 
-    public function __construct(Application $app, $force = false)
+    public function __construct(BaseApplication $app, $force = false)
     {
         if ($force) {
             $this->remove_lock_file();

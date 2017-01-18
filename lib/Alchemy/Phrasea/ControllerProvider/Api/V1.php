@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider\Api;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\Api\V1Controller;
 use Alchemy\Phrasea\Controller\LazyLocator;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;

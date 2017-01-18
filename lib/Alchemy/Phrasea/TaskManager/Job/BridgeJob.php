@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\TaskManager\Job;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\BridgeUploadFailureEvent;
 use Alchemy\Phrasea\TaskManager\Editor\DefaultEditor;
 
@@ -133,7 +133,7 @@ class BridgeJob extends AbstractJob
      *
      * @return BridgeJob
      */
-    protected function update_element(Application $app, \Bridge_Element $element)
+    protected function update_element(BaseApplication $app, \Bridge_Element $element)
     {
         $account = $element->get_account();
         $connector_status = $account->get_api()->get_element_status($element);

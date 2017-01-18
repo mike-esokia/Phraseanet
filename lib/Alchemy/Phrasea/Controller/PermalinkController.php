@@ -12,7 +12,7 @@ namespace Alchemy\Phrasea\Controller;
 
 use Alchemy\Embed\Media\Media;
 use Alchemy\Embed\Media\MediaInformation;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\ApplicationBoxAware;
 use Alchemy\Phrasea\Authentication\ACLProvider;
 use Alchemy\Phrasea\Authentication\Authenticator;
@@ -36,7 +36,7 @@ class PermalinkController extends AbstractDelivery
     /** @var Media */
     private $mediaService;
 
-    public function __construct(Application $app, ACLProvider $acl, Authenticator $authenticator, Media $mediaService)
+    public function __construct(BaseApplication $app, ACLProvider $acl, Authenticator $authenticator, Media $mediaService)
     {
         parent::__construct($app);
 

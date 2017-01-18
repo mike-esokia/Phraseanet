@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Form\Constraint;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Component\Validator\Constraint;
 
@@ -31,7 +31,7 @@ class NewEmail extends Constraint
         return (Boolean) $this->repository->findByEmail($email);
     }
 
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         return new static($app['repo.users']);
     }

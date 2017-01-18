@@ -2,7 +2,7 @@
 
 namespace Alchemy\Phrasea\Core\Thumbnail;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use MediaAlchemyst\Specification\Image as ImageSpecification;
 use Symfony\Component\HttpFoundation\File\File;
 

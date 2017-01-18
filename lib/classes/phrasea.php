@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\CollectionRepositoryRegistry;
 use Alchemy\Phrasea\Collection\Reference\CollectionReferenceRepository;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -29,7 +29,7 @@ class phrasea
     const CACHE_SBAS_FROM_BAS = 'sbas_from_bas';
     const CACHE_SBAS_PARAMS = 'sbas_params';
 
-    public static function clear_sbas_params(Application $app)
+    public static function clear_sbas_params(BaseApplication $app)
     {
         self::$_sbas_params = null;
         $app->getApplicationBox()->delete_data_from_cache(self::CACHE_SBAS_PARAMS);
@@ -37,7 +37,7 @@ class phrasea
         return true;
     }
 
-    public static function sbas_params(Application $app)
+    public static function sbas_params(BaseApplication $app)
     {
         if (self::$_sbas_params) {
             return self::$_sbas_params;
@@ -94,7 +94,7 @@ class phrasea
         return $array;
     }
 
-    public static function sbasFromBas(Application $app, $base_id)
+    public static function sbasFromBas(BaseApplication $app, $base_id)
     {
         $reference = self::getCollectionReferenceRepository($app)->find($base_id);
 
@@ -105,7 +105,7 @@ class phrasea
         return false;
     }
 
-    public static function baseFromColl($sbas_id, $coll_id, Application $app)
+    public static function baseFromColl($sbas_id, $coll_id, BaseApplication $app)
     {
         $reference = self::getCollectionReferenceRepository($app)->findByCollectionId($sbas_id, $coll_id);
 
@@ -141,7 +141,7 @@ class phrasea
         return;
     }
 
-    public static function collFromBas(Application $app, $base_id)
+    public static function collFromBas(BaseApplication $app, $base_id)
     {
         $reference = self::getCollectionReferenceRepository($app)->find($base_id);
 
@@ -152,7 +152,7 @@ class phrasea
         return false;
     }
 
-    public static function sbas_names($sbas_id, Application $app)
+    public static function sbas_names($sbas_id, BaseApplication $app)
     {
         if (!self::$_sbas_names) {
             try {
@@ -168,7 +168,7 @@ class phrasea
         return isset(self::$_sbas_names[$sbas_id]) ? self::$_sbas_names[$sbas_id] : 'Unknown base';
     }
 
-    public static function sbas_labels($sbas_id, Application $app)
+    public static function sbas_labels($sbas_id, BaseApplication $app)
     {
         if (!self::$_sbas_labels) {
             try {
@@ -196,7 +196,7 @@ class phrasea
         return 'Unknown database';
     }
 
-    public static function bas_labels($base_id, Application $app)
+    public static function bas_labels($base_id, BaseApplication $app)
     {
         $reference = self::getCollectionReferenceRepository($app)->find($base_id);
 
@@ -223,19 +223,19 @@ class phrasea
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return CollectionReferenceRepository
      */
-    private static function getCollectionReferenceRepository(Application $app)
+    private static function getCollectionReferenceRepository(BaseApplication $app)
     {
         return $app['repo.collection-references'];
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return CollectionRepositoryRegistry
      */
-    private static function getCollectionRepositoryRegistry(Application $app)
+    private static function getCollectionRepositoryRegistry(BaseApplication $app)
     {
         return $app['repo.collections-registry'];
     }

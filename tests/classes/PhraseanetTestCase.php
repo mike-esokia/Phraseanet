@@ -1,10 +1,10 @@
 <?php
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\ACLProvider;
 use Alchemy\Phrasea\Border\File;
 use Alchemy\Phrasea\Cache\Manager as CacheManager;
-use Alchemy\Phrasea\CLI;
+use Alchemy\Phrasea\CommandLineApplication;
 use Alchemy\Phrasea\Model\Entities\Session;
 use Alchemy\Phrasea\Model\Entities\User;
 use Alchemy\Phrasea\SearchEngine\SearchEngineInterface;
@@ -272,7 +272,7 @@ abstract class PhraseanetTestCase extends WebTestCase
     }
 
     /**
-     * @return Application
+     * @return BaseApplication
      */
     public function getApplication()
     {
@@ -282,7 +282,7 @@ abstract class PhraseanetTestCase extends WebTestCase
     /**
      * @return databox
      */
-    public function getFirstDatabox(Application $app)
+    public function getFirstDatabox(BaseApplication $app)
     {
         $databoxes = $app->getDataboxes();
 
@@ -335,9 +335,9 @@ abstract class PhraseanetTestCase extends WebTestCase
         parent::tearDownAfterClass();
     }
 
-    protected function loadCLI($environment = Application::ENV_TEST)
+    protected function loadCLI($environment = BaseApplication::ENV_TEST)
     {
-        $cli = new CLI('cli test', null, $environment);
+        $cli = new CommandLineApplication('cli test', null, $environment);
         $this->addMocks($cli);
         $this->addAppCacheFlush($cli);
 
@@ -347,14 +347,14 @@ abstract class PhraseanetTestCase extends WebTestCase
     /**
      * @param null|string $path
      * @param string $environment
-     * @return Application
+     * @return BaseApplication
      */
-    protected function loadApp($path = null, $environment = Application::ENV_TEST)
+    protected function loadApp($path = null, $environment = BaseApplication::ENV_TEST)
     {
         if (null !== $path) {
             $app = require __DIR__ . '/../../' . $path;
         } else {
-            $app = new Application($environment);
+            $app = new BaseApplication($environment);
         }
         $this->addAppCacheFlush($app);
 
@@ -364,7 +364,7 @@ abstract class PhraseanetTestCase extends WebTestCase
         return $app;
     }
 
-    protected function addAppCacheFlush(Application $app)
+    protected function addAppCacheFlush(BaseApplication $app)
     {
         $app['phraseanet.cache-service'] = $app->share($app->extend('phraseanet.cache-service', function (CacheManager $cache) {
             $cache->flushAll();
@@ -380,7 +380,7 @@ abstract class PhraseanetTestCase extends WebTestCase
 
     }
 
-    protected function addMocks(Application $app)
+    protected function addMocks(BaseApplication $app)
     {
         $app['form.csrf_provider'] = $app->share(function () {
             return new CsrfTestProvider();
@@ -483,7 +483,7 @@ abstract class PhraseanetTestCase extends WebTestCase
         return $this->assertRegExp('/\d{4}[-]\d{2}[-]\d{2}[T]\d{2}[:]\d{2}[:]\d{2}[+]\d{2}[:]\d{2}/', $date);
     }
 
-    protected function set_user_agent($user_agent, Application $app)
+    protected function set_user_agent($user_agent, BaseApplication $app)
     {
         $app['browser']->setUserAgent($user_agent);
 
@@ -531,7 +531,7 @@ abstract class PhraseanetTestCase extends WebTestCase
         ]);
     }
 
-    protected static function resetUsersRights(Application $app, User $user)
+    protected static function resetUsersRights(BaseApplication $app, User $user)
     {
         switch ($user->getId()) {
             case self::$fixtureIds['user']['test_phpunit']:
@@ -562,7 +562,7 @@ abstract class PhraseanetTestCase extends WebTestCase
      *
      * @param User $user
      */
-    public static function giveRightsToUser(Application $app, User $user, $base_ids = null, $force = false)
+    public static function giveRightsToUser(BaseApplication $app, User $user, $base_ids = null, $force = false)
     {
         $app->getAclForUser($user)->delete_data_from_cache(\ACL::CACHE_GLOBAL_RIGHTS);
         $app->getAclForUser($user)->delete_data_from_cache(databox::CACHE_COLLECTIONS);
@@ -648,10 +648,10 @@ abstract class PhraseanetTestCase extends WebTestCase
     /**
      * Authenticates self::['user'] against application.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param User        $user
      */
-    protected function authenticate(Application $app, User $user = null)
+    protected function authenticate(BaseApplication $app, User $user = null)
     {
         /** @var User $user */
         $user = $user ?: self::$DI['user'];
@@ -672,9 +672,9 @@ abstract class PhraseanetTestCase extends WebTestCase
     /**
      * Logout authenticated user from application.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      */
-    protected function logout(Application $app)
+    protected function logout(BaseApplication $app)
     {
         $app['session']->clear();
         $app->getAuthenticator()->reinitUser();
@@ -740,7 +740,7 @@ abstract class PhraseanetTestCase extends WebTestCase
         return $this->getMock('Alchemy\Phrasea\Model\Entities\User');
     }
 
-    public function removeUser(Application $app, User $user)
+    public function removeUser(BaseApplication $app, User $user)
     {
         $app['orm.em']->remove($user);
         $app['orm.em']->flush();

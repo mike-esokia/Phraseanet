@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_390alpha22a implements patchInterface
 {
@@ -54,7 +54,7 @@ class patch_390alpha22a implements patchInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(base $databox, Application $app)
+    public function apply(base $databox, BaseApplication $app)
     {
         $sql = "UPDATE metadatas_structure SET `aggregable`=20 WHERE `aggregable`=1";
         $stmt = $databox->get_connection()->prepare($sql);

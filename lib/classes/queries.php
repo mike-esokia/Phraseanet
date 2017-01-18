@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class queries
@@ -184,7 +184,7 @@ class queries
         return $out;
     }
 
-    public static function history(Application $app, $usrId)
+    public static function history(BaseApplication $app, $usrId)
     {
         $history = '<ul>';
 

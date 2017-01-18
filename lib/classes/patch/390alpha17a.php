@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\ORM\EntityManager;
 
 class patch_390alpha17a extends patchAbstract
@@ -55,7 +55,7 @@ class patch_390alpha17a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $this->fillApplicationTable($app['orm.em']);
         $this->fillAccountTable($app['orm.em']);

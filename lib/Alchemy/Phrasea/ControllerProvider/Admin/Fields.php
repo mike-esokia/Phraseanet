@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider\Admin;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\Admin\FieldsController;
 use Alchemy\Phrasea\ControllerProvider\ControllerProviderTrait;
 use Alchemy\Phrasea\Vocabulary\ControlProvider\UserProvider;

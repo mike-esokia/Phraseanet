@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\TaskManager\Editor;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -71,7 +71,7 @@ abstract class AbstractEditor implements EditorInterface
     /**
      * {@inheritdoc}
      */
-    public function facility(Application $app, Request $request)
+    public function facility(BaseApplication $app, Request $request)
     {
         throw new NotFoundHttpException('Route not found.');
     }

@@ -1,6 +1,6 @@
 <?php
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 require_once __DIR__ . '/../Bridge_datas.inc';
 

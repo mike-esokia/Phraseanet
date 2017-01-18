@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\Attribute\AttributeInterface;
 use Alchemy\Phrasea\Media\Type\Audio;
 use Alchemy\Phrasea\Media\Type\Document;
@@ -53,14 +53,14 @@ class File
     /**
      * Constructor
      *
-     * @param Application    $app          Application context
+     * @param BaseApplication    $app          Application context
      * @param MediaInterface $media        The media
      * @param \collection    $collection   The destination collection
      * @param string         $originalName The original name of the file
      *                                     (if not provided, original name is
      *                                     extracted from the pathfile)
      */
-    public function __construct(Application $app, MediaInterface $media, \collection $collection, $originalName = null)
+    public function __construct(BaseApplication $app, MediaInterface $media, \collection $collection, $originalName = null)
     {
         $this->app = $app;
         $this->media = $media;
@@ -270,14 +270,14 @@ class File
      *
      * @param  string                    $pathfile     The path to the file
      * @param  \collection               $collection   The destination collection
-     * @param  Application               $app          An application
+     * @param  BaseApplication               $app          An application
      * @param  string                    $originalName An optionnal original name (if
      *                                                 different from the $pathfile filename)
      * @throws \InvalidArgumentException
      *
      * @return File
      */
-    public static function buildFromPathfile($pathfile, \collection $collection, Application $app, $originalName = null)
+    public static function buildFromPathfile($pathfile, \collection $collection, BaseApplication $app, $originalName = null)
     {
         try {
             $media = $app->getMediaFromUri($pathfile);

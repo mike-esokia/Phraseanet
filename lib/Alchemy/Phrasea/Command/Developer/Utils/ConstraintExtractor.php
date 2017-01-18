@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Command\Developer\Utils;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
@@ -36,7 +36,7 @@ class ConstraintExtractor implements FileVisitorInterface, \PHPParser_NodeVisito
     private $catalogue;
     private $namespace = '';
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
         $this->traverser = new \PHPParser_NodeTraverser();

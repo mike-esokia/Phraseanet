@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Setup\Version\Probe;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Tests\Phrasea\Setup\AbstractSetupTester;
 use Alchemy\Phrasea\Setup\Version\Probe\Probe31;
 
@@ -28,6 +28,6 @@ class Probe31Test extends AbstractSetupTester
 
     private function getProbe()
     {
-        return new Probe31(new Application(Application::ENV_TEST));
+        return new Probe31(new BaseApplication(BaseApplication::ENV_TEST));
     }
 }

@@ -19,6 +19,8 @@ class ConfigurationEditor extends Command
 
     protected function configure()
     {
+        $this->setDescription('Gets or sets named configuration values');
+
         $this->addArgument(
             'operation',
             InputArgument::REQUIRED,

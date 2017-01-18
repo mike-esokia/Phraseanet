@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Setup\Version\Probe;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Tests\Phrasea\Setup\AbstractSetupTester;
 use Alchemy\Phrasea\Setup\Version\Probe\Probe38;
 
@@ -20,7 +20,7 @@ class Probe38Test extends AbstractSetupTester
 
     public function testMigration()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['root.path'] = __DIR__ . '/fixtures-3807';
         $probe = new Probe38($app);
         $this->assertTrue($probe->isMigrable());
@@ -29,6 +29,6 @@ class Probe38Test extends AbstractSetupTester
 
     private function getProbe()
     {
-        return new Probe38(new Application(Application::ENV_TEST));
+        return new Probe38(new BaseApplication(BaseApplication::ENV_TEST));
     }
 }

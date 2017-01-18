@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Databox\Record;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Cache\Exception;
 use Alchemy\Phrasea\Model\Entities\User;
 use Doctrine\DBAL\Connection;
@@ -18,7 +18,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 class LegacyRecordRepository implements RecordRepository
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
@@ -32,7 +32,7 @@ class LegacyRecordRepository implements RecordRepository
      */
     private $site;
 
-    public function __construct(Application $app, \databox $databox, $site)
+    public function __construct(BaseApplication $app, \databox $databox, $site)
     {
         $this->app = $app;
         $this->databox = $databox;

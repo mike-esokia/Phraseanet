@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Version\PreSchemaUpgrade;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\User;
 use Alchemy\Phrasea\Model\Entities\FtpCredential;
 use Doctrine\DBAL\Connection;
@@ -64,7 +64,7 @@ class Upgrade39Users implements PreSchemaUpgradeInterface
     /**
      * {@inheritdoc}
      */
-    public function isApplyable(Application $app)
+    public function isApplyable(BaseApplication $app)
     {
         return false === $this->tableExists($app['orm.em'], 'Users');
     }
@@ -364,7 +364,7 @@ class Upgrade39Users implements PreSchemaUpgradeInterface
         $em->getConnection()->executeUpdate('UPDATE Users SET geoname_id=NULL WHERE geoname_id=0');
         $em->getConnection()->executeUpdate(
             'UPDATE Users SET locale=NULL WHERE locale NOT IN (:locales)',
-            ['locales' => array_keys(Application::getAvailableLanguages())],
+            ['locales' => array_keys(BaseApplication::getAvailableLanguages())],
             ['locales' => Connection::PARAM_STR_ARRAY]
         );
         $em->getConnection()->executeUpdate('UPDATE Users SET deleted=1, login=SUBSTRING(login, 11) WHERE login LIKE "(#deleted_%"');

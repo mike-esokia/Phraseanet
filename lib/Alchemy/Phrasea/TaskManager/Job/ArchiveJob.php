@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\TaskManager\Job;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Exception\RuntimeException;
 use Alchemy\Phrasea\Border\File;
 use Alchemy\Phrasea\Border\Manager as borderManager;
@@ -229,7 +229,7 @@ class ArchiveJob extends AbstractJob
         }
     }
 
-    private function listFilesPhase1(Application $app, \DOMDocument $dom, \DomElement $node, $path, $server_coll_id, $depth, &$TColls)
+    private function listFilesPhase1(BaseApplication $app, \DOMDocument $dom, \DomElement $node, $path, $server_coll_id, $depth, &$TColls)
     {
         $nnew = 0;
 
@@ -292,7 +292,7 @@ class ArchiveJob extends AbstractJob
         return $nnew;
     }
 
-    private function listFilesPhase2(Application $app, \DOMDocument $dom, \DOMElement $node, $path, $depth)
+    private function listFilesPhase2(BaseApplication $app, \DOMDocument $dom, \DOMElement $node, $path, $depth)
     {
         $nnew = 0;
 
@@ -487,7 +487,7 @@ class ArchiveJob extends AbstractJob
         }
     }
 
-    private function removeBadGroups(Application $app, \DOMDocument $dom, \DOMElement $node, $path, $path_archived, $path_error, $depth, $moveError)
+    private function removeBadGroups(BaseApplication $app, \DOMDocument $dom, \DOMElement $node, $path, $path_archived, $path_error, $depth, $moveError)
     {
         $ret = false;
 
@@ -559,7 +559,7 @@ class ArchiveJob extends AbstractJob
         }
     }
 
-    private function archive(Application $app, \databox $databox, \DOMDOcument $dom, \DOMElement $node, $path, $path_archived, $path_error, $depth, $moveError, $moveArchived, $stat0, $stat1)
+    private function archive(BaseApplication $app, \databox $databox, \DOMDOcument $dom, \DOMElement $node, $path, $path_archived, $path_error, $depth, $moveError, $moveArchived, $stat0, $stat1)
     {
         if ($node->getAttribute('temperature') == 'hot') {
             return;
@@ -670,7 +670,7 @@ class ArchiveJob extends AbstractJob
         return $ret;
     }
 
-    private function moveFiles(Application $app, \DOMDocument $dom, \DOMElement $node, $path, $path_archived, $path_error, $depth, $moveArchived, $moveError)
+    private function moveFiles(BaseApplication $app, \DOMDocument $dom, \DOMElement $node, $path, $path_archived, $path_error, $depth, $moveArchived, $moveError)
     {
         $ret = false;
 
@@ -817,7 +817,7 @@ class ArchiveJob extends AbstractJob
         return;
     }
 
-    private function archiveGrp(Application $app, \databox $databox, \DOMDocument $dom, \DOMElement $node, $path, $path_archived, $path_error, array &$nodesToDel, $moveError, $moveArchived, $stat0, $stat1)
+    private function archiveGrp(BaseApplication $app, \databox $databox, \DOMDocument $dom, \DOMElement $node, $path, $path_archived, $path_error, array &$nodesToDel, $moveError, $moveArchived, $stat0, $stat1)
     {
         $xpath = new \DOMXPath($dom);
 
@@ -981,7 +981,7 @@ class ArchiveJob extends AbstractJob
         return;
     }
 
-    public function createStory(Application $app, \collection $collection, $pathfile, $captionFile, $stat0, $stat1)
+    public function createStory(BaseApplication $app, \collection $collection, $pathfile, $captionFile, $stat0, $stat1)
     {
         $status = \databox_status::operation_or($stat0, $stat1);
 
@@ -1029,7 +1029,7 @@ class ArchiveJob extends AbstractJob
      * @param  integer         $force       Force lazaret or record ; use \Alchemy\Phrasea\Border\Manager::FORCE_* constants
      * @return \record_adapter
      */
-    public function createRecord(Application $app, \collection $collection, $pathfile, $captionFile, $grp_rid, $force, $stat0, $stat1)
+    public function createRecord(BaseApplication $app, \collection $collection, $pathfile, $captionFile, $grp_rid, $force, $stat0, $stat1)
     {
         $status = \databox_status::operation_or($stat0, $stat1);
 
@@ -1094,7 +1094,7 @@ class ArchiveJob extends AbstractJob
      * @param string       $path_error
      * @param integer      $grp_rid
      */
-    private function archiveFilesToGrp(Application $app, \databox $databox, \DOMDocument $dom, \DOMElement $node, $path, $path_archived, $path_error, $grp_rid, $stat0, $stat1, $moveError, $moveArchived)
+    private function archiveFilesToGrp(BaseApplication $app, \databox $databox, \DOMDocument $dom, \DOMElement $node, $path, $path_archived, $path_error, $grp_rid, $stat0, $stat1, $moveError, $moveArchived)
     {
         $nodesToDel = [];
         for ($n = $node->firstChild; $n; $n = $n->nextSibling) {
@@ -1131,7 +1131,7 @@ class ArchiveJob extends AbstractJob
      * @param array        $nodesToDel    out, filled with files to delete
      * @param integer      $grp_rid
      */
-    private function archiveFile(Application $app, \databox $databox, \DOMDocument $dom, \DOMElement $node, $path, $path_archived, $path_error, array &$nodesToDel, $grp_rid, $stat0, $stat1, $moveError, $moveArchived)
+    private function archiveFile(BaseApplication $app, \databox $databox, \DOMDocument $dom, \DOMElement $node, $path, $path_archived, $path_error, array &$nodesToDel, $grp_rid, $stat0, $stat1, $moveError, $moveArchived)
     {
         $match = $node->getAttribute('match');
 
@@ -1185,7 +1185,7 @@ class ArchiveJob extends AbstractJob
      * @param integer      $grp_rid
      * @param array        $nodesToDel      out, filled with files to delete
      */
-    private function archiveFileAndCaption(Application $app, \databox $databox, \DOMDocument $dom, \DOMElement $node, \DOMElement $captionFileNode = null, $path, $path_archived, $path_error, $grp_rid, array &$nodesToDel, $stat0, $stat1, $moveError, $moveArchived)
+    private function archiveFileAndCaption(BaseApplication $app, \databox $databox, \DOMDocument $dom, \DOMElement $node, \DOMElement $captionFileNode = null, $path, $path_archived, $path_error, $grp_rid, array &$nodesToDel, $stat0, $stat1, $moveError, $moveArchived)
     {
         $file = $node->getAttribute('name');
         $cid = $node->getAttribute('cid');
@@ -1358,7 +1358,7 @@ class ArchiveJob extends AbstractJob
      *
      * @return LazaretSession
      */
-    protected function getLazaretSession(Application $app)
+    protected function getLazaretSession(BaseApplication $app)
     {
         $lazaretSession = new LazaretSession();
 
@@ -1389,7 +1389,7 @@ class ArchiveJob extends AbstractJob
         return $ret;
     }
 
-    protected function readXMLForDatabox(Application $app, \databox_descriptionStructure $metadatasStructure, $pathfile)
+    protected function readXMLForDatabox(BaseApplication $app, \databox_descriptionStructure $metadatasStructure, $pathfile)
     {
         if (false === $app['filesystem']->exists($pathfile)) {
             throw new \InvalidArgumentException(sprintf('file %s does not exists', $pathfile));

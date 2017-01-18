@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Repositories;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\FeedItem;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -51,12 +51,12 @@ class FeedItemRepository extends EntityRepository
     /**
      * Gets latest items from public feeds.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param integer     $nbItems
      *
      * @return FeedItem[] An array of FeedItem
      */
-    public function loadLatest(Application $app, $nbItems = 20)
+    public function loadLatest(BaseApplication $app, $nbItems = 20)
     {
         $execution = 0;
         $items = [];

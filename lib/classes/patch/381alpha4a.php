@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_381alpha4a extends patchAbstract
 {
@@ -46,7 +46,7 @@ class patch_381alpha4a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $sql = "SELECT usr_id, prop, value FROM usr_settings
                 WHERE prop = 'editing_top_box'

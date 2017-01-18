@@ -2,14 +2,14 @@
 
 namespace Alchemy\Tests\Phrasea\Border\Checker;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\Checker\AbstractChecker;
 use Alchemy\Phrasea\Border\File;
 
 class AbstractCheckerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
@@ -22,7 +22,7 @@ class AbstractCheckerTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->app = $this->prophesize(Application::class);
+        $this->app = $this->prophesize(BaseApplication::class);
 
         $this->sut = $this->getMockBuilder(AbstractChecker::class)
             ->setConstructorArgs([$this->app->reveal()])

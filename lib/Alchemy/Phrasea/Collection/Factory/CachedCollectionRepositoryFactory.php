@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Collection\Factory;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\CollectionRepository;
 use Alchemy\Phrasea\Collection\CollectionRepositoryFactory;
 use Alchemy\Phrasea\Collection\Repository\CachedCollectionRepository;
@@ -19,7 +19,7 @@ use Doctrine\Common\Cache\Cache;
 class CachedCollectionRepositoryFactory implements CollectionRepositoryFactory
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $application;
 
@@ -39,13 +39,13 @@ class CachedCollectionRepositoryFactory implements CollectionRepositoryFactory
     private $baseCacheKey;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      * @param CollectionRepositoryFactory $collectionRepositoryFactory
      * @param Cache $cache
      * @param string $baseCacheKey
      */
     public function __construct(
-        Application $application,
+        BaseApplication $application,
         CollectionRepositoryFactory $collectionRepositoryFactory,
         Cache $cache,
         $baseCacheKey

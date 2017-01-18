@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Serializer\CaptionSerializer;
 
 class record_exportElement extends record_adapter
@@ -46,7 +46,7 @@ class record_exportElement extends record_adapter
 
     /**
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param integer     $sbas_id
      * @param integer     $record_id
      * @param string      $directory
@@ -54,7 +54,7 @@ class record_exportElement extends record_adapter
      *
      * @return record_exportElement
      */
-    public function __construct(Application $app, $sbas_id, $record_id, $directory = '', $remain_hd = false)
+    public function __construct(BaseApplication $app, $sbas_id, $record_id, $directory = '', $remain_hd = false)
     {
         $this->directory = $directory;
 

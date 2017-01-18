@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_360alpha2a extends patchAbstract
 {
@@ -46,7 +46,7 @@ class patch_360alpha2a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $app['orm.em']->getConnection()->executeUpdate('UPDATE Users u SET u.email = NULL WHERE u.email IS NOT NULL AND u.deleted = 1');
 

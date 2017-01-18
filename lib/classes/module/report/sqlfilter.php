@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class module_report_sqlfilter
 {
@@ -19,7 +19,7 @@ class module_report_sqlfilter
     private $app;
     private $report;
 
-    public function __construct(Application $app, module_report $report)
+    public function __construct(BaseApplication $app, module_report $report)
     {
         $this->app = $app;
         $this->conn = $app->findDataboxById($report->getSbasId())->get_connection();

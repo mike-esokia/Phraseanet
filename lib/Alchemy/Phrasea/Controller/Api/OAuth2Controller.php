@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Controller\Api;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\DispatcherAware;
 use Alchemy\Phrasea\Authentication\Context;
 use Alchemy\Phrasea\Authentication\Exception\AccountLockedException;
@@ -35,7 +35,7 @@ class OAuth2Controller extends Controller
     /** @var \API_OAuth2_Adapter */
     private $oAuth2Adapter;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         parent::__construct($app);
         $this->oAuth2Adapter = $app['oauth2-server'];

@@ -2,7 +2,7 @@
 
 namespace Alchemy\Phrasea\Core\Thumbnail;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use MediaAlchemyst\Alchemyst;
 use MediaAlchemyst\Specification\Image as ImageSpecification;
 use MediaVorus\Media\Image;
@@ -30,7 +30,7 @@ abstract class AbstractThumbnailManager
     protected $alchemyst;
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $application;
 
@@ -45,12 +45,12 @@ abstract class AbstractThumbnailManager
     protected $rootPath;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      * @param Alchemyst $alchemyst
      * @param Filesystem $filesystem
      * @param $rootPath
      */
-    public function __construct(Application $application, Alchemyst $alchemyst, Filesystem $filesystem, $rootPath)
+    public function __construct(BaseApplication $application, Alchemyst $alchemyst, Filesystem $filesystem, $rootPath)
     {
         $this->alchemyst = $alchemyst;
         $this->application = $application;

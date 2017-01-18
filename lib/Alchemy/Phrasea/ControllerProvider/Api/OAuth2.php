@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider\Api;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\Api\OAuth2Controller;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
 use Silex\Application;

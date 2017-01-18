@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border\Checker;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\File;
 use Alchemy\Phrasea\Model\Entities\LazaretFile;
 use Doctrine\ORM\EntityManager;
@@ -27,10 +27,10 @@ class Filename extends AbstractChecker
     /**
      * Constructor
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param array       $options An array of options. available : 'sensitive' (false by default)
      */
-    public function __construct(Application $app, array $options = [])
+    public function __construct(BaseApplication $app, array $options = [])
     {
         if (!isset($options['sensitive'])) {
             $options['sensitive'] = false;
@@ -53,11 +53,11 @@ class Filename extends AbstractChecker
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param LazaretFile $file
      * @return \record_adapter[]
      */
-    public static function listConflicts(Application $app, LazaretFile $file)
+    public static function listConflicts(BaseApplication $app, LazaretFile $file)
     {
         return \record_adapter::get_records_by_originalname(
             $file->getCollection($app)->get_databox(), $file->getOriginalName(), false, 0, 1000

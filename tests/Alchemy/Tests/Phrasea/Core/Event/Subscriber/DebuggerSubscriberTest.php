@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\Subscriber\DebuggerSubscriber;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -25,7 +25,7 @@ class DebuggerSubscriberTest extends \PhraseanetTestCase
      */
     public function testIpsAndEnvironments($exceptionThrown, $env, $incomingIp, $authorized)
     {
-        $app = new Application($env);
+        $app = new BaseApplication($env);
         unset($app['exception_handler']);
 
         $app['phraseanet.configuration.config-path'] = __DIR__ . '/Fixtures/configuration-debugger.yml';
@@ -54,13 +54,13 @@ class DebuggerSubscriberTest extends \PhraseanetTestCase
     public function provideIpsAndEnvironments()
     {
         return [
-            [false, Application::ENV_PROD, '127.0.0.1', []],
-            [true, Application::ENV_PROD, '192.168.0.1', []],
-            [false, Application::ENV_DEV, '127.0.0.1', []],
-            [true, Application::ENV_DEV, '192.168.0.1', []],
-            [false, Application::ENV_DEV, '192.168.0.1', ['192.168.0.1']],
-            [false, Application::ENV_TEST, '127.0.0.1', []],
-            [true, Application::ENV_TEST, '192.168.0.1', []],
+            [false, BaseApplication::ENV_PROD, '127.0.0.1', []],
+            [true, BaseApplication::ENV_PROD, '192.168.0.1', []],
+            [false, BaseApplication::ENV_DEV, '127.0.0.1', []],
+            [true, BaseApplication::ENV_DEV, '192.168.0.1', []],
+            [false, BaseApplication::ENV_DEV, '192.168.0.1', ['192.168.0.1']],
+            [false, BaseApplication::ENV_TEST, '127.0.0.1', []],
+            [true, BaseApplication::ENV_TEST, '192.168.0.1', []],
         ];
     }
 }

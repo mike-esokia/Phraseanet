@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 interface patchInterface
 {
@@ -41,11 +41,11 @@ interface patchInterface
      * Apply patch.
      *
      * @param base        $base The Application Box or the Data Boxes where the patch is applied.
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return boolean returns true if the patch succeed.
      */
-    public function apply(base $base, Application $app);
+    public function apply(base $base, BaseApplication $app);
 
     /**
      * Returns doctrine migrations needed for the patch.

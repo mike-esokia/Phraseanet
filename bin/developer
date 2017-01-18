@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\CLI;
+use Alchemy\Phrasea\CommandLineApplication;
 use Alchemy\Phrasea\Core\Version;
 use Alchemy\Phrasea\Command\Developer\APIRoutesDumper;
 use Alchemy\Phrasea\Command\Developer\Behat;
@@ -54,7 +54,7 @@ use Doctrine\DBAL\Migrations\Tools\Console\Command\VersionCommand;
 require_once __DIR__ . '/../lib/autoload.php';
 
 $version = new Version();
-$cli = new CLI("
+$cli = new CommandLineApplication("
  ___  ___  _  _  ___  __    __  ___  ___  ___     ____  __    __  __    ___
 (   \(  _)( )( )(  _)(  )  /  \(  ,\(  _)(  ,)   (_  _)/  \  /  \(  )  / __)
  ) ) )) _) \\//  ) _) )(__( () )) _/ ) _) )  \     )( ( () )( () ))(__ \__ \

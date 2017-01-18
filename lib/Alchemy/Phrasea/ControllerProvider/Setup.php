@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\SetupController;
 use Alchemy\Phrasea\Helper\DatabaseHelper;
 use Alchemy\Phrasea\Helper\PathHelper;

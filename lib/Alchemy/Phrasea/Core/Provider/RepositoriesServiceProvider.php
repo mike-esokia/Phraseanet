@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Core\Provider;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Collection\CollectionFactory;
 use Alchemy\Phrasea\Collection\CollectionRepositoryRegistry;
 use Alchemy\Phrasea\Collection\Factory\ArrayCachedCollectionRepositoryFactory;

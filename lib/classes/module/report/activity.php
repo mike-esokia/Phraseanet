@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class module_report_activity extends module_report
 {
@@ -41,7 +41,7 @@ class module_report_activity extends module_report
         'size'      => 'subdef.size'
     ];
 
-    public function __construct(Application $app, $arg1, $arg2, $sbas_id, $collist)
+    public function __construct(BaseApplication $app, $arg1, $arg2, $sbas_id, $collist)
     {
         // parent::__construct($app, $arg1, $arg2, $sbas_id, $collist);
         parent::__construct($app, $arg1, $arg2, $sbas_id, "");
@@ -555,7 +555,7 @@ class module_report_activity extends module_report
     }
 
     // ========================== ???????????????? ===========================
-    public static function topTenUser(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function topTenUser(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById($sbas_id);
         $conn = $databox->get_connection();
@@ -650,7 +650,7 @@ class module_report_activity extends module_report
     }
 
     //============================= Dashboard =========================
-    public static function activity(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function activity(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById($sbas_id);
         $conn = $databox->get_connection();
@@ -706,7 +706,7 @@ class module_report_activity extends module_report
     }
 
     //============================= Dashboard =========================
-    public static function activityDay(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function activityDay(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById($sbas_id);
         $conn = $databox->get_connection();
@@ -759,7 +759,7 @@ class module_report_activity extends module_report
     }
 
     //============================= Dashboard =========================
-    public static function activityQuestion(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function activityQuestion(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById($sbas_id);
         $conn = $databox->get_connection();
@@ -812,7 +812,7 @@ class module_report_activity extends module_report
     }
 
     //============================= Dashboard =========================
-    public static function activiteTopQuestion(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function activiteTopQuestion(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById($sbas_id);
         $conn = $databox->get_connection();
@@ -868,7 +868,7 @@ class module_report_activity extends module_report
     }
 
     //============================= Dashboard =========================
-    public static function activiteTopTenSiteView(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function activiteTopTenSiteView(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById($sbas_id);
         $conn = $databox->get_connection();
@@ -926,7 +926,7 @@ class module_report_activity extends module_report
     }
 
     //============================= Dashboard =========================
-    public static function activiteAddedDocument(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function activiteAddedDocument(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById($sbas_id);
         $conn = $databox->get_connection();
@@ -975,7 +975,7 @@ class module_report_activity extends module_report
     }
 
     //============================= Dashboard =========================
-    public static function activiteEditedDocument(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function activiteEditedDocument(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById($sbas_id);
         $conn = $databox->get_connection();
@@ -1024,7 +1024,7 @@ class module_report_activity extends module_report
     }
 
     //============================= Dashboard =========================
-    public static function activiteAddedTopTenUser(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function activiteAddedTopTenUser(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById($sbas_id);
         $conn = $databox->get_connection();

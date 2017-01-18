@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 return (new Application\WebApplicationLoader())->buildApplication(
-    isset($environment) ? $environment : Application::ENV_PROD,
+    isset($environment) ? $environment : BaseApplication::ENV_PROD,
     isset($forceDebug) ? $forceDebug : false
 );

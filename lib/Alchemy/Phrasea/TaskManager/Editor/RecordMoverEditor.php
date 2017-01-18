@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\TaskManager\Editor;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
 use Alchemy\Phrasea\TaskManager\Job\RecordMoverJob;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +35,7 @@ class RecordMoverEditor extends AbstractEditor
         return 900;
     }
 
-    public function facility(Application $app, Request $request)
+    public function facility(BaseApplication $app, Request $request)
     {
         $ret = ['tasks' => []];
         $job = new RecordMoverJob($this->translator);

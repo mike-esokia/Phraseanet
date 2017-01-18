@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 class patch_383alpha1a extends patchAbstract
@@ -47,7 +47,7 @@ class patch_383alpha1a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         if (!$this->hasSessionTable($app)) {
             return true;
@@ -79,7 +79,7 @@ class patch_383alpha1a extends patchAbstract
         return true;
     }
 
-    private function hasSessionTable(Application $app)
+    private function hasSessionTable(BaseApplication $app)
     {
         $rsm = (new ResultSetMapping())->addScalarResult('Name', 'Name');
         $ret = false;

@@ -11,14 +11,14 @@
 
 namespace Alchemy\Phrasea\Setup\Version\Probe;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\Version\Migration\Migration35;
 
 class Probe35 implements ProbeInterface
 {
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

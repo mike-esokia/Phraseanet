@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Plugin;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Silex\ServiceProviderInterface;
 
 interface PluginProviderInterface extends ServiceProviderInterface
@@ -21,9 +21,9 @@ interface PluginProviderInterface extends ServiceProviderInterface
      *
      * This method is called to build it.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return PluginProviderInterface
      */
-    public static function create(Application $app);
+    public static function create(BaseApplication $app);
 }

@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Application;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\RouteLoader;
 use Prophecy\Argument;
 use Silex\ControllerCollection;
@@ -24,7 +24,7 @@ class RouteLoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisteredProvidersAreMountedInApplication()
     {
-        $application = $this->prophesize(Application::class);
+        $application = $this->prophesize(BaseApplication::class);
         $application->offsetGet(Argument::any())
             ->shouldBeCalled();
         $application->mount(Argument::any(), Argument::type(ControllerProviderInterface::class))

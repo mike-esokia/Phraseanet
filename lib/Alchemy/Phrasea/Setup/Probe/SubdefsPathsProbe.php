@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Probe;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\RequirementCollection;
 
 class SubdefsPathsProbe extends RequirementCollection implements ProbeInterface
@@ -56,7 +56,7 @@ class SubdefsPathsProbe extends RequirementCollection implements ProbeInterface
      *
      * @return SubdefsPathsProbe
      */
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         return new static($app['phraseanet.appbox']);
     }

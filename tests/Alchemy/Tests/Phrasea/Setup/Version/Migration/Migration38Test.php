@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Setup\Version\Migration;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\Version\Migration\Migration38;
 use Alchemy\Tests\Phrasea\Setup\AbstractSetupTester;
 
@@ -35,7 +35,7 @@ class Migration38Test extends AbstractSetupTester
 
     public function testMigrate()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['configuration.store'] = $this->getMock('Alchemy\Phrasea\Core\Configuration\ConfigurationInterface');
         $app['root.path'] = __DIR__ . '/../Probe/fixtures-3807';
 

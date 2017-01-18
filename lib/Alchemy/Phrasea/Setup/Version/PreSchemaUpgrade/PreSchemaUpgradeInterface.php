@@ -12,7 +12,7 @@
 namespace Alchemy\Phrasea\Setup\Version\PreSchemaUpgrade;
 
 use Doctrine\ORM\EntityManager;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
 
 /**
@@ -43,9 +43,9 @@ interface PreSchemaUpgradeInterface
     /**
      * Returns true if the Upgrade is applyable.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return Boolean
      */
-    public function isApplyable(Application $app);
+    public function isApplyable(BaseApplication $app);
 }

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Command;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Symfony\Component\Console\Command\Command as SymfoCommand;
@@ -21,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 abstract class Command extends SymfoCommand implements CommandInterface
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $container = null;
 
@@ -68,11 +68,11 @@ abstract class Command extends SymfoCommand implements CommandInterface
     /**
      * Sets the application container containing all services.
      *
-     * @param Application $container Application object to register.
+     * @param BaseApplication $container Application object to register.
      *
      * @return void
      */
-    public function setContainer(Application $container)
+    public function setContainer(BaseApplication $container)
     {
         $this->container = $container;
     }
@@ -80,7 +80,7 @@ abstract class Command extends SymfoCommand implements CommandInterface
     /**
      * Returns the application container.
      *
-     * @return Application
+     * @return BaseApplication
      */
     public function getContainer()
     {

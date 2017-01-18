@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class record_orderElement extends record_adapter
 {
@@ -27,13 +27,13 @@ class record_orderElement extends record_adapter
 
     /**
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param int         $sbas_id
      * @param int         $record_id
      * @param boolean     $deny
      * @param int         $order_master_id
      */
-    public function __construct(Application $app, $sbas_id, $record_id, $deny, $order_master_id)
+    public function __construct(BaseApplication $app, $sbas_id, $record_id, $deny, $order_master_id)
     {
         $this->deny = ! ! $deny;
         $this->order_master_id = $order_master_id;

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\ControllerProvider\Root;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Controller\Root\DeveloperController;
 use Alchemy\Phrasea\ControllerProvider\ControllerProviderTrait;
 use Silex\Application;

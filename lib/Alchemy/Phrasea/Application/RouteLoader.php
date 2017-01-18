@@ -3,7 +3,7 @@
 namespace Alchemy\Phrasea\Application;
 
 use Alchemy\EmbedProvider\EmbedServiceProvider;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\ControllerProvider as Providers;
 use Assert\Assertion;
 use Silex\ControllerProviderInterface;
@@ -98,9 +98,9 @@ class RouteLoader
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      */
-    public function bindRoutes(Application $app)
+    public function bindRoutes(BaseApplication $app)
     {
         // @todo Move me out of here !
         // Controllers with routes referenced by api
@@ -112,10 +112,10 @@ class RouteLoader
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param $routeParameter
      */
-    public function bindPluginRoutes(Application $app, $routeParameter)
+    public function bindPluginRoutes(BaseApplication $app, $routeParameter)
     {
         foreach ($app[$routeParameter] as $providerDefinition) {
             $prefix = '';
@@ -140,7 +140,7 @@ class RouteLoader
         }
     }
 
-    private function isValidProviderDefinition(Application $app, $prefix, $provider)
+    private function isValidProviderDefinition(BaseApplication $app, $prefix, $provider)
     {
         if (!is_string($prefix) || !is_string($provider)) {
             return false;

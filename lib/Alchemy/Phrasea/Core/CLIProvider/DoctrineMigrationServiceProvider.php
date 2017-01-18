@@ -19,6 +19,11 @@ class DoctrineMigrationServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
     {
+
+    }
+
+    public function boot(Application $app)
+    {
         $app['doctrine-migration.configuration'] = $app->share(function ($app) {
             $configuration = new YamlConfiguration($app['orm.em']->getConnection());
             $configuration->load(__DIR__.'/../../../../conf.d/migrations.yml');
@@ -26,9 +31,5 @@ class DoctrineMigrationServiceProvider implements ServiceProviderInterface
 
             return $configuration;
         });
-    }
-
-    public function boot(Application $app)
-    {
     }
 }

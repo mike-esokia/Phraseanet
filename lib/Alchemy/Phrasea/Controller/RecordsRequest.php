@@ -13,7 +13,7 @@ namespace Alchemy\Phrasea\Controller;
 
 use Alchemy\Phrasea\Model\Entities\Basket;
 use Doctrine\Common\Collections\ArrayCollection;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use record_adapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -196,14 +196,14 @@ class RecordsRequest extends ArrayCollection
     /**
      * Create a new RecordRequest from current request
      *
-     * @param  Application    $app
+     * @param  BaseApplication    $app
      * @param  Request        $request
      * @param  boolean        $flattenStories
      * @param  array          $rightsColl
      * @param  array          $rightsDatabox
      * @return RecordsRequest|\record_adapter[]
      */
-    public static function fromRequest(Application $app, Request $request, $flattenStories = self::FLATTEN_NO, array $rightsColl = [], array $rightsDatabox = [])
+    public static function fromRequest(BaseApplication $app, Request $request, $flattenStories = self::FLATTEN_NO, array $rightsColl = [], array $rightsDatabox = [])
     {
         $elements = $received = [];
         $basket = null;

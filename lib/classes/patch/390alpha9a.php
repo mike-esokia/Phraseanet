@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_390alpha9a extends patchAbstract
 {
@@ -46,14 +46,14 @@ class patch_390alpha9a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $this->updateRegistry($app);
         $this->updateDoctrineUsers($app);
         $this->updateDataboxPrefs($appbox);
     }
 
-    private function updateRegistry(Application $app)
+    private function updateRegistry(BaseApplication $app)
     {
         $sql = 'SELECT `value` FROM registry WHERE `key` = :key';
         $stmt = $app->getApplicationBox()->get_connection()->prepare($sql);
@@ -69,7 +69,7 @@ class patch_390alpha9a extends patchAbstract
         $stmt->closeCursor();
     }
 
-    private function updateDoctrineUsers(Application $app)
+    private function updateDoctrineUsers(BaseApplication $app)
     {
         $dql = 'SELECT u FROM Phraseanet:User u WHERE u.locale IS NOT NULL';
         $users = $app['orm.em']->createQuery($dql)->getResult();

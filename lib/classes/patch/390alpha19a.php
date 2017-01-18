@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_390alpha19a extends patchAbstract
 {
@@ -46,7 +46,7 @@ class patch_390alpha19a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $storage = $app['conf']->get(['main', 'storage']);
         $storage['cache'] = $app['root.path'].'/cache';
@@ -76,14 +76,14 @@ class patch_390alpha19a extends patchAbstract
         return true;
     }
 
-    private function removeDirectory(Application $app, $originDir)
+    private function removeDirectory(BaseApplication $app, $originDir)
     {
         if (is_dir($originDir)) {
             $app['filesystem']->remove($originDir);
         }
     }
 
-    private function copyFile(Application $app, $originFile, $targetFile)
+    private function copyFile(BaseApplication $app, $originFile, $targetFile)
     {
         if ($app['filesystem']->exists($originFile)) {
             $app['filesystem']->copy($originFile, $targetFile);

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\DBAL\Driver\Statement;
 
 class caption_field implements cache_cacheableInterface
@@ -36,12 +36,12 @@ class caption_field implements cache_cacheableInterface
     protected static $localCache = [];
 
     /**
-     * @param Application    $app
+     * @param BaseApplication    $app
      * @param databox_field  $databox_field
      * @param record_adapter $record
      * @param bool           $retrieveValues
      */
-    public function __construct(Application $app, databox_field $databox_field, \record_adapter $record, $retrieveValues = self::RETRIEVE_VALUES)
+    public function __construct(BaseApplication $app, databox_field $databox_field, \record_adapter $record, $retrieveValues = self::RETRIEVE_VALUES)
     {
         $this->app = $app;
         $this->record = $record;
@@ -271,7 +271,7 @@ class caption_field implements cache_cacheableInterface
         return $values;
     }
 
-    public static function rename_all_metadatas(Application $app, databox_field $databox_field)
+    public static function rename_all_metadatas(BaseApplication $app, databox_field $databox_field)
     {
         $connection = $databox_field->get_databox()->get_connection();
         $builder = $connection->createQueryBuilder();
@@ -317,7 +317,7 @@ class caption_field implements cache_cacheableInterface
         }
     }
 
-    public static function delete_all_metadatas(Application $app, databox_field $databox_field)
+    public static function delete_all_metadatas(BaseApplication $app, databox_field $databox_field)
     {
         $connection = $databox_field->get_databox()->get_connection();
         $builder = $connection->createQueryBuilder();

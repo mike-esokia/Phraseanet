@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\Subscriber\ApiExceptionHandlerSubscriber;
 use Symfony\Component\HttpKernel\Client;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -22,7 +22,7 @@ class ApiExceptionHandlerSubscriberTest extends \PhraseanetTestCase
      */
     public function testError($exception, $code)
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new ApiExceptionHandlerSubscriber());
         $app->get('/', function () use ($exception) {
             throw $exception;

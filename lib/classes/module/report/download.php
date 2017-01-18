@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class module_report_download extends module_report
 {
@@ -32,13 +32,13 @@ class module_report_download extends module_report
     /**
      * constructor
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param string      $arg1    start date of the  report
      * @param string      $arg2    end date of the report
      * @param integer     $sbas_id id of the databox
      * @param string      $collist
      */
-    public function __construct(Application $app, $arg1, $arg2, $sbas_id, $collist)
+    public function __construct(BaseApplication $app, $arg1, $arg2, $sbas_id, $collist)
     {
         parent::__construct($app, $arg1, $arg2, $sbas_id, '');
         $this->title = $this->app->trans('report:: telechargements');
@@ -97,7 +97,7 @@ class module_report_download extends module_report
      * @param  string        $sql   the request from buildreq
      * @return $this->result
      */
-    protected function buildResult(Application $app, $rs)
+    protected function buildResult(BaseApplication $app, $rs)
     {
         $i = 0;
         $pref = parent::getPreff($app, $this->sbas_id);
@@ -175,7 +175,7 @@ class module_report_download extends module_report
         return phrasea::bas_labels(phrasea::baseFromColl($this->sbas_id, $value, $this->app), $this->app);
     }
 
-    public static function getNbDl(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function getNbDl(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById($sbas_id);
         $conn = $databox->get_connection();
@@ -221,7 +221,7 @@ class module_report_download extends module_report
         return $row ? $row['nb'] : 0;
     }
 
-    public static function getTopDl(Application $app, $dmin, $dmax, $sbas_id, $list_coll_id)
+    public static function getTopDl(BaseApplication $app, $dmin, $dmax, $sbas_id, $list_coll_id)
     {
         $databox = $app->findDataboxById((int) $sbas_id);
         $conn = $databox->get_connection();

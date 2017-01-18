@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_380alpha2b extends patchAbstract
 {
@@ -46,7 +46,7 @@ class patch_380alpha2b extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $sql = "SHOW TABLE STATUS LIKE 'cache'";
         $stmt = $app->getApplicationBox()->get_connection()->prepare($sql);

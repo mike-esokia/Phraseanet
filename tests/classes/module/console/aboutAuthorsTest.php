@@ -1,6 +1,6 @@
 <?php
 
-use Alchemy\Phrasea\CLI;
+use Alchemy\Phrasea\CommandLineApplication;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
@@ -19,7 +19,7 @@ class module_console_aboutAuthorsTest extends \PhraseanetTestCase
      */
     public function testExecute()
     {
-        $application = new CLI('test', null, 'test');
+        $application = new CommandLineApplication('test', null, 'test');
         $application->command(new module_console_aboutAuthors('about:authors'));
 
         $command = $application['console']->find('about:authors');

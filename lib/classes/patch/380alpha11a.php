@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Session;
 use Alchemy\Phrasea\Model\Entities\SessionModule;
 use Doctrine\DBAL\DBALException;
@@ -57,7 +57,7 @@ class patch_380alpha11a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         try {
             $sql = 'SELECT usr_id, user_agent, ip, platform, browser, app,

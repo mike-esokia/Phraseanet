@@ -11,16 +11,16 @@
 
 namespace Alchemy\Phrasea\Command;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 interface CommandInterface
 {
     /**
      * Inject the container in the command.
      *
-     * @param Application $container
+     * @param BaseApplication $container
      */
-    public function setContainer(Application $container);
+    public function setContainer(BaseApplication $container);
 
     /**
      * Factory for the command.

@@ -5,7 +5,7 @@ namespace Alchemy\Phrasea\Account;
 use Alchemy\Phrasea\Account\Command\UpdateAccountCommand;
 use Alchemy\Phrasea\Account\Command\UpdateFtpCredentialsCommand;
 use Alchemy\Phrasea\Account\Command\UpdatePasswordCommand;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\Authenticator;
 use Alchemy\Phrasea\Model\Entities\FtpCredential;
 use Alchemy\Phrasea\Model\Entities\User;

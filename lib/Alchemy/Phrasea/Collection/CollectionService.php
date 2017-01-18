@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Collection;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\ACLProvider;
 use Alchemy\Phrasea\Collection\Reference\CollectionReference;
 use Alchemy\Phrasea\Databox\DataboxConnectionProvider;
@@ -22,7 +22,7 @@ use Doctrine\DBAL\Connection;
 class CollectionService
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
@@ -42,7 +42,7 @@ class CollectionService
     private $userQueryFactory;
 
     public function __construct(
-        Application $application,
+        BaseApplication $application,
         Connection $connection,
         DataboxConnectionProvider $connectionProvider,
         callable $userQueryFactory

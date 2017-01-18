@@ -4,7 +4,7 @@ namespace Alchemy\Tests\Phrasea\Controller\Root;
 
 require_once __DIR__ . '/../../../../../classes/FeedValidator.inc';
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Feed;
 use Alchemy\Phrasea\Model\Entities\FeedEntry;
 use Alchemy\Phrasea\Model\Entities\FeedItem;

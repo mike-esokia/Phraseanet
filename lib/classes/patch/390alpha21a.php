@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class patch_390alpha21a extends patchAbstract
 {
@@ -46,7 +46,7 @@ class patch_390alpha21a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $main = $app['conf']->get(['main']);
         if (isset($main['static-file'])) {

@@ -1,6 +1,6 @@
 <?php
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 /**
  * @group functional
@@ -348,7 +348,7 @@ class databox_fieldTest extends \PhraseanetTestCase
     {
         $codes = [];
 
-        foreach (Application::getAvailableLanguages() as $code => $language) {
+        foreach (BaseApplication::getAvailableLanguages() as $code => $language) {
             $data = explode('_', $code);
             $codes[] = [$data[0]];
         }

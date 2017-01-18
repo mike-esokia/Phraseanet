@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Vocabulary\ControlProvider;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\User;
 use Alchemy\Phrasea\Vocabulary\Term;
 
@@ -19,7 +19,7 @@ class UserProvider implements ControlProviderInterface
 
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

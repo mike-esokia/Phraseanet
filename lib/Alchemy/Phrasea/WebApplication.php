@@ -113,7 +113,7 @@ use Unoconv\UnoconvServiceProvider;
 use XPDF\PdfToText;
 use XPDF\XPDFServiceProvider;
 
-class Application extends SilexApplication
+class WebApplication extends BaseApplication
 {
     use AclAware;
     use ApplicationBoxAware;
@@ -121,51 +121,17 @@ class Application extends SilexApplication
     use UrlGeneratorTrait;
     use TranslationTrait;
 
-    const ENV_DEV = 'dev';
-    const ENV_PROD = 'prod';
-    const ENV_TEST = 'test';
-
-    protected static $availableLanguages = [
-        'de' => 'Deutsch',
-        'en' => 'English',
-        'fr' => 'Français',
-        'nl' => 'Dutch',
-    ];
-
     private static $flashTypes = ['warning', 'info', 'success', 'error'];
-
-    /**
-     * @var Environment
-     */
-    private $environment;
 
     /**
      * @param Environment|string $environment
      */
     public function __construct($environment = null)
     {
-        if (is_string($environment)) {
-            $environment = new Environment($environment, false);
-        }
+        parent::__construct($environment);
 
-        $this->environment = $environment ?: new Environment(self::ENV_PROD, false);
-
-        parent::__construct([
-            'debug' => $this->environment->isDebug()
-        ]);
-
-        $this->setupCharset();
-        $this->setupApplicationPaths();
         $this->setupConstants();
 
-        if ('allowed' == getenv('APP_CONTAINER_DUMP')) {
-            $this->register(new PimpleDumpProvider());
-        }
-
-        $this->register(new ConfigurationServiceProvider());
-        $this->register(new MonologServiceProvider());
-        $this->setupMonolog();
-        $this->register(new FilesystemServiceProvider());
         $this->register(new CacheServiceProvider());
         $this->register(new CacheConnectionServiceProvider());
         $this->register(new PhraseanetServiceProvider());
@@ -211,7 +177,6 @@ class Application extends SilexApplication
             $this->register(new SearchEngineServiceProvider());
             $this->register(new BorderManagerServiceProvider());
         }
-
 
         $this->register(new SerializerServiceProvider());
         $this->register(new ServiceControllerServiceProvider());
@@ -287,23 +252,6 @@ class Application extends SilexApplication
         }
     }
 
-    public function getEnvironment()
-    {
-        return $this->environment->getName();
-    }
-
-    /**
-     * Loads Phraseanet plugins
-     */
-    public function loadPlugins()
-    {
-        call_user_func(function ($app) {
-            if (file_exists($app['plugin.path'] . '/services.php')) {
-                require $app['plugin.path'] . '/services.php';
-            }
-        }, $this);
-    }
-
     /**
      * Returns a form.
      *
@@ -357,7 +305,7 @@ class Application extends SilexApplication
      * @param string $type
      * @param string $message
      *
-     * @return Application
+     * @return BaseApplication
      *
      * @throws InvalidArgumentException In case the type is not valid
      */
@@ -414,7 +362,7 @@ class Application extends SilexApplication
     /**
      * Asks for a captcha ar next authentication
      *
-     * @return Application
+     * @return BaseApplication
      */
     public function requireCaptcha()
     {
@@ -423,14 +371,6 @@ class Application extends SilexApplication
         }
 
         return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isDebug()
-    {
-        return $this->environment->isDebug();
     }
 
     /**
@@ -531,66 +471,10 @@ class Application extends SilexApplication
         return $mediavorus->guess($uri);
     }
 
-    private function setupApplicationPaths()
-    {
-        // app root path
-        $this['root.path'] = realpath(__DIR__ . '/../../..');
-        // temporary resources default path such as download zip, quarantined documents etc ..
-        $this['tmp.path'] = getenv('PHRASEANET_TMP') ?: $this['root.path'].'/tmp';
-
-        // plugin path
-        $this['plugin.path'] = $this['root.path'].'/plugins';
-        // thumbnails path
-        $this['thumbnail.path'] = $this['root.path'].'/www/thumbnails';
-
-        $factory = new ApplicationPathServiceGenerator();
-
-        $this['cache.path'] = $factory->createDefinition(
-            ['main', 'storage', 'cache'],
-            function (Application $app) {
-                return $app['root.path'].'/cache';
-            }
-        );
-        $this['cache.paths'] = function (Application $app) {
-            return new \ArrayObject([
-                $app['cache.path'],
-            ]);
-        };
-
-        $this['log.path'] = $factory->createDefinition(
-            ['main', 'storage', 'log'],
-            function (Application $app) {
-                return $app['root.path'].'/logs';
-            }
-        );
-
-        $this['tmp.download.path'] = $factory->createDefinition(
-            ['main', 'storage', 'download'],
-            function (Application $app) {
-                return $app['tmp.path'].'/download';
-            }
-        );
-
-        $this['tmp.lazaret.path'] = $factory->createDefinition(
-            ['main', 'storage', 'quarantine'],
-            function (Application $app) {
-                return $app['tmp.path'].'/lazaret';
-            }
-        );
-
-        $this['tmp.caption.path'] = $factory->createDefinition(
-            ['main', 'storage', 'caption'],
-            function (Application $app) {
-                return $app['tmp.path'].'/caption';
-            }
-        );
-    }
-
-
     private function setupXpdf()
     {
         $this['xpdf.pdftotext'] = $this->share(
-            $this->extend('xpdf.pdftotext', function (PdfToText $pdftotext, Application $app) {
+            $this->extend('xpdf.pdftotext', function (PdfToText $pdftotext, BaseApplication $app) {
                 if ($app['conf']->get(['registry', 'executables', 'pdf-max-pages'])) {
                     $pdftotext->setPageQuantity($app['conf']->get(['registry', 'executables', 'pdf-max-pages']));
                 }
@@ -602,7 +486,7 @@ class Application extends SilexApplication
 
     private function setupForm()
     {
-        $this['form.type.extensions'] = $this->share($this->extend('form.type.extensions', function ($extensions, Application $app) {
+        $this['form.type.extensions'] = $this->share($this->extend('form.type.extensions', function ($extensions, BaseApplication $app) {
             $extensions[] = new HelpTypeExtension();
 
             return $extensions;
@@ -611,12 +495,12 @@ class Application extends SilexApplication
 
     private function setupRecaptacha()
     {
-        $this['recaptcha.public-key'] = $this->share(function (Application $app) {
+        $this['recaptcha.public-key'] = $this->share(function (BaseApplication $app) {
             if ($app['conf']->get(['registry', 'webservices', 'captcha-enabled'])) {
                 return $app['conf']->get(['registry', 'webservices', 'recaptcha-public-key']);
             }
         });
-        $this['recaptcha.private-key'] = $this->share(function (Application $app) {
+        $this['recaptcha.private-key'] = $this->share(function (BaseApplication $app) {
             if ($app['conf']->get(['registry', 'webservices', 'captcha-enabled'])) {
                 return $app['conf']->get(['registry', 'webservices', 'recaptcha-private-key']);
             }
@@ -625,14 +509,14 @@ class Application extends SilexApplication
 
     private function setupGeonames()
     {
-        $this['geonames.server-uri'] = $this->share(function (Application $app) {
+        $this['geonames.server-uri'] = $this->share(function (BaseApplication $app) {
             return $app['conf']->get(['registry', 'webservices', 'geonames-server'], 'http://geonames.alchemyasp.com/');
         });
     }
 
     private function setupSwiftMailer()
     {
-        $this['swiftmailer.transport'] = $this->share(function (Application $app) {
+        $this['swiftmailer.transport'] = $this->share(function (BaseApplication $app) {
             if ($app['conf']->get(['registry', 'email', 'smtp-enabled'])) {
                 $transport = new \Swift_Transport_EsmtpTransport(
                     $app['swiftmailer.transport.buffer'],
@@ -676,24 +560,10 @@ class Application extends SilexApplication
         });
     }
 
-    private function setupMonolog()
-    {
-        $this['monolog.name'] = 'phraseanet';
-        $this['monolog.handler'] = $this->share(function (Application $app) {
-            return new RotatingFileHandler(
-                $app['log.path'] . '/app_error.log',
-                10,
-                Logger::ERROR,
-                $app['monolog.bubble'],
-                $app['monolog.permission']
-            );
-        });
-    }
-
     private function setupEventDispatcher()
     {
         $this['dispatcher'] = $this->share(
-            $this->extend('dispatcher', function (EventDispatcherInterface $dispatcher, Application $app) {
+            $this->extend('dispatcher', function (EventDispatcherInterface $dispatcher, BaseApplication $app) {
                 $dispatcher->addSubscriber(new PhraseaInstallSubscriber($app));
                 $dispatcher->addSubscriber(new FeedEntrySubscriber($app));
                 $dispatcher->addSubscriber(new RegistrationSubscriber($app));
@@ -726,12 +596,6 @@ class Application extends SilexApplication
         if (!defined('JETON_WRITE_META')) {
             define('JETON_WRITE_META', 0x06);
         }
-    }
-
-    private function setupCharset()
-    {
-        $this['charset'] = 'UTF-8';
-        mb_internal_encoding($this['charset']);
     }
 
     /**

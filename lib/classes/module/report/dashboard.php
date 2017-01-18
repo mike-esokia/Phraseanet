@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class module_report_dashboard implements module_report_dashboard_componentInterface
 {
@@ -69,11 +69,11 @@ class module_report_dashboard implements module_report_dashboard_componentInterf
      * Construit un dashboard selon les droits du usrid, si sbas vaut null
      * c'est un report sur toutes les bases, sinon sur le sbasid
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param integer     $usr
      * @param integer     $sbasid
      */
-    public function __construct(Application $app, $usr, $sbasid = null)
+    public function __construct(BaseApplication $app, $usr, $sbasid = null)
     {
         $this->app = $app;
         $this->usr = $usr;

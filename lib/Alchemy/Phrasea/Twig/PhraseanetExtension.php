@@ -2,7 +2,7 @@
 
 namespace Alchemy\Phrasea\Twig;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\CollectionHelper;
 use Alchemy\Phrasea\Model\Entities\ElasticsearchRecord;
 use Alchemy\Phrasea\Model\Entities\User;
@@ -12,10 +12,10 @@ use Alchemy\Phrasea\SearchEngine\Elastic\Structure\Flag;
 
 class PhraseanetExtension extends \Twig_Extension
 {
-    /** @var Application */
+    /** @var BaseApplication */
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Version\PreSchemaUpgrade;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 /**
  * Collection of Doctrine schema pre-upgrades
@@ -29,9 +29,9 @@ class PreSchemaUpgradeCollection
     /**
      * Applies all applyable upgrades
      *
-     * @param Application $app
+     * @param BaseApplication $app
      */
-    public function apply(Application $app)
+    public function apply(BaseApplication $app)
     {
         $applied = [];
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Connection\ConnectionSettings;
 use Alchemy\Phrasea\Core\Database\DatabaseMaintenanceService;
 use Alchemy\Phrasea\Core\Version as PhraseaVersion;
@@ -48,7 +48,7 @@ abstract class base implements cache_cacheableInterface
     protected $connection;
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
@@ -58,12 +58,12 @@ abstract class base implements cache_cacheableInterface
     protected $versionRepository;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      * @param Connection $connection
      * @param ConnectionSettings $connectionSettings
      * @param PhraseaVersion\VersionRepository $versionRepository
      */
-    public function __construct(Application $application,
+    public function __construct(BaseApplication $application,
         Connection $connection,
         ConnectionSettings $connectionSettings,
         PhraseaVersion\VersionRepository $versionRepository)

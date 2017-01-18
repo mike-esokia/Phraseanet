@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Helper\User;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Application\Helper\NotifierAware;
 use Alchemy\Phrasea\Controller\LazyLocator;
 use Alchemy\Phrasea\Exception\InvalidArgumentException;
@@ -36,7 +36,7 @@ class Edit extends \Alchemy\Phrasea\Helper\Helper
     /** @var int */
     protected $base_id;
 
-    public function __construct(Application $app, Request $Request)
+    public function __construct(BaseApplication $app, Request $Request)
     {
         parent::__construct($app, $Request);
         $this->setDelivererLocator(new LazyLocator($app, 'notification.deliverer'));

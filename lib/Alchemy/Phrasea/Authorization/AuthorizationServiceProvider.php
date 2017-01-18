@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Authorization;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Model\Entities\User;
 use Silex\Application;
 use Silex\ServiceProviderInterface;

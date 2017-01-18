@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class cache_databox
 {
     protected static $refreshing = false;
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param int         $sbas_id
      *
      * @return cache_databox
      */
-    public static function refresh(Application $app, $sbas_id)
+    public static function refresh(BaseApplication $app, $sbas_id)
     {
         if (self::$refreshing) {
             return;
@@ -134,12 +134,12 @@ class cache_databox
     }
 
     /**
-     * @param Application   $app
+     * @param BaseApplication   $app
      * @param int           $sbas_id
      * @param string        $type
      * @param mixed content $value
      */
-    public static function update(Application $app, $sbas_id, $type, $value = '')
+    public static function update(BaseApplication $app, $sbas_id, $type, $value = '')
     {
         $databox = $app->findDataboxById($sbas_id);
         $connbas = $databox->get_connection();
@@ -167,7 +167,7 @@ class cache_databox
         return;
     }
 
-    public static function insertClient(Application $app, \databox $databox)
+    public static function insertClient(BaseApplication $app, \databox $databox)
     {
         $connbas = $databox->get_connection();
 

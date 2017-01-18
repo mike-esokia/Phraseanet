@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Core\Event\Listener;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\Authenticator;
 use Alchemy\Phrasea\Authentication\Context;
 use Alchemy\Phrasea\Controller\Api\Result;
@@ -44,7 +44,7 @@ class OAuthListener
         }
     }
 
-    public function __invoke(Request $request, Application $app)
+    public function __invoke(Request $request, BaseApplication $app)
     {
         /** @var EventDispatcherInterface $dispatcher */
         $dispatcher = $app['dispatcher'];
@@ -132,26 +132,26 @@ class OAuthListener
         return $this->verifyOptions;
     }
 
-    private function registerClosingAccountCallback(EventDispatcherInterface $dispatcher, Application $app)
+    private function registerClosingAccountCallback(EventDispatcherInterface $dispatcher, BaseApplication $app)
     {
         $dispatcher->addListener(KernelEvents::RESPONSE, new OAuthResponseListener($app), -20);
     }
 
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return Session
      */
-    private function getSession(Application $app)
+    private function getSession(BaseApplication $app)
     {
         return $app['session'];
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return Authenticator
      */
-    private function getAuthenticator(Application $app)
+    private function getAuthenticator(BaseApplication $app)
     {
         return $app['authentication'];
     }

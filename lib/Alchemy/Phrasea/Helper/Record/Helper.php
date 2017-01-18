@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Helper\Record;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Basket;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -96,12 +96,12 @@ class Helper extends \Alchemy\Phrasea\Helper\Helper
 
     /**
      *
-     * @param Application $app
+     * @param BaseApplication $app
      * @param Request     $Request
      *
      * @return Helper
      */
-    public function __construct(Application $app, Request $Request)
+    public function __construct(BaseApplication $app, Request $Request)
     {
         parent::__construct($app, $Request);
 

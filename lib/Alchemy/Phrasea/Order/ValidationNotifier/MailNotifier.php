@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Order\ValidationNotifier;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Order;
 use Alchemy\Phrasea\Model\Entities\User;
 use Alchemy\Phrasea\Notification\Deliverer;
@@ -26,11 +26,11 @@ use Alchemy\Phrasea\Order\ValidationNotifier;
 class MailNotifier implements ValidationNotifier
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $application;
 
-    public function __construct(Application $application)
+    public function __construct(BaseApplication $application)
     {
         $this->application = $application;
     }

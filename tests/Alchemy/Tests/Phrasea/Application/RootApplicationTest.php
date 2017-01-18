@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Application;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 /**
  * @group functional
@@ -22,29 +22,29 @@ class RootApplicationTest extends \PhraseanetTestCase
     public function provideEnvironments()
     {
         return [
-            [Application::ENV_PROD],
-            [Application::ENV_TEST],
-            [Application::ENV_DEV],
+            [BaseApplication::ENV_PROD],
+            [BaseApplication::ENV_TEST],
+            [BaseApplication::ENV_DEV],
         ];
     }
 
     public function testWebProfilerDisableInProdEnv()
     {
-        $environment = Application::ENV_PROD;
+        $environment = BaseApplication::ENV_PROD;
         $app = require __DIR__ . '/../../../../../lib/Alchemy/Phrasea/Application/Root.php';
         $this->assertFalse(isset($app['profiler']));
     }
 
     public function testWebProfilerDisableInTestEnv()
     {
-        $environment = Application::ENV_TEST;
+        $environment = BaseApplication::ENV_TEST;
         $app = require __DIR__ . '/../../../../../lib/Alchemy/Phrasea/Application/Root.php';
         $this->assertFalse(isset($app['profiler']));
     }
 
     public function testWebProfilerEnableInDevMode()
     {
-        $environment = Application::ENV_DEV;
+        $environment = BaseApplication::ENV_DEV;
         $app = require __DIR__ . '/../../../../../lib/Alchemy/Phrasea/Application/Root.php';
         $this->assertTrue(isset($app['profiler']));
     }

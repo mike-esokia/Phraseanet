@@ -2,7 +2,7 @@
 
 namespace Vendor;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Silex\Application;
 use Alchemy\Phrasea\Plugin\PluginProviderInterface;
 

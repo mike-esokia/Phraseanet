@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\DBAL\DBALException;
 
 class patch_360alpha1b extends patchAbstract
@@ -47,7 +47,7 @@ class patch_360alpha1b extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $databox, Application $app)
+    public function apply(base $databox, BaseApplication $app)
     {
         try {
             $sql = 'ALTER TABLE `metadatas` DROP INDEX `unique`';

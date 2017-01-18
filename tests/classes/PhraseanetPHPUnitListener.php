@@ -69,7 +69,7 @@ class PhraseanetPHPUnitListener implements PHPUnit_Framework_TestListener
 
         if (!self::$booted && self::$logSQL) {
             self::$booted = true;
-            $app = new \Alchemy\Phrasea\Application(\Alchemy\Phrasea\Application::ENV_TEST);
+            $app = new \Alchemy\Phrasea\BaseApplication(\Alchemy\Phrasea\BaseApplication::ENV_TEST);
             self::$conn = $app['dbal.provider']($app['db.info']($app['db.appbox.info']));
             unset($app);
             self::$conn->connect();

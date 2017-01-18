@@ -9,13 +9,13 @@
  */
 namespace Alchemy\Phrasea\Databox;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DataboxFactory
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
@@ -25,9 +25,9 @@ class DataboxFactory
     private $databoxRepository;
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      */
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

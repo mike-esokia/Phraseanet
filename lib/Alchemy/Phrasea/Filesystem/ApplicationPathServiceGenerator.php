@@ -10,13 +10,13 @@
 
 namespace Alchemy\Phrasea\Filesystem;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class ApplicationPathServiceGenerator
 {
     public function createDefinition(array $key, callable $default)
     {
-        return function(Application $app) use ($key, $default) {
+        return function(BaseApplication $app) use ($key, $default) {
             static $path;
 
             if (null === $path) {

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -56,7 +56,7 @@ class patch_386alpha4a implements patchInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $repo = $app['orm.em']->getRepository('Phraseanet:UsrList');
         foreach ($app['orm.em']->getRepository('Phraseanet:User')->findDeleted() as $user) {

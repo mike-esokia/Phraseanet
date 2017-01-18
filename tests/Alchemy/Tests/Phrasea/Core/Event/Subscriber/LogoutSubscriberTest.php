@@ -3,7 +3,7 @@
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
 use Alchemy\Phrasea\Core\Event\Subscriber\LogoutSubscriber;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\LogoutEvent;
 use Alchemy\Phrasea\Core\PhraseaEvents;
 
@@ -15,7 +15,7 @@ class LogoutSubscriberTest extends \PhraseanetTestCase
 {
     public function testThatSearchEngineCacheIsCleaned()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new LogoutSubscriber());
 
         $app['phraseanet.SE'] = $this->getMock('Alchemy\Phrasea\SearchEngine\SearchEngineInterface');

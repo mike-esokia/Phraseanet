@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\UserNotificationSetting;
 
 class patch_390alpha5a extends patchAbstract
@@ -55,7 +55,7 @@ class patch_390alpha5a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $sql = 'DELETE FROM UserNotificationSettings';
         $stmt = $app->getApplicationBox()->get_connection()->prepare($sql);

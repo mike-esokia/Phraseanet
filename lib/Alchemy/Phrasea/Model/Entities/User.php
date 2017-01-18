@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Entities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Exception\InvalidArgumentException;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -551,7 +551,7 @@ class User
      */
     public function setLocale($locale)
     {
-        if (null !== $locale && !array_key_exists($locale, Application::getAvailableLanguages())) {
+        if (null !== $locale && !array_key_exists($locale, BaseApplication::getAvailableLanguages())) {
             throw new InvalidArgumentException(sprintf('Invalid locale %s.', $locale));
         }
 

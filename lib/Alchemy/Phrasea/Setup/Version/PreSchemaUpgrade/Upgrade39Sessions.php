@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Version\PreSchemaUpgrade;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\DBAL\Migrations\Configuration\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
@@ -33,7 +33,7 @@ class Upgrade39Sessions implements PreSchemaUpgradeInterface
     /**
      * {@inheritdoc}
      */
-    public function isApplyable(Application $app)
+    public function isApplyable(BaseApplication $app)
     {
         return $this->tableExists($app['orm.em'], 'Sessions');
     }

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Form\Login;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Form\Constraint\NewEmail;
 use Alchemy\Phrasea\Utilities\StringHelper;
 use Symfony\Component\Form\AbstractType;
@@ -24,7 +24,7 @@ class PhraseaRegisterForm extends AbstractType
     private $available;
     private $params;
 
-    public function __construct(Application $app, array $available, array $params = [])
+    public function __construct(BaseApplication $app, array $available, array $params = [])
     {
         $this->app = $app;
         $this->available = $available;

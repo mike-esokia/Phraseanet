@@ -2,7 +2,7 @@
 
 namespace Alchemy\Phrasea\Authentication;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Exception\InvalidArgumentException;
 use Alchemy\Phrasea\Model\Entities\User;
 use Alchemy\Phrasea\Model\Manipulator\TokenManipulator;
@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class RecoveryService
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $application;
 
@@ -52,7 +52,7 @@ class RecoveryService
     private $urlGenerator;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      * @param Deliverer $mailer
      * @param TokenManipulator $tokenManipulator
      * @param TokenRepository $tokenRepository
@@ -61,7 +61,7 @@ class RecoveryService
      * @param UrlGeneratorInterface $urlGenerator
      */
     public function __construct(
-        Application $application,
+        BaseApplication $application,
         Deliverer $mailer,
         TokenManipulator $tokenManipulator,
         TokenRepository $tokenRepository,

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\UserQuery;
 
 class patch_390alpha3a extends patchAbstract
@@ -55,7 +55,7 @@ class patch_390alpha3a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $sql = 'DELETE FROM UserQueries';
         $stmt = $app->getApplicationBox()->get_connection()->prepare($sql);

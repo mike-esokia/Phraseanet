@@ -10,7 +10,7 @@
 
 namespace Alchemy\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Session;
 use Alchemy\Phrasea\Model\Entities\SessionModule;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +34,7 @@ class SessionManagerSubscriber implements EventSubscriberInterface
         'lightbox' => 6,
     ];
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }
@@ -43,8 +43,8 @@ class SessionManagerSubscriber implements EventSubscriberInterface
     {
         return [
             KernelEvents::REQUEST => [
-                ['initSession', Application::EARLY_EVENT],
-                ['checkSessionActivity', Application::LATE_EVENT]
+                ['initSession', BaseApplication::EARLY_EVENT],
+                ['checkSessionActivity', BaseApplication::LATE_EVENT]
             ]
         ];
     }

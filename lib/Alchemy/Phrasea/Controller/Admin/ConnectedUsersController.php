@@ -12,7 +12,7 @@ namespace Alchemy\Phrasea\Controller\Admin;
 
 use Alchemy\Geonames\Exception\ExceptionInterface;
 use Alchemy\Geonames\Geoname;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Controller\Controller;
 use Alchemy\Phrasea\Model\Entities\Session;
 use Doctrine\ORM\EntityManager;
@@ -28,7 +28,7 @@ class ConnectedUsersController extends Controller
     /** @var LoggerInterface */
     protected $logger;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         parent::__construct($app);
         $this->translator = $app['translator'];

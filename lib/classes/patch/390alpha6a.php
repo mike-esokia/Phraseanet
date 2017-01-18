@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\FtpExport;
 use Alchemy\Phrasea\Model\Entities\FtpExportElement;
 use Gedmo\Timestampable\TimestampableListener;
@@ -57,7 +57,7 @@ class patch_390alpha6a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $sql = 'DELETE FROM FtpExports';
         $stmt = $app->getApplicationBox()->get_connection()->prepare($sql);

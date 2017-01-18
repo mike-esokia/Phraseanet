@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\Subscriber\JsonRequestSubscriber;
 use Symfony\Component\HttpKernel\Client;
 
@@ -17,7 +17,7 @@ class JsonRequestSubscriberTest extends \PhraseanetTestCase
      */
     public function testRoutes($route, $isJson, $exceptionExpected)
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         unset($app['exception_handler']);
         $app['dispatcher']->addSubscriber(new JsonRequestSubscriber());
         $app->get($route, function () {

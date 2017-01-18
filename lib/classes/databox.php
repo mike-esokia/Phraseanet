@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Collection\CollectionRepositoryRegistry;
 use Alchemy\Phrasea\Core\Connection\ConnectionSettings;
 use Alchemy\Phrasea\Core\PhraseaTokens;
@@ -60,13 +60,13 @@ class databox extends base implements ThumbnailedElement
     protected static $_sxml_thesaurus = [];
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param Connection  $databoxConnection
      * @param SplFileInfo $data_template
      * @return databox
      * @throws \Doctrine\DBAL\DBALException
      */
-    public static function create(Application $app, Connection $databoxConnection, \SplFileInfo $data_template)
+    public static function create(BaseApplication $app, Connection $databoxConnection, \SplFileInfo $data_template)
     {
         if ( ! file_exists($data_template->getRealPath())) {
             throw new \InvalidArgumentException($data_template->getRealPath() . " does not exist");
@@ -122,7 +122,7 @@ class databox extends base implements ThumbnailedElement
 
     /**
      *
-     * @param  Application $app
+     * @param  BaseApplication $app
      * @param  string      $host
      * @param  int         $port
      * @param  string      $user
@@ -130,7 +130,7 @@ class databox extends base implements ThumbnailedElement
      * @param  string      $dbname
      * @return databox
      */
-    public static function mount(Application $app, $host, $port, $user, $password, $dbname)
+    public static function mount(BaseApplication $app, $host, $port, $user, $password, $dbname)
     {
         $app['db.provider']([
             'host'     => $host,
@@ -269,12 +269,12 @@ class databox extends base implements ThumbnailedElement
     private $viewname;
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param int $sbas_id
      * @param DataboxRepository $databoxRepository
      * @param array $row
      */
-    public function __construct(Application $app, $sbas_id, DataboxRepository $databoxRepository, array $row)
+    public function __construct(BaseApplication $app, $sbas_id, DataboxRepository $databoxRepository, array $row)
     {
         assert(is_int($sbas_id));
         assert($sbas_id > 0);
@@ -1385,7 +1385,7 @@ class databox extends base implements ThumbnailedElement
         return $vars;
     }
 
-    public function hydrate(Application $app)
+    public function hydrate(BaseApplication $app)
     {
         $this->app = $app;
     }

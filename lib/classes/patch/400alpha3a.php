@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
 
 class patch_400alpha3a implements patchInterface
@@ -55,7 +55,7 @@ class patch_400alpha3a implements patchInterface
     /**
      * {@inheritdoc}
      */
-    public function apply(base $databox, Application $app)
+    public function apply(base $databox, BaseApplication $app)
     {
         /** @var PropertyAccess $registry */
         $registry = $app['conf'];

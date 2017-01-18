@@ -11,13 +11,13 @@
 
 namespace Alchemy\Phrasea\Border\Attribute;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 
 class Status implements AttributeInterface
 {
     protected $status;
 
-    public function __construct(Application $app, $status)
+    public function __construct(BaseApplication $app, $status)
     {
         /**
          * We store a binary string
@@ -56,7 +56,7 @@ class Status implements AttributeInterface
         return $this->status;
     }
 
-    public static function loadFromString(Application $app, $string)
+    public static function loadFromString(BaseApplication $app, $string)
     {
         return new static($app, $string);
     }

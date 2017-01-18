@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Manipulator;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\ACLProvider;
 use Alchemy\Phrasea\Model\Entities\Registration;
 use Alchemy\Phrasea\Model\Entities\User;
@@ -26,7 +26,7 @@ class RegistrationManipulator implements ManipulatorInterface
     private $repository;
     private $aclProvider;
 
-    public function __construct(Application $app, EntityManager $em, ACLProvider $aclProvider, \appbox $appbox, EntityRepository $repo)
+    public function __construct(BaseApplication $app, EntityManager $em, ACLProvider $aclProvider, \appbox $appbox, EntityRepository $repo)
     {
         $this->app = $app;
         $this->em = $em;

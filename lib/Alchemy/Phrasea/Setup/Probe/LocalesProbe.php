@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Probe;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\Requirements\LocalesRequirements;
 
 class LocalesProbe extends LocalesRequirements implements ProbeInterface
@@ -26,7 +26,7 @@ class LocalesProbe extends LocalesRequirements implements ProbeInterface
      *
      * @return LocalesProbe
      */
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         return new static($app['locale']);
     }

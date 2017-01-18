@@ -2,7 +2,7 @@
 
 namespace Alchemy\Phrasea\Databox;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
 use Alchemy\Phrasea\Model\Entities\User;
 use Doctrine\DBAL\Connection;
@@ -18,7 +18,7 @@ class DataboxService
     const INVALID_DB_NAME = 1;
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
@@ -48,7 +48,7 @@ class DataboxService
     private $rootPath;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      * @param \appbox $appbox
      * @param callable $connectionFactory
      * @param DataboxRepository $databoxRepository
@@ -56,7 +56,7 @@ class DataboxService
      * @param string $rootPath
      */
     public function __construct(
-        Application $application,
+        BaseApplication $application,
         \appbox $appbox,
         callable $connectionFactory,
         DataboxRepository $databoxRepository,

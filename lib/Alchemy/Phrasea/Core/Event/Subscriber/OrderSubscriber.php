@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\OrderDeliveryEvent;
 use Alchemy\Phrasea\Core\Event\OrderEvent;
 use Alchemy\Phrasea\Core\PhraseaEvents;
@@ -29,10 +29,10 @@ class OrderSubscriber extends AbstractNotificationSubscriber
     private $notifierRegistry;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      * @param ValidationNotifierRegistry $notifierRegistry
      */
-    public function __construct(Application $application, ValidationNotifierRegistry $notifierRegistry)
+    public function __construct(BaseApplication $application, ValidationNotifierRegistry $notifierRegistry)
     {
         parent::__construct($application);
 

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Probe;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\Requirements\SystemRequirements;
 
 class SystemProbe extends SystemRequirements implements ProbeInterface
@@ -21,7 +21,7 @@ class SystemProbe extends SystemRequirements implements ProbeInterface
      *
      * @return SystemProbe
      */
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         return new static();
     }

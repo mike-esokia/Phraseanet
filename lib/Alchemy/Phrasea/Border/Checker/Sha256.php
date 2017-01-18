@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Border\Checker;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Border\File;
 use Alchemy\Phrasea\Model\Entities\LazaretFile;
 use Doctrine\ORM\EntityManager;
@@ -24,7 +24,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 class Sha256 extends AbstractChecker
 {
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         parent::__construct($app);
     }
@@ -40,11 +40,11 @@ class Sha256 extends AbstractChecker
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param LazaretFile $file
      * @return \record_adapter[]
      */
-    public static function listConflicts(Application $app, LazaretFile $file)
+    public static function listConflicts(BaseApplication $app, LazaretFile $file)
     {
         $databox = $file->getCollection($app)->get_databox();
 

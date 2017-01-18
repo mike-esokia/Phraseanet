@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\TaskManager\Job;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\TaskManager\Editor\RecordMoverEditor;
 use \databox;
 use Doctrine\DBAL\Connection;
@@ -72,7 +72,7 @@ class RecordMoverJob extends AbstractJob
         }
     }
 
-    private function processData(Application $app, $row, $logsql)
+    private function processData(BaseApplication $app, $row, $logsql)
     {
         /** @var databox $databox */
         $databox = $app->findDataboxById($row['sbas_id']);
@@ -125,7 +125,7 @@ class RecordMoverJob extends AbstractJob
         return $this;
     }
 
-    private function getData(Application $app, array $tasks, $logsql)
+    private function getData(BaseApplication $app, array $tasks, $logsql)
     {
         $ret = [];
         foreach ($tasks as $sxtask) {
@@ -188,7 +188,7 @@ class RecordMoverJob extends AbstractJob
         return $ret;
     }
 
-    public function calcSQL(Application $app, $sxtask, $playTest = false)
+    public function calcSQL(BaseApplication $app, $sxtask, $playTest = false)
     {
         $sbas_id = (int) $sxtask['sbas_id'];
 
@@ -237,7 +237,7 @@ class RecordMoverJob extends AbstractJob
         return $ret;
     }
 
-    private function calcUPDATE(Application $app, $sbas_id, &$sxtask, $playTest)
+    private function calcUPDATE(BaseApplication $app, $sbas_id, &$sxtask, $playTest)
     {
         $tws = array(); // NEGATION of updates, used to build the 'test' sql
 
@@ -308,7 +308,7 @@ class RecordMoverJob extends AbstractJob
         return $ret;
     }
 
-    private function calcDELETE(Application $app, $sbas_id, &$sxtask, $playTest)
+    private function calcDELETE(BaseApplication $app, $sbas_id, &$sxtask, $playTest)
     {
         // compute the 'where' clause
         list($tw, $join, $err) = $this->calcWhere($app, $sbas_id, $sxtask);
@@ -348,7 +348,7 @@ class RecordMoverJob extends AbstractJob
         return $ret;
     }
 
-    private function playTest(Application $app, $sbas_id, $sql)
+    private function playTest(BaseApplication $app, $sbas_id, $sql)
     {
         /** @var databox $databox */
         $databox = $app->findDataboxById($sbas_id);
@@ -370,7 +370,7 @@ class RecordMoverJob extends AbstractJob
         return $result;
     }
 
-    private function calcWhere(Application $app, $sbas_id, &$sxtask)
+    private function calcWhere(BaseApplication $app, $sbas_id, &$sxtask)
     {
         $err = "";
         /** @var databox $databox */

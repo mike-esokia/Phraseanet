@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Feed\Formatter;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\FeedEntry;
 use Alchemy\Phrasea\Feed\FeedInterface;
 use Alchemy\Phrasea\Feed\Link\FeedLink;
@@ -36,7 +36,7 @@ class AtomFormatter extends FeedFormatterAbstract implements FeedFormatterInterf
     /**
      * {@inheritdoc}
      */
-    public function createResponse(Application $app, FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet')
+    public function createResponse(BaseApplication $app, FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet')
     {
         $content = $this->format($feed, $page, $user, $generator, $app);
         $response = new Response($content, 200, ['Content-Type' => 'application/atom+xml']);
@@ -47,7 +47,7 @@ class AtomFormatter extends FeedFormatterAbstract implements FeedFormatterInterf
     /**
      * {@inheritdoc}
      */
-    public function format(FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet', Application $app = null)
+    public function format(FeedInterface $feed, $page, User $user = null, $generator = 'Phraseanet', BaseApplication $app = null)
     {
         $document = new \DOMDocument('1.0', 'UTF-8');
         $document->formatOutput = true;
@@ -131,7 +131,7 @@ class AtomFormatter extends FeedFormatterAbstract implements FeedFormatterInterf
         return $document->saveXML();
     }
 
-    protected function addItem(Application $app, \DOMDocument $document, \DOMNode $feed, FeedEntry $entry, FeedLink $link)
+    protected function addItem(BaseApplication $app, \DOMDocument $document, \DOMNode $feed, FeedEntry $entry, FeedLink $link)
     {
         $entry_node = $this->addTag($document, $feed, 'entry');
 

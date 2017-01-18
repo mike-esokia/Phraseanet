@@ -3,7 +3,7 @@
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
 use Alchemy\Phrasea\Core\Event\Subscriber\SessionManagerSubscriber;
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Session;
 use Symfony\Component\HttpKernel\Client;
 
@@ -17,7 +17,7 @@ class SessionManagerSubscriberTest extends \PhraseanetAuthenticatedWebTestCase
 {
     public function testEndSession()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new SessionManagerSubscriber($app));
         $app['phraseanet.configuration']['session'] = [
             'idle' => 0,
@@ -43,7 +43,7 @@ class SessionManagerSubscriberTest extends \PhraseanetAuthenticatedWebTestCase
 
     public function testEndSessionXmlXhttpRequest()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new SessionManagerSubscriber($app));
         $app['phraseanet.configuration']['session'] = [
             'idle' => 0,
@@ -71,7 +71,7 @@ class SessionManagerSubscriberTest extends \PhraseanetAuthenticatedWebTestCase
 
     public function testEndSessionAuthenticated()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new SessionManagerSubscriber($app));
         $app['authentication'] = $this->getMockBuilder('Alchemy\Phrasea\Authentication\Authenticator')->disableOriginalConstructor()->getMock();
         $app['authentication']->expects($this->any())->method('isAuthenticated')->will($this->returnValue(true));
@@ -105,7 +105,7 @@ class SessionManagerSubscriberTest extends \PhraseanetAuthenticatedWebTestCase
 
     public function testEndSessionAuthenticatedWithOutdatedIdle()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new SessionManagerSubscriber($app));
         $app['authentication'] = $this->getMockBuilder('Alchemy\Phrasea\Authentication\Authenticator')->disableOriginalConstructor()->getMock();
         $app['authentication']->expects($this->any())->method('isAuthenticated')->will($this->returnValue(true));
@@ -143,7 +143,7 @@ class SessionManagerSubscriberTest extends \PhraseanetAuthenticatedWebTestCase
 
     public function testEndSessionAuthenticatedWithOutdatedIdleXmlHttpRequest()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new SessionManagerSubscriber($app));
         $app['authentication'] = $this->getMockBuilder('Alchemy\Phrasea\Authentication\Authenticator')->disableOriginalConstructor()->getMock();
         $app['authentication']->expects($this->any())->method('isAuthenticated')->will($this->returnValue(true));
@@ -182,7 +182,7 @@ class SessionManagerSubscriberTest extends \PhraseanetAuthenticatedWebTestCase
 
     public function testUndefinedModule()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new SessionManagerSubscriber($app));
 
         $app->get('/login', function () {
@@ -205,7 +205,7 @@ class SessionManagerSubscriberTest extends \PhraseanetAuthenticatedWebTestCase
      */
     public function testForbiddenRoutes($route)
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         $app['dispatcher']->addSubscriber(new SessionManagerSubscriber($app));
         $app['authentication'] = $this->getMockBuilder('Alchemy\Phrasea\Authentication\Authenticator')->disableOriginalConstructor()->getMock();
         $app['authentication']->expects($this->never())->method('isAuthenticated');

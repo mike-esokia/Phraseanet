@@ -11,13 +11,13 @@
 
 namespace Alchemy\Phrasea\Notification\Mail;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Notification\EmitterInterface;
 use Alchemy\Phrasea\Notification\ReceiverInterface;
 
 abstract class AbstractMail implements MailInterface
 {
-    /** @var Application */
+    /** @var BaseApplication */
     protected $app;
     /** @var EmitterInterface */
     protected $emitter;
@@ -34,7 +34,7 @@ abstract class AbstractMail implements MailInterface
     /** @var string */
     protected $url;
 
-    public function __construct(Application $app, ReceiverInterface $receiver, EmitterInterface $emitter = null, $message = null)
+    public function __construct(BaseApplication $app, ReceiverInterface $receiver, EmitterInterface $emitter = null, $message = null)
     {
         $this->app = $app;
         $this->emitter = $emitter;
@@ -189,14 +189,14 @@ abstract class AbstractMail implements MailInterface
     /**
      * Creates an Email
      *
-     * @param Application       $app
+     * @param BaseApplication       $app
      * @param ReceiverInterface $receiver
      * @param EmitterInterface  $emitter
      * @param string            $message
      *
      * @return static
      */
-    public static function create(Application $app, ReceiverInterface $receiver, EmitterInterface $emitter = null, $message = null)
+    public static function create(BaseApplication $app, ReceiverInterface $receiver, EmitterInterface $emitter = null, $message = null)
     {
         return new static($app, $receiver, $emitter, $message);
     }

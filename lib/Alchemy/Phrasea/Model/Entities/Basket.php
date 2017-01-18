@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Entities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -455,7 +455,7 @@ class Basket
         return $total_el1 < $total_el2 ? 1 : -1;
     }
 
-    public function hasRecord(Application $app, \record_adapter $record)
+    public function hasRecord(BaseApplication $app, \record_adapter $record)
     {
         foreach ($this->getElements() as $basket_element) {
             $bask_record = $basket_element->getRecord($app);
@@ -469,7 +469,7 @@ class Basket
         return false;
     }
 
-    public function getSize(Application $app)
+    public function getSize(BaseApplication $app)
     {
         $totSize = 0;
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Assert\Assertion;
 use Doctrine\DBAL\DBALException;
 
@@ -48,7 +48,7 @@ class patch_360alpha2b extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $databox, Application $app)
+    public function apply(base $databox, BaseApplication $app)
     {
         Assertion::isInstanceOf($databox, databox::class);
         /** @var databox $databox */

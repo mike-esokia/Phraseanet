@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Probe;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\RequirementCollection;
 
 class DataboxStructureProbe extends RequirementCollection implements ProbeInterface
@@ -41,7 +41,7 @@ class DataboxStructureProbe extends RequirementCollection implements ProbeInterf
      *
      * @return DataboxStructureProbe
      */
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         return new static($app['phraseanet.appbox']);
     }

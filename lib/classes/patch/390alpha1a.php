@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Order;
 use Alchemy\Phrasea\Model\Entities\OrderElement;
 use Doctrine\ORM\Query;
@@ -59,7 +59,7 @@ class patch_390alpha1a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $sql = 'DELETE FROM Orders';
         $stmt = $app->getApplicationBox()->get_connection()->prepare($sql);

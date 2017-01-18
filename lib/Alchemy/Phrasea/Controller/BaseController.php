@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Controller;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authorization\AuthorizationChecker;
 use Alchemy\Phrasea\Model\Entities\User;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 abstract class BaseController
 {
-    /** @var Application */
+    /** @var BaseApplication */
     protected $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

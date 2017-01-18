@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Http\H264PseudoStreaming;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Exception\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
@@ -70,11 +70,11 @@ class H264Factory
     /**
      * Creates a new instance of H264 Factory given a configuration.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return H264Factory
      */
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         $conf = $app['phraseanet.configuration']['h264-pseudo-streaming'];
 

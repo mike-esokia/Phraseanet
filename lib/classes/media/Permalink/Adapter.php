@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Exception\RuntimeException;
 use Alchemy\Phrasea\Model\Manipulator\TokenManipulator;
 use Alchemy\Phrasea\Utilities\NullableDateTime;
@@ -36,7 +36,7 @@ class media_Permalink_Adapter implements cache_cacheableInterface
     protected $last_modified;
     /** @var string */
     protected $label;
-    /** @var Application */
+    /** @var BaseApplication */
     protected $app;
 
     private static $bad_chars = [
@@ -46,12 +46,12 @@ class media_Permalink_Adapter implements cache_cacheableInterface
     ];
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param databox $databox
      * @param media_subdef $media_subdef
      * @param array $data
      */
-    public function __construct(Application $app, databox $databox, media_subdef $media_subdef, array $data = null)
+    public function __construct(BaseApplication $app, databox $databox, media_subdef $media_subdef, array $data = null)
     {
         $this->app = $app;
         $this->databox = $databox;
@@ -257,12 +257,12 @@ class media_Permalink_Adapter implements cache_cacheableInterface
     }
 
     /**
-     * @param  Application $app
+     * @param  BaseApplication $app
      * @param  databox $databox
      * @param  media_subdef $media_subdef
      * @return $this
      */
-    public static function getPermalink(Application $app, databox $databox, media_subdef $media_subdef)
+    public static function getPermalink(BaseApplication $app, databox $databox, media_subdef $media_subdef)
     {
         try {
             return new self($app, $databox, $media_subdef);
@@ -274,11 +274,11 @@ class media_Permalink_Adapter implements cache_cacheableInterface
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param media_subdef[] $subdefs
      * @return media_Permalink_Adapter[]
      */
-    public static function getMany(Application $app, $subdefs)
+    public static function getMany(BaseApplication $app, $subdefs)
     {
         Assertion::allIsInstanceOf($subdefs, media_subdef::class);
 
@@ -377,13 +377,13 @@ class media_Permalink_Adapter implements cache_cacheableInterface
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param databox $databox
      * @param media_subdef[] $subdefs
      * @throws DBALException
      * @throws \InvalidArgumentException
      */
-    public static function createMany(Application $app, databox $databox, $subdefs)
+    public static function createMany(BaseApplication $app, databox $databox, $subdefs)
     {
         $databoxId = $databox->get_sbas_id();
         $recordIds = [];
@@ -443,12 +443,12 @@ class media_Permalink_Adapter implements cache_cacheableInterface
     }
 
     /**
-     * @param  Application $app
+     * @param  BaseApplication $app
      * @param  databox $databox
      * @param  media_subdef $media_subdef
      * @return $this
      */
-    public static function create(Application $app, databox $databox, media_subdef $media_subdef)
+    public static function create(BaseApplication $app, databox $databox, media_subdef $media_subdef)
     {
         self::createMany($app, $databox, [$media_subdef]);
 

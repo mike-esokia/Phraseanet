@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Http\XSendFile;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Exception\InvalidArgumentException;
 use Alchemy\Phrasea\Exception\RuntimeException;
 use Psr\Log\LoggerInterface;
@@ -43,10 +43,10 @@ class XSendFileFactory
      * Creates a new instance of XSendFile Factory according to the application
      * configuration.
      *
-     * @param  Application      $app
+     * @param  BaseApplication      $app
      * @return XSendFileFactory
      */
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         $conf = $app['conf']->get('xsendfile');
 

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Entities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -135,11 +135,11 @@ class Registration
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return \collection
      */
-    public function getCollection(Application $app)
+    public function getCollection(BaseApplication $app)
     {
         return \collection::getByBaseId($app, $this->baseId);
     }

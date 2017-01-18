@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\AggregateToken;
 use Alchemy\Phrasea\Model\Entities\Feed;
 use Alchemy\Phrasea\Model\Entities\FeedEntry;
@@ -61,7 +61,7 @@ class patch_390alpha7a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         if (false === $this->hasFeedBackup($app)) {
             return false;
@@ -233,11 +233,11 @@ class patch_390alpha7a extends patchAbstract
     /**
      * Checks whether `feeds_backup` tables exists.
      *
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return boolean True if `feeds_backup` table exists.
      */
-    private function hasFeedBackup(Application $app)
+    private function hasFeedBackup(BaseApplication $app)
     {
         $rsm = (new ResultSetMapping())->addScalarResult('Name', 'Name');
         $backup = false;

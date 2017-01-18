@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\Record\Structure\FieldDeletedEvent;
 use Alchemy\Phrasea\Core\Event\Record\Structure\FieldEvent;
 use Alchemy\Phrasea\Core\Event\Record\Structure\FieldUpdatedEvent;
@@ -25,7 +25,7 @@ class databox_field implements cache_cacheableInterface
 {
     protected $id;
 
-    /** @var Application  */
+    /** @var BaseApplication  */
     protected $app;
 
     /** @var databox */
@@ -125,11 +125,11 @@ class databox_field implements cache_cacheableInterface
     const FACET_NO_LIMIT = -1;
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param databox     $databox
      * @param array       $row
      */
-    public function __construct(Application $app, databox $databox, array $row)
+    public function __construct(BaseApplication $app, databox $databox, array $row)
     {
         $this->app = $app;
         $this->set_databox($databox);
@@ -223,7 +223,7 @@ class databox_field implements cache_cacheableInterface
         return $this->aggregable;
     }
 
-    public function hydrate(Application $app)
+    public function hydrate(BaseApplication $app)
     {
         $this->app = $app;
         $this->set_databox($this->app->findDataboxById($this->sbas_id));
@@ -883,7 +883,7 @@ class databox_field implements cache_cacheableInterface
 
     /**
      *
-     * @param \Alchemy\Phrasea\Application $app
+     * @param \Alchemy\Phrasea\BaseApplication $app
      * @param databox                      $databox
      * @param string                       $name
      * @param bool                         $multi
@@ -892,7 +892,7 @@ class databox_field implements cache_cacheableInterface
      *
      * @throws \Exception_InvalidArgument
      */
-    public static function create(Application $app, databox $databox, $name, $multi)
+    public static function create(BaseApplication $app, databox $databox, $name, $multi)
     {
         $sorter = 0;
 

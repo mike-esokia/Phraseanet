@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Model\Entities;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use \record_adapter;
@@ -210,7 +210,7 @@ class LazaretFile
      *
      * @return \collection
      */
-    public function getCollection(Application $app)
+    public function getCollection(BaseApplication $app)
     {
         return \collection::getByBaseId($app, $this->getBaseId());
     }
@@ -424,7 +424,7 @@ class LazaretFile
      *
      * @return record_adapter[]
      */
-    public function getRecordsToSubstitute(Application $app, $includeReason = false)
+    public function getRecordsToSubstitute(BaseApplication $app, $includeReason = false)
     {
         $merged = [];
         /** @var LazaretCheck $check */

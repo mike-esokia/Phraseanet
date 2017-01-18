@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Core\Event\Listener;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Authentication\Authenticator;
 use Alchemy\Phrasea\Model\Entities\ApiOauthToken;
 use Alchemy\Phrasea\Model\Manipulator\ApiLogManipulator;
@@ -20,10 +20,10 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class OAuthResponseListener
 {
-    /** @var Application */
+    /** @var BaseApplication */
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

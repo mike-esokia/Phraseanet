@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Databox\Caption\CachedCaptionDataRepository;
 use Alchemy\Phrasea\Model\RecordReferenceInterface;
 use Alchemy\Phrasea\Model\Serializer\CaptionSerializer;
@@ -26,16 +26,16 @@ class caption_record implements cache_cacheableInterface
     protected $record;
 
     /**
-     * @var Application
+     * @var BaseApplication
      */
     protected $app;
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @param RecordReferenceInterface $record
      * @param array[]|null $fieldsData
      */
-    public function __construct(Application $app, RecordReferenceInterface $record, array $fieldsData = null)
+    public function __construct(BaseApplication $app, RecordReferenceInterface $record, array $fieldsData = null)
     {
         $this->app = $app;
         $this->record = $record;

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Probe;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\RequirementCollectionInterface;
 
 /**
@@ -20,7 +20,7 @@ use Alchemy\Phrasea\Setup\RequirementCollectionInterface;
 interface ProbeInterface extends RequirementCollectionInterface
 {
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      */
-    public static function create(Application $app);
+    public static function create(BaseApplication $app);
 }

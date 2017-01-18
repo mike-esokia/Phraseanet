@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Task;
 
 class patch_370alpha8a extends patchAbstract
@@ -54,11 +54,11 @@ class patch_370alpha8a extends patchAbstract
      * will group tasks(01) with same period to a single task(02)
      *
      * @param base        $appbox
-     * @param Application $app
+     * @param BaseApplication $app
      *
      * @return boolean
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         $ttasks = [];
         $conn = $appbox->get_connection();

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup\Probe;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Setup\RequirementCollection;
 use Alchemy\Phrasea\SearchEngine\SearchEngineInterface;
 
@@ -31,7 +31,7 @@ class SearchEngineProbe extends RequirementCollection implements ProbeInterface
      *
      * @return SearchEngineProbe
      */
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         return new static($app['phraseanet.SE']);
     }

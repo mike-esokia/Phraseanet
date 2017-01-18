@@ -32,7 +32,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * Largely inspired by Cilex
  * @see https://github.com/Cilex/Cilex
  */
-class CLI extends Application
+class CommandLineApplication extends BaseApplication
 {
     /**
      * Registers the autoloader and necessary components.
@@ -52,7 +52,7 @@ class CLI extends Application
         });
 
         $this['dispatcher'] = $this->share(
-            $this->extend('dispatcher', function (EventDispatcher $dispatcher, Application $app) {
+            $this->extend('dispatcher', function (EventDispatcher $dispatcher, BaseApplication $app) {
                 $dispatcher->addListener('phraseanet.notification.sent', function () use ($app) {
                     $app['swiftmailer.spooltransport']->getSpool()->flushQueue($app['swiftmailer.transport']);
                 });
@@ -62,7 +62,6 @@ class CLI extends Application
             })
         );
 
-        $this->register(new PluginServiceProvider());
         $this->register(new ComposerSetupServiceProvider());
         $this->register(new CLIDriversServiceProvider());
         $this->register(new SignalHandlerServiceProvider());
@@ -107,7 +106,8 @@ class CLI extends Application
             throw new RuntimeException('Phraseanet Konsole can not run Http Requests.');
         }
 
-        $this->runCLI();
+        $this->boot();
+        $this['console']->run();
     }
 
     /**

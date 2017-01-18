@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\User\DeletedEvent;
 use Alchemy\Phrasea\Core\Event\User\UserEvents;
 use Alchemy\Phrasea\Model\Entities\WebhookEvent;
@@ -21,14 +21,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class WebhookUserEventSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var Application
+     * @var BaseApplication
      */
     private $app;
 
     /**
-     * @param Application $application
+     * @param BaseApplication $application
      */
-    public function __construct(Application $application)
+    public function __construct(BaseApplication $application)
     {
         $this->app = $application;
     }

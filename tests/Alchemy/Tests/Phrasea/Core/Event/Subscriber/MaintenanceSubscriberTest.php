@@ -2,7 +2,7 @@
 
 namespace Alchemy\Tests\Phrasea\Core\Event\Subscriber;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Configuration\Configuration;
 use Alchemy\Phrasea\Core\Configuration\HostConfiguration;
 use Alchemy\Phrasea\Core\Configuration\PropertyAccess;
@@ -26,7 +26,7 @@ class MaintenanceSubscriberTest extends \PhraseanetTestCase
 
     public function testCheckNegative()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
         unset($app['exception_handler']);
         $app['dispatcher']->addSubscriber(new MaintenanceSubscriber($app));
         $app->get('/', function () {
@@ -42,7 +42,7 @@ class MaintenanceSubscriberTest extends \PhraseanetTestCase
 
     public function testCheckPositive()
     {
-        $app = new Application(Application::ENV_TEST);
+        $app = new BaseApplication(BaseApplication::ENV_TEST);
 
         $app['phraseanet.configuration.config-path'] = __DIR__ . '/Fixtures/configuration-maintenance.yml';
         $app['phraseanet.configuration.config-compiled-path'] = __DIR__ . '/Fixtures/configuration-maintenance.php';

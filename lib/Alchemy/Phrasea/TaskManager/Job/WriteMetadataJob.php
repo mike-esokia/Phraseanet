@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\TaskManager\Job;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\PhraseaTokens;
 use Alchemy\Phrasea\Metadata\TagFactory;
 use Alchemy\Phrasea\TaskManager\Editor\WriteMetadataEditor;
@@ -193,10 +193,10 @@ class WriteMetadataJob extends AbstractJob
     }
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return Writer
      */
-    private function getMetadataWriter(Application $app)
+    private function getMetadataWriter(BaseApplication $app)
     {
         return $app['exiftool.writer'];
     }

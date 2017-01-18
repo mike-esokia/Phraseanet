@@ -11,14 +11,14 @@
 
 namespace Alchemy\Phrasea\Core\Event;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Symfony\Component\EventDispatcher\Event as SfEvent;
 
 class LogoutEvent extends SfEvent
 {
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

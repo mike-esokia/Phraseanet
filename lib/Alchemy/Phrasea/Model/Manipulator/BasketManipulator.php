@@ -9,7 +9,7 @@
  */
 namespace Alchemy\Phrasea\Model\Manipulator;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Entities\Basket;
 use Alchemy\Phrasea\Model\Entities\BasketElement;
 use Alchemy\Phrasea\Model\Entities\ValidationData;
@@ -19,14 +19,14 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class BasketManipulator
 {
-    /** @var Application */
+    /** @var BaseApplication */
     private $app;
     /** @var BasketRepository */
     private $repository;
     /** @var ObjectManager */
     private $manager;
 
-    public function __construct(Application $app, BasketRepository $repository, ObjectManager $manager)
+    public function __construct(BaseApplication $app, BasketRepository $repository, ObjectManager $manager)
     {
         $this->app = $app;
         $this->repository = $repository;

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Doctrine\ORM\NoResultException;
 
 class patch_383alpha2a extends patchAbstract
@@ -55,7 +55,7 @@ class patch_383alpha2a extends patchAbstract
     /**
      * {@inheritdoc}
      */
-    public function apply(base $appbox, Application $app)
+    public function apply(base $appbox, BaseApplication $app)
     {
         // Clean validation sessions where initiator_id does not exist anymore
         $sql = 'SELECT DISTINCT(v.id) AS validation_session_id FROM `ValidationSessions` v LEFT JOIN Users u ON (v.initiator_id = u.id) WHERE u.id IS NULL';

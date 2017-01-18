@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Setup;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\PhraseaEvents;
 use Alchemy\Phrasea\Core\Event\InstallFinishEvent;
 use Alchemy\Phrasea\Model\Entities\User;
@@ -24,7 +24,7 @@ class Installer
 {
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

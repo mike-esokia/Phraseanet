@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Core\Provider;
 
-use Alchemy\Phrasea\Application as PhraseaApplication;
+use Alchemy\Phrasea\BaseApplication as PhraseaApplication;
 use Alchemy\Phrasea\Core\Connection\ConnectionPoolManager;
 use Doctrine\Common\EventManager;
 use Doctrine\DBAL\Connection;

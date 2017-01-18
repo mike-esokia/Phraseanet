@@ -2,7 +2,7 @@
 
 namespace Alchemy\Phrasea\Application;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Core\Event\Subscriber\DebuggerSubscriber;
 use Monolog\Logger;
 use Monolog\Processor\WebProcessor;
@@ -14,16 +14,16 @@ abstract class BaseApplicationLoader
     /**
      * @param string $environment
      * @param bool $forceDebug
-     * @return Application
+     * @return BaseApplication
      */
-    public function buildApplication($environment = Application::ENV_PROD, $forceDebug = false)
+    public function buildApplication($environment = BaseApplication::ENV_PROD, $forceDebug = false)
     {
         $app = $this->createApplication($environment, $forceDebug);
 
         $this->doPrePluginServiceRegistration($app);
         $app->loadPlugins();
 
-        $app['exception_handler'] = $app->share(function (Application $app) {
+        $app['exception_handler'] = $app->share(function (BaseApplication $app) {
             return $this->createExceptionHandler($app);
         });
 
@@ -55,25 +55,25 @@ abstract class BaseApplicationLoader
         return $app;
     }
 
-    abstract protected function doPrePluginServiceRegistration(Application $app);
+    abstract protected function doPrePluginServiceRegistration(BaseApplication $app);
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return EventSubscriberInterface
      */
-    abstract protected function createExceptionHandler(Application $app);
+    abstract protected function createExceptionHandler(BaseApplication $app);
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return void
      */
-    abstract protected function bindRoutes(Application $app);
+    abstract protected function bindRoutes(BaseApplication $app);
 
     /**
-     * @param Application $app
+     * @param BaseApplication $app
      * @return EventSubscriberInterface[]
      */
-    protected function getDispatcherSubscribersFor(Application $app)
+    protected function getDispatcherSubscribersFor(BaseApplication $app)
     {
         return $app->isDebug() ? [new DebuggerSubscriber($app)] : [];
     }
@@ -81,10 +81,10 @@ abstract class BaseApplicationLoader
     /**
      * @param string $environment
      * @param bool $forceDebug
-     * @return Application
+     * @return BaseApplication
      */
-    private function createApplication($environment = Application::ENV_PROD, $forceDebug = false)
+    private function createApplication($environment = BaseApplication::ENV_PROD, $forceDebug = false)
     {
-        return new Application(new Environment($environment, $forceDebug));
+        return new BaseApplication(new Environment($environment, $forceDebug));
     }
 }

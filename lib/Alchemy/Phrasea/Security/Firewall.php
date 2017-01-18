@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Security;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Silex\Controller;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,7 +21,7 @@ class Firewall
 {
     private $app;
 
-    public function __construct(Application $app)
+    public function __construct(BaseApplication $app)
     {
         $this->app = $app;
     }

@@ -11,7 +11,7 @@
 
 namespace Alchemy\Phrasea\Form\Constraint;
 
-use Alchemy\Phrasea\Application;
+use Alchemy\Phrasea\BaseApplication;
 use Alchemy\Phrasea\Model\Manipulator\TokenManipulator;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Validator\Constraint;
@@ -36,7 +36,7 @@ class PasswordToken extends Constraint
         return TokenManipulator::TYPE_PASSWORD === $token->getType();
     }
 
-    public static function create(Application $app)
+    public static function create(BaseApplication $app)
     {
         return new static($app['repo.tokens']);
     }
