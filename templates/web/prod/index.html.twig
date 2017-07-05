@@ -821,12 +821,12 @@
             filterFacet = ({% if app['settings'].getUserSetting(app.getAuthenticatedUser(), "facet") %}{{ app['settings'].getUserSetting(app.getAuthenticatedUser(), "facet") }}{% else %}false{% endif %});
 
             $('#right-btn').mouseenter(function() {
-                $('#right-btn i').fadeIn(200).delay(500).hide(0);
+                $('#right-btn i').fadeIn(200).delay(500).fadeOut(200);
 
             });
 
             $('#left-btn').mouseenter(function() {
-                $('#left-btn i').fadeIn(200).delay(500).hide(0);
+                $('#left-btn i').fadeIn(200).delay(500).fadeOut(200);
 
             });
         });
